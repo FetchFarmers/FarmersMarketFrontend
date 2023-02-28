@@ -1,0 +1,120 @@
+
+body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  font-family:Arial, Helvetica, sans-serif ;
+  flex-direction: column;
+  margin: 0;
+  padding-left: 0; padding-right: 0;
+  overflow-x: hidden
+}
+
+/* * Header Styles * */
+.header {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  background-color: #9bd0ea;
+  height: 175px;
+  width: 100vw;
+  margin: 0px;
+  box-shadow: 0px 10.9826px 10.4564px rgba(0, 0, 0, 0.1)
+}
+.headerTop{
+  margin: 0px;
+  background-color :#67aacb;
+  height: 125px;
+  box-shadow: 0px 10.9826px 10.4564px rgba(0, 0, 0, 0.1);
+}
+.headerAboutContainer{
+  margin-left: 20px;
+}
+.aboutTitle{
+  font-size: 45px;
+  color:#4a4f5f;
+  margin-bottom: 5px;
+}
+.aboutSlogan{
+  font-size: 18px;
+  font-weight: normal;
+  margin-top: 0px;
+  padding-top: 0px;
+  color:#ecf9fb;
+}
+.headerLinksContainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+}
+.headerNavBarContainer{
+  display: flex;
+  margin-left: 20px;
+}
+.navBarLink {
+  color: #4a4f5f;
+  text-decoration: none;
+  font-size: auto;
+  padding-left: 4px;
+  font-weight: 300;
+}
+.headerUserControlsContainer{
+  display: flex;
+  align-items: center;
+}
+.userControlsWelcome {
+  color: #4a4f5f;
+  text-align: end;
+  font-size: auto;
+}
+.userControlsLoginLinkLeft{
+  background-color:#67aacb;
+  border: 1px solid #62a1c1;
+  color: #ecf9fb;
+  border-radius: 5px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 75px;
+  height: 32px;
+  font-size: auto;
+  font-weight: 300;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+.userControlsLoginLinkRight{
+  background-color:#67aacb;
+  border: 1px solid #62a1c1;
+  color: #ecf9fb;
+  border-radius: 5px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 75px;
+  height: 32px;
+  font-size: auto;
+  font-weight: 300;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+.userControlsLoginLinkScrollBar{
+  background-color:#67aacb;
+  border: 1px solid #62a1c1;
+  color: #ecf9fb;
+  border-radius: 5px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 75px;
+  height: 32px;
+  font-size: 14px;
+  font-weight: 300;
+  margin-left: 10px;
+  margin-right: 30px;
+}
+
