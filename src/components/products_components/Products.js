@@ -1,9 +1,9 @@
 import React from 'react';
 import {Routes, Route, Link} from 'react-router-dom';
-import Bakery from './Bakery_components/Bakery';
-import Dairy from './Dairy_components/Dairy';
-import FruitAndVeg from './Fruit_Veg_components/FruitAndVeg';
-import MeatAndSeafood from './Meat_Seafood_components/MeatAndSeafood';
+import Bakery from './bakery_components/Bakery';
+import Dairy from './dairy_components/Dairy';
+import FruitAndVeg from './fruit_veg_components/FruitAndVeg';
+import MeatAndSeafood from './meat_seafood_components/MeatAndSeafood';
 
 function Products() {
     return (

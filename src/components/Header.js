@@ -46,6 +46,7 @@ const Header = () => {
                 <p className="userControlsWelcome">Welcome! </p>
                 <Link className="userControlsLoginLinkLeft" to="/user/login">Log In</Link>
                 <Link className="userControlsLoginLinkRight" to="/user/register">Register</Link>
+                <Link className="userControlsLoginLinkRight" to="/my_cart">Cart</Link>
             </nav>                   
         </div>
     </div>
