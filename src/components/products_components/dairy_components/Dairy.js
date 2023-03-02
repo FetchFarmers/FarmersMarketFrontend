@@ -38,7 +38,7 @@ function EggsAndDairy() {
                 <p>{product.description}</p>
                 <p>Inventory: {product.inventory}</p>
                 <p>Price: ${product.price}</p>
-                <p>Subcategory: {product.subCategory}</p>
+                <p>Subcategory: {product.subcategory}</p>
                 <img src={product.imageURL} alt={product.name} />
                 {product.id && <AddToCart productId={product.id} handleAddToCart={handleAddToCart} />}
               </li>

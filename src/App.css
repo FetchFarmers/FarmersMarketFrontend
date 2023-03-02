@@ -12,8 +12,8 @@ body {
   overflow-x: hidden
 }
 
-/* * Header Styles * */
-.header {
+ /* Header Styles  */
+ .header {
   margin: 0px;
   display: flex;
   flex-direction: column;
@@ -25,17 +25,20 @@ body {
 .headerTop{
   margin: 0px;
   background-color :#fffeee;
-
   height: 175px;
   display: flex;
   justify-content: space-between;
+
 }
-.headerNavBarContainer{
+
+
+/* .headerNavBarContainer{
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-left: 20px;
-}
+} */
+
 .navBarLink {
   color: #1D561A;
   text-decoration: none;
@@ -44,6 +47,7 @@ body {
   padding-top: 5px;
   font-weight: 300;
 }
+
 .headerUserControlsContainer{
   display: flex;
   justify-content: flex-end;
@@ -85,3 +89,92 @@ body {
   max-height: 175px;
   margin-right: 30px;
 }
+
+
+/* dropdown */
+
+.menus {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.menu-items {
+  position: relative;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.menu-items a {
+  display: block;
+  font-size: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+
+.menu-items button {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  font-size: inherit;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+
+.menu-items > a, .menu-items button {
+  text-align: left;
+  padding: 0.7rem 1rem;
+}
+
+.dropdown {
+  position: absolute;
+  left: 0;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+  display: none;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+
+.dropdown.show {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.2s ease-in-out;
+}
+
+
+.dropdown .dropdown-submenu {
+  position: absolute;
+  left: 100%;
+  top: -7px;
+}
+
+.dropdown-toggle:hover {
+  cursor: pointer;
+}
+
+.dropdown-toggle + .dropdown {
+  display: none;
+}
+
+.dropdown-toggle:hover + .dropdown {
+  display: block;
+}
+
