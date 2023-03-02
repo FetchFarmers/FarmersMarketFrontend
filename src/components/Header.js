@@ -24,14 +24,7 @@ const Header = () => {
     
   return (
     <div className="header">
-        <div className="headerTop">
-            <nav className="headerNavBarContainer">
-                <Link className="navBarLink" to="/">Home</Link>
-                <Link className="navBarLink" to="/products/meat_seafood">Meat & Seafood</Link>
-                <Link className="navBarLink" to="/products/dairy">Dairy</Link>
-                <Link className="navBarLink" to="/products/fruit_vegetables">Fruits & Vegetables</Link>
-                <Link className="navBarLink" to="/products/bakery">Bakery</Link>
-            </nav>     
+        <div className="headerTop">      
             <div className="headerAboutContainer">
                 <img className="logoImage" src="../images/Farmer's market.png" alt=""/>
             </div>   
@@ -44,7 +37,7 @@ const Header = () => {
                 })}
               </ul>
             </nav>
-
+        </div>
             {/*  //todo wrap this nav this in if statement to display if user */}
             {/* <nav className="headerUserControlsContainer">
                 <p className="userControlsWelcome">Welcome User!</p>
