@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import AddToCart from '../../cart_components/AddToCart';
+import { useState, useEffect } from "react";
+import AddToCart from "../../../cart_components/AddToCart";
 
-function Bakery() {
+const BeefProducts = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('https://farmers-market-1oeq.onrender.com/api/products/category/Bakery')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
+    const fetchBeefProducts = async () => {
+      try {
+        const response = await fetch("https://farmers-market-1oeq.onrender.com/api/products/subcategory/Deli%20Meat%20&%20Charcuterie");
+        const data = await response.json();
         setProducts(data);
-      })
-      .catch(error => {
-        console.log('There was a problem with the API request:', error);
-      });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchBeefProducts();
   }, []);
 
   const handleAddToCart = (productId) => {
@@ -26,7 +24,6 @@ function Bakery() {
 
   return (
     <div>
-      <h2>Bakery Products</h2>
       <ul>
         {products.map(product => (
           <li key={product.id}>
@@ -43,5 +40,5 @@ function Bakery() {
     </div>
   );
 }
+export default BeefProducts;
 
-export default Bakery;

@@ -9,3 +9,21 @@ export async function functionName() {
       throw error;
     }
   }
+
+  export const getProductsByCategory = async (category) => {
+    const response = await fetch(`/api/products/category/${category}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch products');
+    }
+    const products = await response.json();
+    return products;
+  };
+  
+  export const getProductsBySubcategory = async (subcategory) => {
+    const response = await fetch(`/api/products/subcategory/${subcategory}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch products');
+    }
+    const products = await response.json();
+    return products;
+  };

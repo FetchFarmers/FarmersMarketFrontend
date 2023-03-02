@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from 'react-router-dom';
-
+import { menuItems } from "../menuItems";
+import MenuItems from './MenuItems';
 
 const Header = () => {
    
@@ -17,7 +18,6 @@ const Header = () => {
         navigate("/");
     }
     
-
   return (
     <div className="header">
         <div className="headerTop">
@@ -28,20 +28,12 @@ const Header = () => {
         </div>
         <div className="headerLinksContainer">
             <nav className="headerNavBarContainer">
-                <Link className="navBarLink" to="/">Home |</Link>
-                <Link className="navBarLink" to="/products/meat_seafood">Meat & Seafood |</Link>
-                <Link className="navBarLink" to="/products/dairy">Dairy |</Link>
-                <Link className="navBarLink" to="/products/fruit_vegetables">Fruits & Vegetables |</Link>
-                <Link className="navBarLink" to="/products/bakery">Bakery |</Link>
-                <Link className="navBarLink" to="/my_cart">Cart</Link>
-                
+              <ul className="menus">
+                {menuItems.map((menu, index) => {
+                  return <MenuItems items={menu} key={index} />;
+                })}
+              </ul>
             </nav>
-            {/*  //todo wrap this nav this in if statement to display if user */}
-            {/* <nav className="headerUserControlsContainer">
-                <p className="userControlsWelcome">Welcome User!</p>
-                <button className="userControlsLoginLinkScrollBar" onClick={handleSubmit} >Log Out</button>
-            </nav> */}
-              {/* //todo wrap this nav in if statement to display if user */}
             <nav className="headerUserControlsContainer">
                 <p className="userControlsWelcome">Welcome! </p>
                 <Link className="userControlsLoginLinkLeft" to="/user/login">Log In</Link>
