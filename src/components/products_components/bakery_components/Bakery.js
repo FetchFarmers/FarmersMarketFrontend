@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom';
-
-// import { 
-    // todo call api functions here
-//  } from '../products_api'; //! not positive about the path might need another dot or two??
+import AddToCart from '../../cart_components/AddToCart';
 
 function Bakery() {
   const [products, setProducts] = useState([]);
@@ -24,6 +20,10 @@ function Bakery() {
       });
   }, []);
 
+  const handleAddToCart = (productId) => {
+    console.log(`Product ${productId} added to cart!`);
+  }
+
   return (
     <div>
       <h2>Bakery Products</h2>
@@ -36,6 +36,7 @@ function Bakery() {
             <p>Price: ${product.price}</p>
             <p>Subcategory: {product.subCategory}</p>
             <img src={product.imageURL} alt={product.name} />
+            {product.id && <AddToCart productId={product.id} handleAddToCart={handleAddToCart} />}
           </li>
         ))}
       </ul>

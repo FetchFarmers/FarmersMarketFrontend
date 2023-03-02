@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import {Routes, Route} from 'react-router-dom';
 import HomePage from './components/HomePage';
 import Header from './components/Header';
-import Products from './components/Products_components/Products';
-import User from './components/User_Components/User';
-import Cart from './components/Cart_components/Cart';
+import Products from './components/products_components/Products';
+import User from './components/user_components/User';
+import Cart from './components/cart_components/Cart';
 
 function App() {
 

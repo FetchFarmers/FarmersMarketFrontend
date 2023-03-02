@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
+import AddToCart from '../../cart_components/AddToCart';
 
 // import { 
     // todo call api functions here
 //  } from '../products_api'; //! not positive about the path might need another dot or two??
-
-function Produce() {
+function EggsAndDairy() {
     const [products, setProducts] = useState([]);
   
     useEffect(() => {
-      fetch('https://farmers-market-1oeq.onrender.com/api/products/category/Fresh%20Fruits%20and%20Vegetables')
+      fetch('https://farmers-market-1oeq.onrender.com/api/products/category/Dairy')
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -23,6 +23,10 @@ function Produce() {
           console.log('There was a problem with the API request:', error);
         });
     }, []);
+
+    const handleAddToCart = (productId) => {
+      console.log(`Product ${productId} added to cart!`);
+    }
   
     return (
         <div>
@@ -36,6 +40,7 @@ function Produce() {
                 <p>Price: ${product.price}</p>
                 <p>Subcategory: {product.subCategory}</p>
                 <img src={product.imageURL} alt={product.name} />
+                {product.id && <AddToCart productId={product.id} handleAddToCart={handleAddToCart} />}
               </li>
             ))}
           </ul>
@@ -43,6 +48,5 @@ function Produce() {
       );
     }
   
-  export default Produce;
+  export default EggsAndDairy;
   
-
