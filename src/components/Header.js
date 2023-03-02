@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from 'react-router-dom';
 
 
-function Header() {
+const Header = () => {
    
     let navigate = useNavigate();
     // setCurrentUsername(window.localStorage.getItem("username"))
@@ -31,8 +31,9 @@ function Header() {
                 <Link className="navBarLink" to="/">Home |</Link>
                 <Link className="navBarLink" to="/products/meat_seafood">Meat & Seafood |</Link>
                 <Link className="navBarLink" to="/products/dairy">Dairy |</Link>
-                <Link className="navBarLink" to="/products/fruit_vegetables">Produce |</Link>
-                <Link className="navBarLink" to="/products/bakery">Bakery</Link>
+                <Link className="navBarLink" to="/products/fruit_vegetables">Fruits & Vegetables |</Link>
+                <Link className="navBarLink" to="/products/bakery">Bakery |</Link>
+                <Link className="navBarLink" to="/my_cart">Cart</Link>
                 
             </nav>
             {/*  //todo wrap this nav this in if statement to display if user */}
