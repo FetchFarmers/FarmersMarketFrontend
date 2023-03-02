@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 const Header = () => {
    
@@ -21,32 +23,29 @@ const Header = () => {
   return (
     <div className="header">
         <div className="headerTop">
-            <div className="headerAboutContainer">
-                <h1 className="aboutTitle">Farmers Market</h1>
-                <h5 className="aboutSlogan"> Where you will always find the best local products! </h5>
-            </div>        
-        </div>
-        <div className="headerLinksContainer">
             <nav className="headerNavBarContainer">
-                <Link className="navBarLink" to="/">Home |</Link>
-                <Link className="navBarLink" to="/products/meat_seafood">Meat & Seafood |</Link>
-                <Link className="navBarLink" to="/products/dairy">Dairy |</Link>
-                <Link className="navBarLink" to="/products/fruit_vegetables">Fruits & Vegetables |</Link>
-                <Link className="navBarLink" to="/products/bakery">Bakery |</Link>
-                <Link className="navBarLink" to="/my_cart">Cart</Link>
-                
-            </nav>
+                <Link className="navBarLink" to="/">Home</Link>
+                <Link className="navBarLink" to="/products/meat_seafood">Meat & Seafood</Link>
+                <Link className="navBarLink" to="/products/dairy">Dairy</Link>
+                <Link className="navBarLink" to="/products/fruit_vegetables">Fruits & Vegetables</Link>
+                <Link className="navBarLink" to="/products/bakery">Bakery</Link>
+            </nav>     
+            <div className="headerAboutContainer">
+                <img className="logoImage" src="../images/Farmer's market.png" alt=""/>
+            </div>   
+        </div>
+
             {/*  //todo wrap this nav this in if statement to display if user */}
             {/* <nav className="headerUserControlsContainer">
                 <p className="userControlsWelcome">Welcome User!</p>
                 <button className="userControlsLoginLinkScrollBar" onClick={handleSubmit} >Log Out</button>
             </nav> */}
+        <div className="headerLinksContainer">     
               {/* //todo wrap this nav in if statement to display if user */}
             <nav className="headerUserControlsContainer">
-                <p className="userControlsWelcome">Welcome! </p>
                 <Link className="userControlsLoginLinkLeft" to="/user/login">Log In</Link>
-                <Link className="userControlsLoginLinkRight" to="/user/register">Register</Link>
-                <Link className="userControlsLoginLinkRight" to="/my_cart">Cart</Link>
+                <Link className="userControlsLoginLinkLeft" to="/user/register">Register</Link>
+                <Link className="userControlsLoginLinkRight" to="/my_cart"><FontAwesomeIcon icon={faCartShopping}/></Link>
             </nav>                   
         </div>
     </div>
