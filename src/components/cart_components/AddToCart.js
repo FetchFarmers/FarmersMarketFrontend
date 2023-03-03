@@ -1,26 +1,31 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 
-const AddToCart = ({ productId, handleAddToCart }) => {
+const AddToCart = ({ productId }) => {
   const [quantity, setQuantity] = useState(1);
-
-  const handleQuantityChange = (event) => {
-    setQuantity(event.target.value);
-  };
 
   const handleAddToCartClick = () => {
     handleAddToCart(productId);
   }
 
+  const handleAddToCart = (productId) => {
+
+    console.log(quantity)
+    console.log(`Product ${productId} added to cart!`);
+  }
+
   return (
-    <div>
-      <input
+    <div className='addToCartContainer'>
+      <input className='quantityDropdown'
         type="number"
         value={quantity}
-        onChange={handleQuantityChange}
+        onChange={(event) => setQuantity(event.target.value)}
         min={1}
         max={10}
       />
-      <button onClick={handleAddToCartClick}>Add to Cart</button>
+      <button className="addToCartButton" onClick={handleAddToCartClick}><FontAwesomeIcon  icon={faCartArrowDown}/></button>
     </div>
   );
 };
