@@ -31,7 +31,7 @@ export async function fetchAddToOrder(token, sessionId, productId, quantity) {
   
   try {
     //!!once you can add test this with passing in a token - generate an if statement to check if token in local storage and if not pass exclude the bearer token
-    const url = `https://farmers-market-1oeq.onrender.com/api/orders/user/add_product`;
+    const url = `https://farmers-market-1oeq.onrender.com/api/orders/user/open/add_product`;
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -46,7 +46,7 @@ export async function fetchAddToOrder(token, sessionId, productId, quantity) {
         }
       )
     });
-    const [data] = await response.json();
+    const data = await response.json();
     console.log('data :>> ', data);
 
     return data;

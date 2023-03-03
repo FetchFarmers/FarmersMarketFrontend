@@ -2,18 +2,35 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
+import { fetchAddToOrder } from '../../orders_api';
+
+
 
 const AddToCart = ({ productId }) => {
   const [quantity, setQuantity] = useState(1);
+  const [userOrderProducts, setUserOrderProducts] = useState([])
+  const [sessionId, setSessionId] = useState("");
+  const [token, setToken] = useState("")
 
   const handleAddToCartClick = () => {
     handleAddToCart(productId);
   }
 
-  const handleAddToCart = (productId) => {
+  const randomString =  () => {
+    setSessionId("6489igj")
+    return "6489igj"
+  }
 
-    console.log(quantity)
-    console.log(`Product ${productId} added to cart!`);
+  async function handleAddToCart(productId) {
+    try {  
+      const newSessionId = randomString()
+      setSessionId(newSessionId);
+      const results = await fetchAddToOrder(token, newSessionId, productId, quantity)
+      console.log('fetchAddToOrderResults :>> ', results);
+
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -26,6 +43,7 @@ const AddToCart = ({ productId }) => {
         max={10}
       />
       <button className="addToCartButton" onClick={handleAddToCartClick}><FontAwesomeIcon  icon={faCartArrowDown}/></button>
+      
     </div>
   );
 };

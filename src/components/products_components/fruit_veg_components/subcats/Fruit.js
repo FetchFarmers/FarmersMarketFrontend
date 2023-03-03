@@ -38,7 +38,7 @@ function Fruit() {
                 <p>Inventory: {product.inventory}</p>
                 <p>Price: ${product.price}</p>
                 <p>Subcategory: {product.subcategory}</p>
-                <img src={product.imageURL} alt={product.name} />\
+                <img src={product.imageURL} alt={product.name} />
                 {product.id && <AddToCart productId={product.id} onClick={() => handleAddToCart(product.id)}/>}
               </li>
             ))}
