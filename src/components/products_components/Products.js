@@ -34,9 +34,9 @@ function Products() {
           <Routes>
             <Route path="/products/bakery" element={ <Bakery/> } />
               <Route path="/products/bread" element={ <BreadProducts/> } />
-              <Route path="/products/desserts" element={ <DessertProducts/> } />
+              <Route path="/products/pastries_desserts" element={ <DessertProducts/> } />
               <Route path="/products/glutenfree_vegan" element={ <GlutenFreeVeganProducts/> } />
-              <Route path="/products/savory" element={ <SavoryProducts/> } /> 
+              <Route path="/products/savory_baked_goods" element={ <SavoryProducts/> } /> 
               <Route path="/products/seasonal" element={ <SeasonalProducts/> } /> 
 
             <Route path="/products/meat_seafood" element={ <MeatAndSeafood/> } />
