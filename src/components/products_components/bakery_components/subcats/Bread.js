@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import AddToCart from "../../../cart_components/AddToCart";
+import handleAddToCart from '../../../cart_components/AddToCart';
 
 const BreadProducts = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetchBreadroducts = async () => {
+    const fetchBreadProducts = async () => {
       try {
         const response = await fetch("https://farmers-market-1oeq.onrender.com/api/products/subcategory/Artisan%20bread");
         const data = await response.json();
@@ -15,12 +16,8 @@ const BreadProducts = () => {
       }
     };
 
-    fetchBreadroducts();
+    fetchBreadProducts();
   }, []);
-
-  const handleAddToCart = (productId) => {
-    console.log(`Product ${productId} added to cart!`);
-  }
 
   return (
     <div>
@@ -33,7 +30,7 @@ const BreadProducts = () => {
             <p>Price: ${product.price}</p>
             <p>Subcategory: {product.subcategory}</p>
             <img src={product.imageURL} alt={product.name} />
-            {product.id && <AddToCart productId={product.id} handleAddToCart={handleAddToCart} />}
+            {product.id && <AddToCart productId={product.id} onClick={() => handleAddToCart(product.id)}/>}
           </li>
         ))}
       </ul>

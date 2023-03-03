@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AddToCart from '../../cart_components/AddToCart';
+import handleAddToCart from '../../cart_components/AddToCart';
 
 function Produce() {
   const [products, setProducts] = useState([]);
@@ -21,10 +22,6 @@ function Produce() {
       });
   }, []);
 
-  const handleAddToCart = (productId) => {
-    console.log(`Product ${productId} added to cart!`);
-  }
-
   return (
     <div className='products-page'>
       <h3 className='product-title'>Fruits & Vegetables</h3>
@@ -36,7 +33,7 @@ function Produce() {
               <h3 className='product-name'>{product.name}</h3>
             </Link>
             <p>${product.price}</p>
-            {product.id && <AddToCart productId={product.id} handleAddToCart={handleAddToCart} />}
+            {product.id && <AddToCart productId={product.id} onClick={() => handleAddToCart(product.id)}/>}
           </div>
         ))}
       </div>
