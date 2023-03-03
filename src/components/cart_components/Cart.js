@@ -10,7 +10,7 @@ import {
 function Cart() {
   const [userOrderProducts, setUserOrderProducts] = useState([])
   const [sessionId, setSessionId] = useState("")
-  const [token, setToken] = useState()
+  const [token, setToken] = useState("")
   
  
   //! you hard coded in the sessionID to test make sure to remove that 

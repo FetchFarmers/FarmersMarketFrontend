@@ -1,9 +1,5 @@
 export const menuItems = [
     {
-      title: 'Home',
-      url: '/home',
-    },
-    {
       title: 'Meat & Seafood',
       url: '/products/meat_seafood',
       submenu: [
