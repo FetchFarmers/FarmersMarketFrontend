@@ -1,6 +1,8 @@
 import React from 'react';
 import {Routes, Route, Link} from 'react-router-dom';
 
+import ProductDetails from './ProductDetails';
+
 import Bakery from './bakery_components/Bakery';
 import BreadProducts from './bakery_components/subcats/Bread';
 import DessertProducts from './bakery_components/subcats/Desserts';
@@ -34,9 +36,9 @@ function Products() {
           <Routes>
             <Route path="/products/bakery" element={ <Bakery/> } />
               <Route path="/products/bread" element={ <BreadProducts/> } />
-              <Route path="/products/desserts" element={ <DessertProducts/> } />
+              <Route path="/products/pastries_desserts" element={ <DessertProducts/> } />
               <Route path="/products/glutenfree_vegan" element={ <GlutenFreeVeganProducts/> } />
-              <Route path="/products/savory" element={ <SavoryProducts/> } /> 
+              <Route path="/products/savory_baked_goods" element={ <SavoryProducts/> } /> 
               <Route path="/products/seasonal" element={ <SeasonalProducts/> } /> 
 
             <Route path="/products/meat_seafood" element={ <MeatAndSeafood/> } />
@@ -56,6 +58,8 @@ function Products() {
             <Route path="/products/fruit_vegetables" element={ <FruitAndVeg/> } />
               <Route path="/products/fruit" element={ <Fruit/> } />
               <Route path="/products/vegetables" element={ <Vegetables/> } />
+
+              <Route path="/products/:id" element={<ProductDetails />} />
 
           </Routes>
         </div>
