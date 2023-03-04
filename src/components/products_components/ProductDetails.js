@@ -28,16 +28,18 @@ function ProductDetails() {
   }
 
   return (
-    <div className='products-page'>
+    <div className='product-details-page'>
       <h3 className='product-title'>{product.name}</h3>
-      <div className='product'>
-        <img src={product.imageURL} alt={product.name} />
-        <div className='product-info'>
-          <p>{product.description}</p>
-          <p>Inventory: {product.inventory}</p>
-          <p>Price: ${product.price}</p>
-          <p>Subcategory: {product.subcategory}</p>
-          {product.id && <AddToCart productId={product.id} onClick={() => handleAddToCart(product.id)}/>}
+      <div className='product-container'>
+        <div className='product-image-container'>
+          <img className='product-image' src={product.imageURL} alt={product.name} />
+        </div>
+        <div className='product-info-container'>
+          <p className='product-description'>{product.description}</p>
+          <p className='product-inventory'>Inventory: {product.inventory}</p>
+          <p className='product-subcategory'>Subcategory: {product.subcategory}</p>
+          <p className='product-price'>${product.price}</p>
+          {product.id && <AddToCart productId={product.id} onClick={() => handleAddToCart(product.id)} className='add-to-cart' />}
         </div>
       </div>
     </div>
@@ -45,4 +47,3 @@ function ProductDetails() {
 }
 
 export default ProductDetails;
-

@@ -29,11 +29,13 @@ function Produce() {
         {products.map(product => (
           <div key={product.id} className="product">
             <Link to={`/products/${product.id}`}>
-              <img src={product.imageURL} alt={product.name} />
-              <h3 className='product-name'>{product.name}</h3>
+              <img className="product-image" src={product.imageURL} alt={product.name} />
+              <div className="product-details">
+                <h3 className='product-name'>{product.name}</h3>
+                <p className='product-price'>${product.price}</p>
+                {product.id && <AddToCart productId={product.id} onClick={() => handleAddToCart(product.id)} className="add-to-cart" />}
+              </div>
             </Link>
-            <p>${product.price}</p>
-            {product.id && <AddToCart productId={product.id} onClick={() => handleAddToCart(product.id)}/>}
           </div>
         ))}
       </div>
