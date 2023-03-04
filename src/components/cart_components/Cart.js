@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
 
 import { 
    fetchUserOpenOrders
@@ -9,38 +8,41 @@ import {
 
 function Cart() {
   const [userOrderProducts, setUserOrderProducts] = useState([])
-  const [sessionId, setSessionId] = useState("")
-  // const [token, setToken] = useState("")
-  
- 
-  //! you hard coded in the sessionID to test make sure to remove that 
-  const randomString =  () => {
-    setSessionId("6489igj")
-    return "6489igj"
-  }
-  const token = window.localStorage.getItem("token")
 
+  const randomString =  () => {
+    return crypto.randomUUID()+"(TS-"+Date.now()+")"
+  }
+  
   async function loadUserOpenOrders() {
     try {  
-      const newSessionId = randomString();
-      setSessionId(newSessionId);
-      const results = await fetchUserOpenOrders(token, newSessionId);
-      setUserOrderProducts(() => results.products);
+      const sessionId = window.localStorage.getItem("fetchSessionId")
+
+      if (sessionId) {
+        const results = await fetchUserOpenOrders(sessionId);
+        setUserOrderProducts(() => results.products);
+
+      } else {
+        const newSessionId = randomString();
+        window.localStorage.setItem("fetchSessionId", newSessionId )
+        const results = await fetchUserOpenOrders(newSessionId);
+        setUserOrderProducts(() => results.products);
+
+      }
+      
     } catch (error) {
       console.error(error);
     }
   }
-  
+
   useEffect(() => {
     loadUserOpenOrders()
   }, [])
   
-  console.log('userOrderProducts :>> ', userOrderProducts);
-
   return (
     <div className="mainBodyContainer">
       <h1 className='pageTitle' >cart</h1>
-      <ul>
+      {(!userOrderProducts[0]) && <h3 className='pageTitle' >Your cart is currently empty</h3>}
+      {userOrderProducts && <ul>
         {userOrderProducts.map((item) => (
           <li key={item.id}>
             <p>{item.name}</p>
@@ -48,7 +50,7 @@ function Cart() {
             <p>Price: ${item.price}</p>
           </li>
         ))}
-      </ul>
+      </ul>}
     </div>
   );
 }

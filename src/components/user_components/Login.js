@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 
 import { 
@@ -8,12 +8,7 @@ import {
 function Login({setLoggedInUser, setToken, setUserMessage}) {
 
   const [username, setUsername] = useState("")
-  console.log("🚀 ~ file: Login.js:11 ~ Login ~ username:", username)
   const [password, setPassword] = useState("")
-  console.log("🚀 ~ file: Login.js:13 ~ Login ~ password:", password)
-  
-
-  
 
   const handleLogin = async (event) => {
     event.preventDefault()
