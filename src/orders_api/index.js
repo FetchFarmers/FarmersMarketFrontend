@@ -1,17 +1,30 @@
 //! This is where we will make all the orders API calls 
+  
+const setHeader = () => {
+  const token = window.localStorage.getItem("token")
+  console.log("🚀 ~ file: index.js:4 ~ token:", token)
 
-// * this is how they called the functions on art collector - they didn't export at the bottom just imported at top of page where used
-export async function fetchUserOpenOrders(token, sessionId) {
+  if (token) {
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${ token }`
+    }
+  } else {
+    return {
+      'Content-Type': 'application/json',
+    }
+  }
+}
+
+export async function fetchUserOpenOrders(sessionId) {
   
   try {
-    //!!once you can add test this with passing in a token - generate an if statement to check if token in local storage and if not pass exclude the bearer token
+    const header = setHeader()
+
     const url = `https://farmers-market-1oeq.onrender.com/api/orders/user/open`;
     const response = await fetch(url, {
       method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${ token }`
-      },
+      headers: header,
       body: JSON.stringify(
         {
           sessionId: sessionId,
@@ -20,6 +33,7 @@ export async function fetchUserOpenOrders(token, sessionId) {
     });
     const [data] = await response.json();
     console.log('data :>> ', data);
+    console.log('header :>> ', header);
 
     return data;
   } catch (error) {
@@ -27,17 +41,15 @@ export async function fetchUserOpenOrders(token, sessionId) {
   }
 }
 
-export async function fetchAddToOrder(token, sessionId, productId, quantity) {
+export async function fetchAddToOrder( sessionId, productId, quantity) {
   
   try {
-    //!!once you can add test this with passing in a token - generate an if statement to check if token in local storage and if not pass exclude the bearer token
+    const header = setHeader()
+
     const url = `https://farmers-market-1oeq.onrender.com/api/orders/user/open/add_product`;
     const response = await fetch(url, {
       method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${ token }`
-      },
+      headers: header,
       body: JSON.stringify(
         {
           sessionId: sessionId,
