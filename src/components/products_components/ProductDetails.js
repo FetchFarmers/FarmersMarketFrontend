@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import AddToCart from '../cart_components/AddToCart';
+import handleAddToCart from '../cart_components/AddToCart';
 
 function ProductDetails() {
   const { id } = useParams();
@@ -36,15 +37,11 @@ function ProductDetails() {
           <p>Inventory: {product.inventory}</p>
           <p>Price: ${product.price}</p>
           <p>Subcategory: {product.subcategory}</p>
-          {product.id && <AddToCart productId={product.id} handleAddToCart={handleAddToCart} />}
+          {product.id && <AddToCart productId={product.id} onClick={() => handleAddToCart(product.id)}/>}
         </div>
       </div>
     </div>
   );
-}
-
-const handleAddToCart = (productId) => {
-  console.log(`Product ${productId} added to cart!`);
 }
 
 export default ProductDetails;

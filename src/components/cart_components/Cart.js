@@ -10,7 +10,7 @@ import {
 function Cart() {
   const [userOrderProducts, setUserOrderProducts] = useState([])
   const [sessionId, setSessionId] = useState("")
-  const [token, setToken] = useState("")
+  // const [token, setToken] = useState("")
   
  
   //! you hard coded in the sessionID to test make sure to remove that 
@@ -18,13 +18,14 @@ function Cart() {
     setSessionId("6489igj")
     return "6489igj"
   }
+  const token = window.localStorage.getItem("token")
 
   async function loadUserOpenOrders() {
     try {  
-      const newSessionId = randomString()
+      const newSessionId = randomString();
       setSessionId(newSessionId);
-      const results = await fetchUserOpenOrders(token, newSessionId)
-      setUserOrderProducts(() => results.products)
+      const results = await fetchUserOpenOrders(token, newSessionId);
+      setUserOrderProducts(() => results.products);
     } catch (error) {
       console.error(error);
     }
@@ -33,6 +34,7 @@ function Cart() {
   useEffect(() => {
     loadUserOpenOrders()
   }, [])
+  
   console.log('userOrderProducts :>> ', userOrderProducts);
 
   return (

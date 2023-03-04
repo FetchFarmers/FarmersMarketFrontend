@@ -10,9 +10,11 @@ const AddToCart = ({ productId }) => {
   const [quantity, setQuantity] = useState(1);
   const [userOrderProducts, setUserOrderProducts] = useState([])
   const [sessionId, setSessionId] = useState("");
-  const [token, setToken] = useState("")
+  // const [token, setToken] = useState("")
+  const token = window.localStorage.getItem("token")
 
-  const handleAddToCartClick = () => {
+  const handleAddToCartClick = (event) => {
+    event.preventDefault()
     handleAddToCart(productId);
   }
 

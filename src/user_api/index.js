@@ -1,11 +1,27 @@
 //! This is where we will make all the User API calls 
 
-// * this is how they called the functions on art collector - they didn't export at the bottom just imported at top of page where used
-export async function functionName() {
+export async function fetchLogin(username, password) {
   
-    try {
-
-    } catch (error) {
-      throw error;
-    }
+  try {
+    const response = await fetch(`https://farmers-market-1oeq.onrender.com/api/users/login`, {
+      method: "POST",
+      headers: {
+       'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        {
+          username: username,
+          password: password,
+        }
+      )
+    })       
+    const data = await response.json();
+    console.log('loginUserData :>> ', data);
+  
+    return data;
+  } catch (error) {
+    throw error;
   }
+}
+
+//curl http://localhost:3000/api/users/login -H "Content-Type: application/json" -X POST -d '{"username": "hollye", "password": "fruit&veg"}' 
