@@ -1,14 +1,27 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import Lottie from 'react-lottie';
+import animationData from './Lotties/barn.json';
 
 function HomePage() {
-    return(
-        <div className="mainBodyContainer">
-        <h1 className='pageTitle' >HomePage</h1>
-        <FontAwesomeIcon icon={faCartShopping}/> 
-        </div>
-    );
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animationData,
+        rendererSettings: {
+          preserveAspectRatio: "xMidYMid slice"
+        }
+      };  
+
+  return (
+    <div className="mainBodyContainer">
+      <h1 className='pageTitle' ></h1>
+      <Lottie 
+	    options={defaultOptions}
+        height={400}
+        width={400}
+      />
+    </div>
+  );
 }
+
 export default HomePage;
