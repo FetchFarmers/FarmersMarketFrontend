@@ -10,7 +10,7 @@ export async function fetchUserOpenOrders(token, sessionId) {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${ token }`
+        'Authorization': `Bearer ${ token }`
       },
       body: JSON.stringify(
         {
@@ -36,7 +36,7 @@ export async function fetchAddToOrder(token, sessionId, productId, quantity) {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${ token }`
+        'Authorization': `Bearer ${ token }`
       },
       body: JSON.stringify(
         {
