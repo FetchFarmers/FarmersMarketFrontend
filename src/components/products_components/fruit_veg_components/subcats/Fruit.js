@@ -25,7 +25,6 @@ function Fruit() {
           console.log('There was a problem with the API request:', error);
         });
     }, []);
-
   
     return (
         <div>
