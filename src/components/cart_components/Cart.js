@@ -37,6 +37,11 @@ function Cart() {
   useEffect(() => {
     loadUserOpenOrders()
   }, [])
+
+  let orderSum = 0
+  userOrderProducts.map((item) => 
+    orderSum += item.price*item.quantity
+  )
   
   return (
     <div className="mainBodyContainer">
@@ -45,11 +50,12 @@ function Cart() {
       {userOrderProducts && <ul>
         {userOrderProducts.map((item) => (
           <li key={item.id}>
-            <p>{item.name}</p>
-            <p>Quantity: {item.quantity}</p>
-            <p>Price: ${item.price}</p>
+            <h4>{item.name}</h4>
+            <p>{item.quantity} x ${item.price}</p>
+            <p>Total: ${(item.price*item.quantity).toFixed(2)}</p>
           </li>
         ))}
+        <h4>Order Total: $ {orderSum.toFixed(2)}</h4>
       </ul>}
     </div>
   );
