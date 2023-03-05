@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { menuItems } from "../menuItems";
 import MenuItems from './MenuItems';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
-
+import { fetchUserData } from "../user_api";
 
 const Header = () => {
    
