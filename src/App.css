@@ -44,16 +44,17 @@ body {
   display: block;
   width: 75px;
 }
-.logoImage {
+.ourLogoImage {
+  box-sizing: content-box;
   display: flex;
   max-height: 175px;
-  margin-right: 30px;
 }
 .headerUserControlsContainer{
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin-top: 10px;
+  margin-bottom: 15px;
   margin-right: 30px;
   align-items: flex-start;
 }
@@ -76,23 +77,23 @@ body {
   height: 28px;
   font-size: 12px;
   font-weight: 300;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 .headerNavBarContainer{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-content: flex-end;
   margin-left: 0px;
   margin-top: 15px;
 }
 
-
-
 /** Add to cart styles  */
 .addToCartContainer{
   display: flex;
   justify-content: left;
-  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 20px;
   align-items: center;
 }
 .quantityDropdown{
@@ -457,4 +458,3 @@ label{
   font-weight: 200;
   border-radius: 5px;
 }
-

@@ -5,7 +5,7 @@ import {
     fetchLogin
  } from '../../user_api';
 
-function Login({setLoggedInUser, setToken, setUserMessage}) {
+function Login() {
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -18,6 +18,8 @@ function Login({setLoggedInUser, setToken, setUserMessage}) {
       console.log('logInUserResults :>> ', user);
       window.localStorage.setItem("username", user.user.username);
       window.localStorage.setItem("token", user.token);
+      window.localStorage.setItem("isAdmin", user.user.isAdmin)
+      console.log('user.isAdmin :>> ', user.user.isAdmin);
       setUsername("")
       setPassword("")
       navigate("/")
