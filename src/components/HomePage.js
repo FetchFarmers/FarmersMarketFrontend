@@ -1,5 +1,6 @@
 import React from 'react';
 import backgroundImage from './images/Adams_Township_Sunny_Farm.jpg'
+
 function Homepage() {
     
   return (

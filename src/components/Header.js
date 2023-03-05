@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { menuItems } from '../menuItems';
+import { menuItems } from "../menuItems";
 import MenuItems from './MenuItems';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
-import { fetchUserData } from '../user_api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faHouse } from '@fortawesome/free-solid-svg-icons'
+
 
 const Header = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [token, setToken] = useState(window.localStorage.getItem('token'));
+   
+    let navigate = useNavigate();
+    const username = window.localStorage.getItem("username")
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [token, setToken] = useState(window.localStorage.getItem('token'));
 
-  let navigate = useNavigate();
-
-  const handleLogout = () => {
-    window.localStorage.removeItem('token');
-    setToken(null);
-    navigate('/');
-  };
-
-  useEffect(() => {
+    const handleLogout = (event) => {
+        event.preventDefault();
+        window.localStorage.removeItem("token")
+        window.localStorage.removeItem("username")
+        // setCurrentUsername(window.localStorage.getItem("username"));
+        navigate("/");
+    }
+    
+    useEffect(() => {
     const getUserData = async () => {
       if (token) {
         const userData = await fetchUserData(token);
@@ -28,43 +31,43 @@ const Header = () => {
     };
     getUserData();
   }, [token]);
-
+    
   return (
     <div className="header">
-      <div className="headerTop">
-        <nav className="headerUserControlsContainer"></nav>
-        <div className="headerAboutContainer">
-          <img className="logoImage" src="../images/Farmer's market.png" alt="" />
+        <div className="headerTop">      
+            <div className="spacingContainer" ></div>     
+            <div className="headerAboutContainer">
+                <img className="logoImage" src="../images/Farmer's market.png" alt=""/>
+            </div>     
+            <nav className="headerUserControlsContainer">
+                {!username && <Link className="userControlsLoginLink" to="/user/login">Log In</Link>}
+                {username && <button className="userControlsLoginLink" onClick={handleLogout} >Log Out</button>}
+                {!username && <Link className="userControlsLoginLink" to="/user/register">Sign Up</Link>}
+                {username && <Link className="userControlsLoginLink" to="/user/profile">My Profile</Link>}
+                <Link className="userControlsLoginLink" to="/">Home&nbsp; <FontAwesomeIcon icon={faHouse}/></Link>
+                <Link className="userControlsLoginLink" to="/my_cart">View&nbsp; <FontAwesomeIcon icon={faCartShopping}/></Link>
+            </nav>   
         </div>
-        <div className="spacingContainer"></div>
-      </div>
-      <div className="headerLinksContainer">
-        <nav className="headerNavBarContainer">
-          <Link to="/">
-            <FontAwesomeIcon className="menuIconLeft" icon={faHouse} />
-          </Link>
-          {isAdmin && <Link to="/admin">Admin</Link>}
-          <ul className="menus">
-            {menuItems.map((menu, index) => {
-              return <MenuItems items={menu} key={index} />;
-            })}
-          </ul>
-          {token ? (
-            <button className="userControlsLoginLink" onClick={handleLogout}>
-              Log Out
-            </button>
-          ) : (
-            <Link className="userControlsLoginLink" to="/user/login">
-              Log In
-            </Link>
-          )}
-          <Link to="/my_cart">
-            <FontAwesomeIcon className="menuIcon" icon={faCartShopping} />
-          </Link>
-        </nav>
-      </div>
+        <div className="headerLinksContainer">
+            <nav className="headerNavBarContainer">
+              <ul className="menus">
+                {menuItems.map((menu, index) => {
+                  return <MenuItems items={menu} key={index} />;
+                })}
+              </ul>
+            </nav>
+        </div>
+            {/*  //todo wrap this nav this in if statement to display if user */}
+            {/* <nav className="headerUserControlsContainer">
+                
+                <button className="userControlsLoginLinkScrollBar" onClick={handleSubmit} >Log Out</button>
+            </nav> */}
+        <div className="headerLinksContainer">     
+              {/* //todo wrap this nav in if statement to display if user */}
+      {isAdmin && <Link to="/admin">Admin</Link>}
+
+        </div>
     </div>
   );
-};
-
+}
 export default Header;

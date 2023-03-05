@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
+import React, { useState } from 'react';
+import {useNavigate, Link} from 'react-router-dom';
 
 import { 
     fetchLogin
@@ -8,12 +8,8 @@ import {
 function Login({setLoggedInUser, setToken, setUserMessage}) {
 
   const [username, setUsername] = useState("")
-  console.log("🚀 ~ file: Login.js:11 ~ Login ~ username:", username)
   const [password, setPassword] = useState("")
-  console.log("🚀 ~ file: Login.js:13 ~ Login ~ password:", password)
-  
-
-  
+  let navigate = useNavigate()
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -22,6 +18,9 @@ function Login({setLoggedInUser, setToken, setUserMessage}) {
       console.log('logInUserResults :>> ', user);
       window.localStorage.setItem("username", user.user.username);
       window.localStorage.setItem("token", user.token);
+      setUsername("")
+      setPassword("")
+      navigate("/")
 
     } catch (error) {
       console.error(error);
@@ -30,17 +29,16 @@ function Login({setLoggedInUser, setToken, setUserMessage}) {
 
   
   return (
-    <div className="logIn_signUp_create_edit_container">
-        <h1 className="pageTitle">Log In </h1>
-        
+    <div className="logIn_signUp_container">
+        <h1 className="logIn_signUp_Title">Log In </h1>
         <form onSubmit={handleLogin} className="form">
             <label>User Name</label><br/>
-            <input className="logIn_signUp_create_edit_entry" type="text" value={username} onChange={(event) => setUsername(event.target.value)} required/><br/>
+            <input className="logIn_signUp_entry" type="text" value={username} onChange={(event) => setUsername(event.target.value)} required/><br/>
             <label>Password</label><br/>
-            <input className="logIn_signUp_create_edit_entry" type="password" value={password} onChange={(event) => setPassword(event.target.value)}  required/><br/>
-            <input className="submitButton" type="submit" ></input>
+            <input className="logIn_signUp_entry" type="password" value={password} onChange={(event) => setPassword(event.target.value)}  required/><br/>
+            <input className="logIn_signUp_submitButton" type="submit" ></input>
         </form>
-        <Link className="signUp_NewActivity_Link" to="/signup">Don't have an account? Sign Up here!</Link>
+        <Link className="signUp_Link" to="/signup">Don't have an account? Sign Up here!</Link>
     </div>
   );
 }

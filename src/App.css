@@ -2,17 +2,14 @@
   box-sizing: border-box;
   text-decoration: none;
 }
-
 a {
   color: inherit;
   text-decoration: none;
 }
-
 a:hover {
   color: inherit;
   text-decoration: none;
 }
-
 body {
   width: 100%;
   color:#2a5c46;
@@ -22,116 +19,82 @@ body {
   flex-direction: column;
   margin: 0;
   padding-left: 0; padding-right: 0;
-  overflow-x: hidden;
+  overflow-x: hidden
 }
 
- /* Header Styles  */
-
-.header {
- /* margin: 0px; */
- /* display: flex; */
- /* flex-direction: column; */
- background-color :#e6f3e0;
- height: 220px;
- width: 100vw;
- /* box-shadow: 0px 10.9826px 10.4564px rgba(0, 0, 0, 0.2) */
- border-bottom: 1px solid #fffeee;
+/** Header Styles  */
+ .header {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  background-color :#e6f3e0;
+  height: 230px;
+  width: 100vw;
+  box-shadow: 0px 10.9826px 10.4564px rgba(0, 0, 0, 0.12);
 }
-
 .headerTop{
- margin: 0px;
- background-color :#fffeee;
- height: 175px;
- display: flex;
- justify-content: space-between;
+  margin: 0px;
+  background-color :#fffeee;
+  height: 175px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px 10.9826px 10.4564px rgba(0, 0, 0, 0.12);
 }
-
 .spacingContainer{
- /* display: block; */
- /* width: 75px; */
+  display: block;
+  width: 75px;
 }
-
 .logoImage {
- /* display: flex; */
- max-height: 175px;
- /* margin-right: 30px; */
+  display: flex;
+  max-height: 175px;
+  margin-right: 30px;
 }
-
 .headerUserControlsContainer{
- /* display: flex; */
- /* flex-direction: row; */
- /* margin-left: 20px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 10px;
+  margin-right: 30px;
+  align-items: flex-start;
 }
-
-.userControlsWelcome{
- /* margin-bottom: 0px; */
-}
-
 .userControlsLoginLink{
- background-color:#3D8161;
- color: #ecf9fb;
- border-radius: 5px;
- /* text-decoration: none; */
- justify-content: center;
- align-items: center;
- display: flex;
- width: 80px;
- height: 32px;
- font-size: 13px;
- font-weight: 600;
- margin-right: 20px;
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+  background-color:#e6f3e0;
+  color: #3D8161;
+  border-radius: 2px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 67px;
+  height: 28px;
+  font-size: 12px;
+  font-weight: 300;
+  margin-top: 8px;
+}
+.headerNavBarContainer{
+  display: flex;
+  justify-content: center;
+  align-content: flex-end;
+  margin-left: 0px;
+  margin-top: 15px;
 }
 
-.headerNavBarContainer {
- display: flex;
- /* justify-content: center; */
- align-items: center;
- /* margin: 0 auto; */
- /* width: 100%; */
-}
 
-.menus {
- /* display: flex; */
- /* margin-bottom: 0; */
- /* font-size: 0px; */
- /* padding: 0; */
- /* align-items: center; */
- justify-content: center;
- /* flex-wrap: wrap; */
- /* list-style: none; */
- width: 100%;
-}
-
-.menuIcon{
-  margin-right: 20px;
-}
-
-.menuIconRight{
- color:#2a5c46;
- /* margin-top: 12px; */
-}
-
-.menuIconLeft {
- color:#2a5c46;
- margin-left: 20px;
- margin-right: 60px;
- /* margin-top: 10px; */
-}
-
-.LogIn {
- /* display: flex;  */
- /* align-items: center; */
- /* margin-left: auto; */
-}
 
 /** Add to cart styles  */
 .addToCartContainer{
   display: flex;
-  align-items: flex-end;
   justify-content: left;
+  margin-top: 10px;
   align-items: center;
 }
-
 .quantityDropdown{
   width: 32px;
   border: 1px solid #3D8161;
@@ -139,7 +102,6 @@ body {
   border-radius: 5px;
   height: 30px;
 }
-
 .addToCartButton{
   background-color:#3D8161;
   color: #ecf9fb;
@@ -156,18 +118,7 @@ body {
   margin-right: 30px;
 }
 
-
-/* Homepage Styles */
-
-.background-image{
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-
-
-/* Dropdown styles */
+/** Dropdown styles */
 .menus {
   display: flex;
   margin-bottom: 0;
@@ -177,24 +128,20 @@ body {
   flex-wrap: wrap;
   list-style: none;
 }
-
 .menu-items {
   position: relative;
-  font-size: 17px;
-  font-weight: 200;
+  font-size: 15px;
   color:#2a5c46;
   padding: 0;
   margin: 0;
   transition: opacity 0.2s ease-in-out;
 }
-
 .menu-items a {
   display: block;
   font-size: inherit;
   color: inherit;
   text-decoration: none;
 }
-
 .menu-items button {
   display: flex;
   align-items: center;
@@ -205,16 +152,13 @@ body {
   cursor: pointer;
   width: 100%;
 }
-
 .menu-items > a, .menu-items button {
   text-align: left;
   padding: 0.7rem 1rem;
 }
-
 .menu-items:hover{
 text-decoration: underline;
 }
-
 .dropdown {
   position: absolute;
   left: 0;
@@ -235,7 +179,6 @@ text-decoration: underline;
   /* border: 1px solid rgba(0, 0, 0, 0.15); */
   /* border-radius: 0.25rem; */
 }
-
 .dropdown.show {
   display: block;
   opacity: 1;
@@ -256,96 +199,76 @@ text-decoration: underline;
 .dropdown-toggle:hover + .dropdown {
   display: block;
 }
-
 .dropdown {
   opacity: 0;
   transition: opacity 0.3s ease-out;
 }
-
 .dropdown.show {
   opacity: 1;
 }
 
-/* Products Pages */
+/** Products Pages */
 .products-page {
   padding: 20px;
-  margin-bottom: 80px;
 }
-
 .product-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 20px;
 }
-
 .product {
   border: 1px solid #ddd;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
   position: relative;
 }
-
 .product:hover {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   transform: translateY(-5px);
 }
-
 .product img {
   width: 100%;
   height: 250px;
   object-fit: cover;
 }
-
 .product-details {
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-
 .product-name {
   font-size: 18px;
   margin: 0 0 10px;
   color: #333;
 }
-
 .product-price {
   font-size: 16px;
   font-weight: bold;
   margin: 0;
   align-self: flex-start;
 }
-
-.add-to-cart {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
 @media (max-width: 768px) {
   .product-list {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 }
 
-/* single product page */
+/** single product page */
 .product-details-page {
   padding: 20px;
 }
-
 .product-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-
 .product-image-container {
   width: 50%;
   margin-right: 20px;
   height: 500px; /* set a fixed height */
   overflow: hidden; /* hide overflowing parts */
 }
-
 .product-image {
   width: 100%;
   max-height: 100%; /* set a max-height to fill the available space while maintaining aspect ratio */
@@ -353,26 +276,72 @@ text-decoration: underline;
   border: 1px solid #ddd;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
 }
-
 .product-info-container {
   width: 50%;
 }
-
 .product-title{
   font-size: 35px;
   font-weight: 400;
 }
-
 .product-description {
   font-size: 18px;
   margin-bottom: 10px;
 }
-
 .product-inventory,
 .product-price,
 .product-subcategory {
   font-size: 18px;
   margin: 0 0 10px;
+}
+
+/** Login/Register Styles */
+.logIn_signUp_container{
+  display: flex;
+  width: 400px;
+  height: auto;
+  flex-direction: column;
+  color: dark;
+  text-justify: center;
+  align-items: center;
+  margin-top: 75px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0px 2.9826px 7.4564px rgba(0, 0, 0, 0.3);
+}
+.logIn_signUp_Title{
+  margin-top: 30px;
+}
+label{
+  font-size: small;
+  color: #4a4f5f;
+}
+.logIn_signUp_entry{
+  margin-bottom: 20px;
+  width: 200px;
+  border: 1px solid #3D8161;
+  background-color: #f0f7ed;
+  height: 28px;
+}
+.signUp_Link{
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: small;
+}
+.logIn_signUp_submitButton{
+  display: flex;
+  background-color:#3D8161;
+  border: 1px solid #3D8161 ;
+  color: #ecf9fb;
+  text-decoration: none;
+  width: 75px;
+  height: 30px;
+  margin-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 200;
+  border-radius: 5px;
 }
 
 /* Footer Styles */
@@ -438,3 +407,54 @@ text-decoration: underline;
   font-size: 14px;
   color: #2a5c46;
 }
+
+/** Login/Register Styles */
+.logIn_signUp_container{
+  display: flex;
+  width: 400px;
+  height: auto;
+  flex-direction: column;
+  color: dark;
+  text-justify: center;
+  align-items: center;
+  margin-top: 75px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0px 2.9826px 7.4564px rgba(0, 0, 0, 0.3);
+}
+.logIn_signUp_Title{
+  margin-top: 30px;
+}
+label{
+  font-size: small;
+  color: #4a4f5f;
+}
+.logIn_signUp_entry{
+  margin-bottom: 20px;
+  width: 200px;
+  border: 1px solid #3D8161;
+  background-color: #f0f7ed;
+  height: 28px;
+}
+.signUp_Link{
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: small;
+}
+.logIn_signUp_submitButton{
+  display: flex;
+  background-color:#3D8161;
+  border: 1px solid #3D8161 ;
+  color: #ecf9fb;
+  text-decoration: none;
+  width: 75px;
+  height: 30px;
+  margin-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 200;
+  border-radius: 5px;
+}
+

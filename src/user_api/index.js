@@ -40,3 +40,28 @@ export const fetchUserData = async (token) => {
     console.error(error);
   }
 };
+
+export async function fetchSignUp(username, password, email) {
+  
+  try {
+    const response = await fetch(`https://farmers-market-1oeq.onrender.com/api/users/register`, {
+      method: "POST",
+      headers: {
+       'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        {
+          username: username,
+          password: password,
+          email: email,
+        }
+      )
+    })       
+    const data = await response.json();
+    console.log('signUpUserData :>> ', data);
+  
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
