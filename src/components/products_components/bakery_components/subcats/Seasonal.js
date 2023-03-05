@@ -9,7 +9,7 @@ const SeasonalProducts = () => {
   useEffect(() => {
     const fetchSeasonalProducts = async () => {
       try {
-        const response = await fetch("https://farmers-market-1oeq.onrender.com/api/products/subcategory/Seasonal%20specialties");
+        const response = await fetch("https://farmers-market-1oeq.onrender.com/api/products/subcategory/Seasonal%20Specialties");
         const data = await response.json();
         setProducts(data);
       } catch (error) {

@@ -9,7 +9,7 @@ const DessertProducts = () => {
   useEffect(() => {
     const fetchDessertProducts = async () => {
       try {
-        const response = await fetch("https://farmers-market-1oeq.onrender.com/api/products/subcategory/Pastries%20and%20desserts");
+        const response = await fetch("https://farmers-market-1oeq.onrender.com/api/products/subcategory/Pastries%20&%20Desserts");
         const data = await response.json();
         setProducts(data);
       } catch (error) {
@@ -22,7 +22,7 @@ const DessertProducts = () => {
 
   return (
     <div className='products-page'>
-      <h3 className='product-title'>Bakery / Desserts & Pastries</h3>
+      <h3 className='product-title'>Bakery /  Pastries & Desserts</h3>
       <div className="product-list">
         {products.map(product => (
           <div key={product.id} className="product">

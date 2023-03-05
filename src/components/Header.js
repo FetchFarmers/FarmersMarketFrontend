@@ -11,7 +11,8 @@ const Header = () => {
    
     let navigate = useNavigate();
     const username = window.localStorage.getItem("username")
-    
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [token, setToken] = useState(window.localStorage.getItem('token'));
 
     const handleLogout = (event) => {
         event.preventDefault();
@@ -20,6 +21,16 @@ const Header = () => {
         // setCurrentUsername(window.localStorage.getItem("username"));
         navigate("/");
     }
+    
+    useEffect(() => {
+    const getUserData = async () => {
+      if (token) {
+        const userData = await fetchUserData(token);
+        setIsAdmin(userData.isAdmin);
+      }
+    };
+    getUserData();
+  }, [token]);
     
   return (
     <div className="header">
@@ -53,7 +64,8 @@ const Header = () => {
             </nav> */}
         <div className="headerLinksContainer">     
               {/* //todo wrap this nav in if statement to display if user */}
-      
+      {isAdmin && <Link to="/admin">Admin</Link>}
+
         </div>
     </div>
   );

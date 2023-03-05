@@ -1,27 +1,21 @@
 import React from 'react';
-// import Lottie from 'react-lottie';
-// import animationData from './Lotties/barn.json';
+import backgroundImage from './images/Adams_Township_Sunny_Farm.jpg'
 
-function HomePage() {
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        // animationData: animationData,
-        rendererSettings: {
-          preserveAspectRatio: "xMidYMid slice"
-        }
-      };  
-
+function Homepage() {
+    
   return (
-    <div className="mainBodyContainer">
-      <h1 className='pageTitle' ></h1>
-      {/* <Lottie 
-	    options={defaultOptions}
-        height={400}
-        width={400} */}
-      {/* /> */}
+    <div
+      className='background-image'
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        minHeight: '100vh'
+      }}
+    >
     </div>
   );
 }
 
-export default HomePage;
+export default Homepage;

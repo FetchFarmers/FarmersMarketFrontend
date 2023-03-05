@@ -343,3 +343,118 @@ label{
   font-weight: 200;
   border-radius: 5px;
 }
+
+/* Footer Styles */
+
+.footer {
+  position:relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #e6f3e0;
+  height: 80px;
+  border-top: 1px solid #fffeee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spacingContainer {
+  width: 75px;
+}
+
+.logoImage {
+  max-height: 125px;
+}
+
+.footerBottom {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 80px;
+}
+
+.footerNavBarContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.menus {
+  display: flex;
+  margin-bottom: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+}
+
+.footer .menus li {
+  margin: 0 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.menus li a {
+  color: #2a5c46;
+  text-decoration: none;
+}
+
+.copy {
+  font-size: 14px;
+  color: #2a5c46;
+}
+
+/** Login/Register Styles */
+.logIn_signUp_container{
+  display: flex;
+  width: 400px;
+  height: auto;
+  flex-direction: column;
+  color: dark;
+  text-justify: center;
+  align-items: center;
+  margin-top: 75px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0px 2.9826px 7.4564px rgba(0, 0, 0, 0.3);
+}
+.logIn_signUp_Title{
+  margin-top: 30px;
+}
+label{
+  font-size: small;
+  color: #4a4f5f;
+}
+.logIn_signUp_entry{
+  margin-bottom: 20px;
+  width: 200px;
+  border: 1px solid #3D8161;
+  background-color: #f0f7ed;
+  height: 28px;
+}
+.signUp_Link{
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: small;
+}
+.logIn_signUp_submitButton{
+  display: flex;
+  background-color:#3D8161;
+  border: 1px solid #3D8161 ;
+  color: #ecf9fb;
+  text-decoration: none;
+  width: 75px;
+  height: 30px;
+  margin-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 200;
+  border-radius: 5px;
+}
+

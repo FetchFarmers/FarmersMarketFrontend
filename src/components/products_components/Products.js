@@ -17,9 +17,9 @@ import YogurtProducts from './dairy_components/subcats/Yogurt'
 import EggsButterProducts from './dairy_components/subcats/EggsButter'
 
 
-import FruitAndVeg from './fruit_veg_components/FruitAndVeg';
-import Fruit from './fruit_veg_components/subcats/Fruit';
-import Vegetables from './fruit_veg_components/subcats/Vegetables';
+import Produce from './produce_components/Produce';
+import Fruit from './produce_components/subcats/Fruit';
+import Vegetables from './produce_components/subcats/Vegetables';
 
 import MeatAndSeafood from './meat_seafood_components/MeatAndSeafood';
 import BeefProducts from './meat_seafood_components/subcats/Beef';
@@ -55,7 +55,7 @@ function Products() {
               <Route path="/products/milk" element={ <MilkProducts/> } />
               <Route path="/products/yogurt" element={ <YogurtProducts/> } /> 
 
-            <Route path="/products/fruit_vegetables" element={ <FruitAndVeg/> } />
+            <Route path="/products/produce" element={ <Produce/> } />
               <Route path="/products/fruit" element={ <Fruit/> } />
               <Route path="/products/vegetables" element={ <Vegetables/> } />
 

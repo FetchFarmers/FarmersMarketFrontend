@@ -9,7 +9,7 @@ const GlutenFreeVeganProducts = () => {
   useEffect(() => {
     const fetchGlutenFreeVeganProducts = async () => {
       try {
-        const response = await fetch("https://farmers-market-1oeq.onrender.com/api/products/subcategory/Gluten-free%20and%20vegan");
+        const response = await fetch("https://farmers-market-1oeq.onrender.com/api/products/subcategory/Gluten-free%20&%20Vegan");
         const data = await response.json();
         setProducts(data);
       } catch (error) {
