@@ -49,7 +49,6 @@ const AddToCart = ({ productId }) => {
         max={10}
       />
       <button className="addToCartButton" onClick={handleAddToCartClick}><FontAwesomeIcon  icon={faCartArrowDown}/></button>
-      
     </div>
   );
 };
