@@ -8,6 +8,7 @@ import {
 
 function Cart() {
   const [userOrderProducts, setUserOrderProducts] = useState([])
+  const [quantity, setQuantity] = useState(1);
 
   const randomString =  () => {
     return crypto.randomUUID()+"(TS-"+Date.now()+")"
@@ -38,6 +39,14 @@ function Cart() {
     loadUserOpenOrders()
   }, [])
 
+  const handleRemoveItem = (itemId) => {
+
+  }
+
+  const handleUpdateItem = (itemId, quantity) => { 
+
+  }
+
   let orderSum = 0
 
   if(userOrderProducts){
@@ -45,20 +54,29 @@ function Cart() {
       orderSum += item.price*item.quantity
     )
   }
+
   return (
-    <div className="mainBodyContainer">
+    <div className="cartContainer">
       <h1 className='pageTitle' >cart</h1>
       {(!userOrderProducts) && <h3 className='pageTitle' >Your cart is currently empty</h3>}
       {userOrderProducts && <ul>
         {userOrderProducts.map((item) => (
-          <li key={item.id}>
-            <h4>{item.name}</h4>
-            <p>{item.quantity} x ${item.price}</p>
-            <p>Total: ${(item.price*item.quantity).toFixed(2)}</p>
-          </li>
+          <div>
+            <li key={item.id}>
+              <h4>{item.name}</h4>
+              <p>{item.quantity} x ${item.price}</p>
+              <p>Total: ${(item.price*item.quantity).toFixed(2)}</p>
+            </li>
+            <div>
+              <button className="userControlsLoginLink" onClick={handleRemoveItem(item.id)} >Remove Item</button>
+              <input className='quantityDropdown' type="number" defaultValue={item.quantity} onChange={(event) => setQuantity(event.target.value)} min={1} max={10}/>
+              <button className="userControlsLoginLink" onClick={handleUpdateItem(item.id)} >Update Item</button>
+            </div>
+          </div>
         ))}
         <h4>Order Total: ${orderSum.toFixed(2)}</h4>
       </ul>}
+      
     </div>
   );
 }

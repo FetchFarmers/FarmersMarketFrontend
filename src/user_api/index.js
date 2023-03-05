@@ -24,9 +24,6 @@ export async function fetchLogin(username, password) {
   }
 }
 
-//curl http://localhost:3000/api/users/login -H "Content-Type: application/json" -X POST -d '{"username": "hollye", "password": "fruit&veg"}' 
-
-
 export const fetchUserData = async (token) => {
   try {
     const response = await fetch('https://farmers-market-1oeq.onrender.com/api/users/me', {
