@@ -52,11 +52,11 @@ export const menuItems = [
     ]
     },
     {
-      title: 'Fruits & Vegetables',
-      url: '/products/fruit_vegetables',
+      title: 'Produce',
+      url: '/products/produce',
       submenu: [
         {
-          title: 'Fresh Fruits',
+          title: 'Fresh Fruit',
           url: 'fruit',
         },
         {

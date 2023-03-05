@@ -9,7 +9,7 @@ const BreadProducts = () => {
   useEffect(() => {
     const fetchBreadProducts = async () => {
       try {
-        const response = await fetch("https://farmers-market-1oeq.onrender.com/api/products/subcategory/Artisan%20bread");
+        const response = await fetch("https://farmers-market-1oeq.onrender.com/api/products/subcategory/Artisan%20Bread");
         const data = await response.json();
         setProducts(data);
       } catch (error) {

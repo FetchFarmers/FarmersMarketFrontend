@@ -9,8 +9,8 @@ const SavoryProducts = () => {
   useEffect(() => {
     const fetchSavoryProducts = async () => {
       try {
-        const response = await fetch("https://farmers-market-1oeq.onrender.com/api/products/subcategory/Savory%20baked%20goods");
-        const data = await response.json();
+        const response = await fetch("https://farmers-market-1oeq.onrender.com/api/products/subcategory/Savory%20Baked%20Goods");
+        const data = await response.json()
         setProducts(data);
       } catch (error) {
         console.error(error);

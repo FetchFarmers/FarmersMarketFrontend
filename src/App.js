@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import Products from './components/products_components/Products';
 import User from './components/user_components/User';
 import Cart from './components/cart_components/Cart';
+import AdminPage from './components/user_components/AdminPage';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <HomePage/> } />
         <Route path="/my_cart" element={ <Cart/> } />
+        <Route path="/admin" element={ <AdminPage/> } />
       </Routes>
       <Footer />
     </div>

@@ -1,29 +1,21 @@
-//! This is where we will make all the products API calls 
+const BASE_URL = 'https://farmers-market-1oeq.onrender.com/api';
 
-// * this is how they called the functions on art collector - they didn't export at the bottom just imported at top of page where used
-export async function functionName() {
-  
-    try {
+async function createProduct(productData) {
+  const response = await fetch(`${BASE_URL}/products`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(productData),
+  });
+  const product = await response.json();
+  return product;
+}
 
-    } catch (error) {
-      throw error;
-    }
-  }
+async function getCategory(productId) {
+  const response = await fetch(`${BASE_URL}/products/${productId}/category`);
+  const category = await response.json();
+  return category;
+}
 
-  export const getProductsByCategory = async (category) => {
-    const response = await fetch(`/api/products/category/${category}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch products');
-    }
-    const products = await response.json();
-    return products;
-  };
-  
-  export const getProductsBySubcategory = async (subcategory) => {
-    const response = await fetch(`/api/products/subcategory/${subcategory}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch products');
-    }
-    const products = await response.json();
-    return products;
-  };
+export { createProduct, getCategory };
