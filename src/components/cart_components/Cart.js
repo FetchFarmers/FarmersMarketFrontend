@@ -39,14 +39,16 @@ function Cart() {
   }, [])
 
   let orderSum = 0
-  userOrderProducts.map((item) => 
-    orderSum += item.price*item.quantity
-  )
-  
+
+  if(userOrderProducts){
+    userOrderProducts.map((item) => 
+      orderSum += item.price*item.quantity
+    )
+  }
   return (
     <div className="mainBodyContainer">
       <h1 className='pageTitle' >cart</h1>
-      {(!userOrderProducts[0]) && <h3 className='pageTitle' >Your cart is currently empty</h3>}
+      {(!userOrderProducts) && <h3 className='pageTitle' >Your cart is currently empty</h3>}
       {userOrderProducts && <ul>
         {userOrderProducts.map((item) => (
           <li key={item.id}>
@@ -55,7 +57,7 @@ function Cart() {
             <p>Total: ${(item.price*item.quantity).toFixed(2)}</p>
           </li>
         ))}
-        <h4>Order Total: $ {orderSum.toFixed(2)}</h4>
+        <h4>Order Total: ${orderSum.toFixed(2)}</h4>
       </ul>}
     </div>
   );
