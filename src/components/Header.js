@@ -32,7 +32,9 @@ const Header = ({cartItemTotal}) => {
           {!username && <Link className="userControlsLoginLink" to="/user/register">Sign Up</Link>}
           {username && <Link className="userControlsLoginLink" to="/user/profile">My Profile</Link>}
           <Link className="userControlsLoginLink" to="/">Home&nbsp; <FontAwesomeIcon icon={faHouse}/></Link>
-          <Link className="userControlsLoginLink" to="/my_cart">View&nbsp;<FontAwesomeIcon icon={faCartShopping}/>({cartItemTotal})</Link>
+          <Link className="userControlsLoginLink" to="/my_cart">View&nbsp;<FontAwesomeIcon icon={faCartShopping}/>
+          {cartItemTotal !== 0 && <p>({cartItemTotal})</p>}
+          </Link>
           {isAdmin && <Link className="userControlsLoginLink" to="/admin">Admin</Link>}
         </nav>   
       </div>

@@ -117,13 +117,29 @@ export async function fetchCheckout(orderId, orderSum, date) {
       )
     });
     const data = await response.json();
-    console.log("🚀 ~ file: index.js:120 ~ fetchCheckout ~ data:", data)
     
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function fetchCancelOrder(orderId){
+  
+  try {
+    const url = `https://farmers-market-1oeq.onrender.com/api/orders/user/open/${orderId}`;
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+      }});
+    const data = await response.json();
 
     return data;
   } catch (error) {
     throw error;
   }
+
 }
 
 
