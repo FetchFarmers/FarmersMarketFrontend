@@ -7,7 +7,8 @@ import {
   fetchRemoveOrderProduct,
   fetchUpdateOrderProductQuantity,
   fetchUserOpenOrders,
-  fetchCheckout
+  fetchCheckout,
+  fetchCancelOrder,
 } from '../../orders_api'; 
 
 
@@ -101,6 +102,8 @@ function Cart({setCartItemTotal, cartItemTotal}) {
         console.log(userMessage)
       } else {  
         loadUserOpenOrders()
+        setCartItemTotal(0)
+
       }
     } catch (error) {
       console.error(error);
@@ -108,8 +111,21 @@ function Cart({setCartItemTotal, cartItemTotal}) {
 
   }
 
-  let orderSum = 0
+  async function handleCancelOrder() {
+    try{
 
+      const results = await fetchCancelOrder(orderId)
+      console.log(results)
+      loadUserOpenOrders()
+      setCartItemTotal(0)
+      
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+
+  let orderSum = 0
   if(userOrderProducts){
     userOrderProducts.map((item) => 
       orderSum += item.price*item.quantity
@@ -119,7 +135,7 @@ function Cart({setCartItemTotal, cartItemTotal}) {
 
   return (
     <div className="cartContainer">
-      <h1 className='pageTitle' >My Cart ({cartItemTotal})</h1>
+      <h1 className='pageTitle' >My Cart {cartItemTotal !== 0 && <>({cartItemTotal} items)</>}</h1>
       {(!userOrderProducts) && <h3 className='pageTitle' >Your cart is currently empty</h3>}
       {userOrderProducts && <ul>
         {userOrderProducts.map((item) =>
@@ -136,7 +152,10 @@ function Cart({setCartItemTotal, cartItemTotal}) {
           </div>
         ))}
         <h3>Order Total: ${orderSum.toFixed(2)}</h3>
-        <button className="editCartButtons" onClick={() =>handleCheckout()} >Checkout</button>
+        <div className='editCartControlsContainer'>
+        {cartItemTotal !== 0 &&<button className="editCartButtons" onClick={() =>handleCheckout()} >Checkout</button>}
+        {cartItemTotal !== 0 &&<button className="editCartButtons" onClick={() =>handleCancelOrder()} >Cancel Order</button>}
+        </div>
       </ul>}
     </div>
   );
