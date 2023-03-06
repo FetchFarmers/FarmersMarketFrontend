@@ -40,6 +40,7 @@ const AddToCart = ({ productId, productInventory}) => {
   }
 
   return (
+    <div>
     <div className='addToCartContainer'>
       <input className='quantityDropdown'
         type="number"
@@ -50,7 +51,9 @@ const AddToCart = ({ productId, productInventory}) => {
       />
       <button className="addToCartButton" onClick={handleAddToCartClick}><FontAwesomeIcon  icon={faCartArrowDown}/></button>
     </div>
+    </div>
   );
 };
 
 export default AddToCart;
+
