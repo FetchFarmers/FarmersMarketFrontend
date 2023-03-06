@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import AddToCart from '../cart_components/AddToCart';
-import handleAddToCart from '../cart_components/AddToCart';
 
 function ProductDetails() {
   const { id } = useParams();

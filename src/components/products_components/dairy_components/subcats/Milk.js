@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AddToCart from "../../../cart_components/AddToCart";
-import handleAddToCart from '../../../cart_components/AddToCart';
 
 const MilkProducts = () => {
   const [products, setProducts] = useState([]);
