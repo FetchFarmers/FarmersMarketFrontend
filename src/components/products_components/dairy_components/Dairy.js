@@ -10,7 +10,7 @@ function EggsAndDairy() {
     const [products, setProducts] = useState([]);
   
     useEffect(() => {
-      fetch('https://farmers-market-1oeq.onrender.com/api/products/category/Dairy')
+      fetch('https://farmers-market-1oeq.onrender.com/api/products/category/Eggs%20&%20Dairy')
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -27,7 +27,7 @@ function EggsAndDairy() {
 
     return (
       <div className='products-page'>
-        <h3 className='product-title'>Dairy</h3>
+        <h3 className='product-title'>Eggs & Dairy</h3>
         <div className="product-list">
           {products.map(product => (
             <div key={product.id} className="product">

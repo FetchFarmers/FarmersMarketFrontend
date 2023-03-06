@@ -22,7 +22,7 @@ const YogurtProducts = () => {
 
   return (
     <div className='products-page'>
-      <h3 className='product-title'>Dairy / Yogurt & Cultured Dairy</h3>
+      <h3 className='product-title'>Eggs & Dairy / Yogurt & Cultured Dairy</h3>
       <div className="product-list">
         {products.map(product => (
           <div key={product.id} className="product">

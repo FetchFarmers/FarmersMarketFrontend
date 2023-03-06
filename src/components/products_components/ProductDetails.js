@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import AddToCart from '../cart_components/AddToCart';
 import { updateProduct } from '../../products_api';
+import { fetchUserData } from '../../user_api';
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -15,6 +16,7 @@ export default function ProductDetails() {
     subcategory: '',
     imageURL: '',
   });
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     fetch(`https://farmers-market-1oeq.onrender.com/api/products/${id}`)
@@ -31,15 +33,30 @@ export default function ProductDetails() {
       .catch(error => {
         console.log('There was a problem with the API request:', error);
       });
+
+    // check if user is admin
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetchUserData(token)
+        .then(userData => {
+          setIsAdmin(userData.isAdmin);
+        })
+        .catch(error => {
+          console.log('There was a problem fetching user data:', error);
+        });
+    }
   }, [id]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUpdatedProduct({...updatedProduct, [name]: value});
+    setUpdatedProduct({ ...updatedProduct, [name]: value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!isAdmin) {
+      return;
+    }
     try {
       await updateProduct(id, updatedProduct);
       setProduct(updatedProduct);
@@ -60,23 +77,25 @@ export default function ProductDetails() {
           <img className='product-image' src={product.imageURL} alt={product.name} />
         </div>
         <div className='product-info-container'>
-          <form onSubmit={handleSubmit}>
-            <label>Name:</label>
-            <input type="text" name="name" value={updatedProduct.name} onChange={handleInputChange} />
-            <label>Description:</label>
-            <textarea name="description" value={updatedProduct.description} onChange={handleInputChange}></textarea>
-            <label>Inventory:</label>
-            <input type="number" name="inventory" value={updatedProduct.inventory} onChange={handleInputChange} />
-            <label>Price:</label>
-            <input type="number" step="0.01" name="price" value={updatedProduct.price} onChange={handleInputChange} />
-            <label>Category:</label>
-            <input type="text" name="category" value={updatedProduct.category} onChange={handleInputChange} />
-            <label>Subcategory:</label>
-            <input type="text" name="subcategory" value={updatedProduct.subcategory} onChange={handleInputChange} />
-            <label>Image URL:</label>
-            <input type="text" name="imageURL" value={updatedProduct.imageURL} onChange={handleInputChange} />
-            <button type="submit">Update Product</button>
-          </form>
+          {isAdmin && (
+            <form onSubmit={handleSubmit}>
+              <label>Name:</label>
+              <input type="text" name="name" value={updatedProduct.name} onChange={handleInputChange} />
+              <label>Description:</label>
+              <textarea name="description" value={updatedProduct.description} onChange={handleInputChange}></textarea>
+              <label>Inventory:</label>
+              <input type="number" name="inventory" value={updatedProduct.inventory} onChange={handleInputChange} />
+              <label>Price:</label>
+              <input type="number" step="0.01" name="price" value={updatedProduct.price} onChange={handleInputChange} />
+              <label>Category:</label>
+              <input type="text" name="category" value={updatedProduct.category} onChange={handleInputChange} />
+              <label>Subcategory:</label>
+              <input type="text" name="subcategory" value={updatedProduct.subcategory} onChange={handleInputChange} />
+              <label>Image URL:</label>
+              <input type="text" name="imageURL" value={updatedProduct.imageURL} onChange={handleInputChange} />
+              <button type="submit">Update Product</button>
+            </form>
+          )}
           <p className='product-inventory'>Inventory: {product.inventory}</p>
           <p className='product-subcategory'>Subcategory: {product.subcategory}</p>
           <p className='product-price'>${product.price}</p>

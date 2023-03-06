@@ -30,7 +30,7 @@ export const menuItems = [
     ]
     },
     {
-      title: 'Dairy',
+      title: 'Eggs & Dairy',
       url: '/products/dairy',
       submenu: [
         {
