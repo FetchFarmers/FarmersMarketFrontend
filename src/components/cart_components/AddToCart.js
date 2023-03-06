@@ -5,7 +5,7 @@ import { fetchAddToOrder } from '../../orders_api';
 
 
 
-const AddToCart = ({ productId }) => {
+const AddToCart = ({ productId, productInventory}) => {
   const [quantity, setQuantity] = useState(1);
   const token = window.localStorage.getItem("token")
 
@@ -46,7 +46,7 @@ const AddToCart = ({ productId }) => {
         value={quantity}
         onChange={(event) => setQuantity(event.target.value)}
         min={1}
-        max={10}
+        max={productInventory || 10}
       />
       <button className="addToCartButton" onClick={handleAddToCartClick}><FontAwesomeIcon  icon={faCartArrowDown}/></button>
     </div>
