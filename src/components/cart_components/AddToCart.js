@@ -46,7 +46,7 @@ const AddToCart = ({ productId, productInventory}) => {
         value={quantity}
         onChange={(event) => setQuantity(event.target.value)}
         min={1}
-        max={productInventory || 10}
+        max={productInventory}
       />
       <button className="addToCartButton" onClick={handleAddToCartClick}><FontAwesomeIcon  icon={faCartArrowDown}/></button>
     </div>

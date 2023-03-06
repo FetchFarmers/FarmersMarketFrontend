@@ -41,7 +41,7 @@ function Register () {
 
     return (
         <div className="logIn_signUp_container">
-            <h1 className="logIn_signUp_pageTitle">Sign Up </h1>
+            <h1 className="logIn_signUp_pageTitle">Create Account </h1>
             <form onSubmit={handleSignUp} className="form">
                 <label>User Name</label><br/>
                 <input className="logIn_signUp_entry" type="text" value={username} onChange={(event) => setUsername(event.target.value)} required/><br/>

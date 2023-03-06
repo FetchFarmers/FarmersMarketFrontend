@@ -97,16 +97,23 @@ body {
   align-items: center;
 }
 .quantityDropdown{
-  width: 32px;
-  border: 1px solid #3D8161;
-  background-color: #e6f3e0;
-  border-radius: 5px;
+  width: 42px;
+  border: 1px solid #8dd2b1;
+  background-color: #f0f7ed;
+  border-radius: 2px;
   height: 30px;
 }
 .addToCartButton{
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
   background-color:#3D8161;
   color: #ecf9fb;
-  border-radius: 5px;
+  border-radius: 2px;
   text-decoration: none;
   justify-content: center;
   align-items: center;
@@ -409,52 +416,35 @@ label{
   color: #2a5c46;
 }
 
-/** Login/Register Styles */
-.logIn_signUp_container{
+/** Cart Styles */
+.editCartControlsContainer{
   display: flex;
-  width: 400px;
-  height: auto;
-  flex-direction: column;
-  color: dark;
-  text-justify: center;
-  align-items: center;
-  margin-top: 75px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0px 2.9826px 7.4564px rgba(0, 0, 0, 0.3);
+  flex-direction: row;
 }
-.logIn_signUp_Title{
-  margin-top: 30px;
-}
-label{
-  font-size: small;
-  color: #4a4f5f;
-}
-.logIn_signUp_entry{
-  margin-bottom: 20px;
-  width: 200px;
-  border: 1px solid #3D8161;
-  background-color: #f0f7ed;
-  height: 28px;
-}
-.signUp_Link{
-  margin-top: 10px;
-  margin-bottom: 30px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: small;
-}
-.logIn_signUp_submitButton{
-  display: flex;
+.editCartButtons{
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
   background-color:#3D8161;
-  border: 1px solid #3D8161 ;
-  color: #ecf9fb;
+  color: #e6f3e0;
+  border-radius: 2px;
   text-decoration: none;
-  width: 75px;
-  height: 30px;
-  margin-bottom: 30px;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
-  font-weight: 200;
-  border-radius: 5px;
+  display: flex;
+  width: 72px;
+  height: 30px;
+  font-size: 12px;
+  font-weight: 300;
+  margin-left: 5px
 }
+
+/* <div className='editCartControlsContainer'>
+<button className="editCartButtons" onClick={() =>handleRemoveItem(item.orderProductId)} >Remove Item</button>
+<input className='quantityDropdown' type="number" defaultValue={item.quantity} onChange={(event) => setQuantity(event.target.value)} min={1} max={item.inventory || 10}/>
+<button className="editCartButtons" onClick={() => handleUpdateItem(item.orderProductId)}>Update&nbsp;<FontAwesomeIcon  icon={faCartShopping}/></button>
+</div> */
