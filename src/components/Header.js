@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
 
-const Header = () => {
+const Header = ({cartItemTotal}) => {
 
   let navigate = useNavigate();
   const username = window.localStorage.getItem("username")
@@ -32,7 +32,7 @@ const Header = () => {
           {!username && <Link className="userControlsLoginLink" to="/user/register">Sign Up</Link>}
           {username && <Link className="userControlsLoginLink" to="/user/profile">My Profile</Link>}
           <Link className="userControlsLoginLink" to="/">Home&nbsp; <FontAwesomeIcon icon={faHouse}/></Link>
-          <Link className="userControlsLoginLink" to="/my_cart">View&nbsp;<FontAwesomeIcon icon={faCartShopping}/></Link>
+          <Link className="userControlsLoginLink" to="/my_cart">View&nbsp;<FontAwesomeIcon icon={faCartShopping}/>({cartItemTotal})</Link>
           {isAdmin && <Link className="userControlsLoginLink" to="/admin">Admin</Link>}
         </nav>   
       </div>
