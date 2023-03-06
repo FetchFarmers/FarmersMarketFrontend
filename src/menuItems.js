@@ -70,7 +70,7 @@ export const menuItems = [
       url: '/products/bakery',
       submenu: [
         {
-          title: 'Artisan Bread',
+          title: 'Bread',
           url: 'bread',
         },
         {
