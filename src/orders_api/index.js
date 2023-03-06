@@ -101,6 +101,31 @@ export async function fetchRemoveOrderProduct(orderProductId) {
   }
 }
 
+export async function fetchCheckout(orderId, orderSum, date) {
+  try {
+    const url = `https://farmers-market-1oeq.onrender.com/api/orders/user/open/${orderId}`;
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(
+        {
+          checkoutSum: orderSum, 
+          checkoutDate: date,
+        }
+      )
+    });
+    const data = await response.json();
+    console.log("🚀 ~ file: index.js:120 ~ fetchCheckout ~ data:", data)
+    
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 
 // Below are my comments with error handling and input validation
 
