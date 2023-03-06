@@ -6,17 +6,20 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { 
   fetchRemoveOrderProduct,
   fetchUpdateOrderProductQuantity,
-   fetchUserOpenOrders
+  fetchUserOpenOrders,
+  fetchCheckout
 } from '../../orders_api'; 
 
 
-function Cart() {
+function Cart({setCartItemTotal, cartItemTotal}) {
   const [userOrderProducts, setUserOrderProducts] = useState([])
   const [quantity, setQuantity] = useState(0);
   const [userMessage, setUserMessage] = useState("")
+  const [orderId, setOrderId] = useState(0)
 
   const randomString =  () => {
-    return crypto.randomUUID()+"(TS-"+Date.now()+")"
+    const date = new Date()
+    return crypto.randomUUID()+"("+date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear()+")"
   }
   
   async function loadUserOpenOrders() {
@@ -26,15 +29,25 @@ function Cart() {
       if (sessionId) {
         const results = await fetchUserOpenOrders(sessionId);
         setUserOrderProducts(() => results.products);
+        setOrderId(() => results.id)
+        console.log('results :>> ', results);
+        let numOfItems = 0
+        results.products.map((product) => numOfItems += product.quantity)
+        setCartItemTotal(numOfItems)
+        console.log('cartItemTotal :>> ', cartItemTotal);
 
       } else {
         const newSessionId = randomString();
         window.localStorage.setItem("fetchSessionId", newSessionId )
         const results = await fetchUserOpenOrders(newSessionId);
         setUserOrderProducts(() => results.products);
-
+        setOrderId(() => results.id)
+        let numOfItems = 0
+        results.products.map((product) => numOfItems += product.quantity)
+        setCartItemTotal(numOfItems)
+        console.log('cartItemTotal :>> ', cartItemTotal);
       }
-      
+
     } catch (error) {
       console.error(error);
     }
@@ -76,6 +89,25 @@ function Cart() {
 
   }
 
+  async function handleCheckout() {
+    try{
+
+      const orderDate = new Date()
+      console.log('orderDate :>> ', orderDate);
+
+      const results = await fetchCheckout (orderId, orderSum, orderDate)
+      if (!results.isCheckedOut){
+        setUserMessage("Sorry there was an error updating your item please try again")
+        console.log(userMessage)
+      } else {  
+        loadUserOpenOrders()
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+
   let orderSum = 0
 
   if(userOrderProducts){
@@ -83,10 +115,11 @@ function Cart() {
       orderSum += item.price*item.quantity
     )
   }
+      
 
   return (
     <div className="cartContainer">
-      <h1 className='pageTitle' >My Cart</h1>
+      <h1 className='pageTitle' >My Cart ({cartItemTotal})</h1>
       {(!userOrderProducts) && <h3 className='pageTitle' >Your cart is currently empty</h3>}
       {userOrderProducts && <ul>
         {userOrderProducts.map((item) =>
@@ -103,9 +136,11 @@ function Cart() {
           </div>
         ))}
         <h3>Order Total: ${orderSum.toFixed(2)}</h3>
+        <button className="editCartButtons" onClick={() =>handleCheckout()} >Checkout</button>
       </ul>}
     </div>
   );
 }
 
 export default Cart;
+

@@ -10,15 +10,16 @@ import Cart from './components/cart_components/Cart';
 import AdminPage from './components/user_components/AdminPage';
 
 function App() {
+  const[cartItemTotal, setCartItemTotal] = useState(0)
 
   return (
     <div className="App">
-      <Header/>
+      <Header cartItemTotal={cartItemTotal}/>
       <Products/>
       <User/>
       <Routes>
         <Route path="/" element={ <HomePage/> } />
-        <Route path="/my_cart" element={ <Cart/> } />
+        <Route path="/my_cart" element={ <Cart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
         <Route path="/admin" element={ <AdminPage/> } />
       </Routes>
       <Footer />
