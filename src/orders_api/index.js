@@ -2,7 +2,6 @@
   
 const setHeader = () => {
   const token = window.localStorage.getItem("token")
-  console.log("🚀 ~ file: index.js:4 ~ token:", token)
 
   if (token) {
     return {
@@ -32,8 +31,6 @@ export async function fetchUserOpenOrders(sessionId) {
       )
     });
     const [data] = await response.json();
-    console.log('data :>> ', data);
-    console.log('header :>> ', header);
 
     return data;
   } catch (error) {
@@ -59,13 +56,51 @@ export async function fetchAddToOrder( sessionId, productId, quantity) {
       )
     });
     const data = await response.json();
-    console.log('data :>> ', data);
 
     return data;
   } catch (error) {
     throw error;
   }
 }
+
+export async function fetchUpdateOrderProductQuantity(orderProductId, quantity) {
+  try {
+    const url = `https://farmers-market-1oeq.onrender.com/api/orders/user/open/order_products/${orderProductId}`;
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(
+        {
+          quantity: quantity
+        }
+      )
+    });
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function fetchRemoveOrderProduct(orderProductId) {
+  try {
+    const url = `https://farmers-market-1oeq.onrender.com/api/orders/user/open/order_products/${orderProductId}`;
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+      }});
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 
 // Below are my comments with error handling and input validation
 

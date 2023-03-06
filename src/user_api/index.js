@@ -16,7 +16,6 @@ export async function fetchLogin(username, password) {
       )
     })       
     const data = await response.json();
-    console.log('loginUserData :>> ', data);
   
     return data;
   } catch (error) {
@@ -55,7 +54,6 @@ export async function fetchSignUp(username, password, email) {
       )
     })       
     const data = await response.json();
-    console.log('signUpUserData :>> ', data);
   
     return data;
   } catch (error) {
