@@ -40,59 +40,60 @@ export default function CreateProduct() {
   };
 
 return (
-  <div>
-    <h2>Create Product</h2>
-    <form onSubmit={handleSubmit}>
+<div className="create-product-container">
+  <h2 className="create-product-title">Create Product</h2>
+  <form onSubmit={handleSubmit} className="create-product-form">
+    <div>
+      <label className="create-product-label">Name</label>
+      <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="create-product-input" />
+    </div>
+    <div>
+      <label className="create-product-label">Description</label>
+      <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="create-product-input" />
+    </div>
+    <div>
+      <label className="create-product-label">Inventory</label>
+      <input type="number" value={inventory} onChange={(e) => setInventory(e.target.value)} className="create-product-input" />
+    </div>
+    <div>
+      <label className="create-product-label">Price</label>
+      <input type="number" step="0.01" value={price} onChange={(e) => setPrice(e.target.value)} className="create-product-input" />
+    </div>
+    <div>
+      <label className="create-product-label">Category</label>
+      <select value={category} onChange={(e) => setCategory(e.target.value)} className="create-product-select">
+        <option value="">Select a category</option>
+        {menuItems.map((item) => (
+          <option key={item.url} value={item.title}>
+            {item.title}
+          </option>
+        ))}
+      </select>
+    </div>
+    {category && (
       <div>
-        <label>Name</label>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-      </div>
-      <div>
-        <label>Description</label>
-        <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
-      </div>
-      <div>
-        <label>Inventory</label>
-        <input type="number" value={inventory} onChange={(e) => setInventory(e.target.value)} />
-      </div>
-      <div>
-        <label>Price</label>
-        <input type="number" step="0.01" value={price} onChange={(e) => setPrice(e.target.value)} />
-      </div>
-      <div>
-        <label>Category</label>
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="">Select a category</option>
-          {menuItems.map((item) => (
-            <option key={item.url} value={item.title}>
-              {item.title}
-            </option>
-          ))}
+        <label className="create-product-label">Subcategory</label>
+        <select value={subcategory} onChange={(e) => setSubcategory(e.target.value)} className="create-product-select">
+          <option value="">Select a subcategory</option>
+          {menuItems
+            .find((item) => item.title === category)
+            ?.submenu.map((item) => (
+              <option key={item.url} value={item.title}>
+                {item.title}
+              </option>
+            ))}
         </select>
       </div>
-      {category && (
-        <div>
-          <label>Subcategory</label>
-          <select value={subcategory} onChange={(e) => setSubcategory(e.target.value)}>
-            <option value="">Select a subcategory</option>
-            {menuItems
-              .find((item) => item.title === category)
-              ?.submenu.map((item) => (
-                <option key={item.url} value={item.title}>
-                  {item.title}
-                </option>
-              ))}
-          </select>
-        </div>
-      )}
-      <div>
-        <label>Image URL</label>
-        <input type="text" value={imageURL} onChange={(e) => setImageURL(e.target.value)} />
-      </div>
-      <button type="submit" disabled={!name || !description || !inventory || !price || !category || !subcategory || !imageURL}>
-        Create Product
-      </button>
-    </form>
-  </div>
+    )}
+    <div>
+      <label className="create-product-label">Image URL</label>
+      <input type="text" value={imageURL} onChange={(e) => setImageURL(e.target.value)} className="create-product-input" />
+    </div>
+    <button type="submit" disabled={!name || !description || !inventory || !price || !category || !subcategory || !imageURL} className="create-product-submit-button">
+      Create Product
+    </button>
+  </form>
+</div>
+
 );
               }

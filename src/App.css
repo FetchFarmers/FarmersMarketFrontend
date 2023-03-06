@@ -448,3 +448,69 @@ label{
 <input className='quantityDropdown' type="number" defaultValue={item.quantity} onChange={(event) => setQuantity(event.target.value)} min={1} max={item.inventory || 10}/>
 <button className="editCartButtons" onClick={() => handleUpdateItem(item.orderProductId)}>Update&nbsp;<FontAwesomeIcon  icon={faCartShopping}/></button>
 </div> */
+
+/* Admin Page */
+
+/* Create New Product */
+
+.create-product-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.create-product-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.create-product-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.create-product-label {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.create-product-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+.create-product-select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+.create-product-submit-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.create-product-submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
