@@ -6,7 +6,7 @@ function MeatAndSeafood() {
     const [products, setProducts] = useState([]);
   
     useEffect(() => {
-      fetch('https://farmers-market-1oeq.onrender.com/api/products/category/Meat%20and%20Seafood')
+      fetch('https://farmers-market-1oeq.onrender.com/api/products/category/Meat%20&%20Seafood')
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
