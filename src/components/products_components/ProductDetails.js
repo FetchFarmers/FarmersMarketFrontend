@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import AddToCart from '../cart_components/AddToCart';
 import { updateProduct } from '../../products_api';
 import { fetchUserData } from '../../user_api';
+import { menuItems } from '../../menuItems';
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -72,88 +73,105 @@ export default function ProductDetails() {
   }
 
   return (
-      <div className='product-details-page'>
-        <h3 className='product-title'>{product.name}</h3>
-        <div className='product-container'>
-          <div className='product-image-container'>
-            <img className='product-image' src={product.imageURL} alt={product.name} />
-          </div>
-          <div className='product-info-container'>
-            <form onSubmit={handleSubmit}>
-              {!isReadOnly && (
-                <div className="edit-field">
-                  <label>Name:</label>
-                  <input type="text" name="name" value={updatedProduct.name} onChange={handleInputChange} />
-                </div>
-              )}
+    <div className='product-details-page'>
+      <h3 className='product-title'>{product.name}</h3>
+      <div className='product-container'>
+        <div className='product-image-container'>
+          <img className='product-image' src={product.imageURL} alt={product.name} />
+        </div>
+        <div className='product-info-container'>
+          <form onSubmit={handleSubmit}>
+            {!isReadOnly && (
               <div className="edit-field">
-                <label>Description:</label>
-                {isReadOnly ? (
-                  <p>{product.description}</p>
-                ) : (
-                  <textarea name="description" value={updatedProduct.description} onChange={handleInputChange}></textarea>
-                )}
-              </div>
-              {!isReadOnly && (
-                <div className="edit-field">
-                  <label>Inventory:</label>
-                  <input type="number" step="1" name="inventory" value={updatedProduct.inventory} onChange={handleInputChange} />
-                </div>
-              )}
-              <div className="edit-field">
-                <label>Price:</label>
-                {isReadOnly ? (
-                  <p>${product.price}</p>
-                ) : (
-                  <input type="number" step="0.01" name="price" value={updatedProduct.price} onChange={handleInputChange} />
-                )}
-              </div>
-              <div className="edit-field">
-                <label>Category:</label>
-                {isReadOnly ? (
-                  <p>{product.category}</p>
-                ) : (
-                  <input type="text" name="category" value={updatedProduct.category} onChange={handleInputChange} />
-                )}
-              </div>
-              <div className="edit-field">
-                <label>Subcategory:</label>
-                {isReadOnly ? (
-                  <p>{product.subcategory}</p>
-                ) : (
-                  <input type="text" name="subcategory" value={updatedProduct.subcategory} onChange={handleInputChange} />
-                )}
-              </div>
-              {!isReadOnly && (
-                <div className="edit-field">
-                  <label>Image URL:</label>
-                  <input type="text" name="imageURL" value={updatedProduct.imageURL} onChange={handleInputChange} />
-                </div>
-              )}
-              {isAdmin && (
-                <div className="edit-buttons">
-                  {isReadOnly ? (
-                    <button type="button" className="btn-edit" onClick={() => setIsReadOnly(false)}>Edit</button>
-                  ) : (
-                    <div className="edit-actions">
-                      <button type="submit" className="btn-save">Save</button>
-                      <button type="button" className="btn-cancel" onClick={() => {
-                        setIsReadOnly(true);
-                        setUpdatedProduct(product);
-                      }}>Cancel</button>
-                    </div>
-                  )}
-                </div>
-              )}
-            </form>
-            {!isAdmin && (
-              <div className="readOnly-message">
-                <p>This product can only be edited by an admin.</p>
+                <label>Name:</label>
+                <input type="text" name="name" value={updatedProduct.name} onChange={handleInputChange} />
               </div>
             )}
-            {product.id && <AddToCart productId={product.id} productInventory={product.inventory} className="add-to-cart" />}
-          </div>
+            <div className="edit-field">
+              {isReadOnly ? (
+                <p>{product.description}</p>
+              ) : (
+                <div>
+                  <label>Description:</label>
+                  <textarea name="description" value={updatedProduct.description} onChange={handleInputChange}></textarea>
+                </div>
+              )}
+            </div>
+            {!isReadOnly && (
+              <div className="edit-field">
+                <label>Inventory:</label>
+                <input type="number" step="1" name="inventory" value={updatedProduct.inventory} onChange={handleInputChange} />
+              </div>
+            )}
+            {!isReadOnly && (
+              <div className="edit-field">
+                <label>Category:</label>
+                <select name="category" value={updatedProduct.category} onChange={handleInputChange}>
+                  <option value="">Select a category</option>
+                  {menuItems.map((item) => (
+                    <option key={item.url} value={item.title}>
+                      {item.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+            <div className="edit-field">
+              {isReadOnly ? (
+                <p>{product.subcategory}</p>
+              ) : (
+                <div>
+                  <label>Subcategory:</label>
+                  <select name="subcategory" value={updatedProduct.subcategory} onChange={handleInputChange}>
+                    <option value="">Select a subcategory</option>
+                    {menuItems
+                      .find((item) => item.title === updatedProduct.category)
+                      ?.submenu.map((item) => (
+                        <option key={item.url} value={item.title}>
+                          {item.title}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+              )}
+            </div>
+            <div className="edit-field">
+              {isReadOnly ? (
+                <p>${product.price}</p>
+              ) : (
+                <div>
+                  <label>Price:</label>
+                  <input type="number" step="0.01" name="price" value={updatedProduct.price} onChange={handleInputChange} />
+                </div>
+              )}
+            </div>
+            {!isReadOnly && (
+              <div className="edit-field">
+                <label>Image URL:</label>
+                <input type="text" name="imageURL" value={updatedProduct.imageURL} onChange={handleInputChange} />
+              </div>
+            )}
+            {isAdmin && (
+              <div className="edit-buttons">
+                {isReadOnly ? (
+                  <button type="button" className="btn-edit" onClick={() => setIsReadOnly(false)}>Edit</button>
+                ) : (
+                  <div className="edit-actions">
+                    <button type="submit" className="btn-save">Save</button>
+                    <button type="button" className="btn-cancel" onClick={() => {
+                      setIsReadOnly(true);
+                      setUpdatedProduct(product);
+                    }}>Cancel</button>
+                  </div>
+                )}
+              </div>
+            )}
+          </form>      
+          {isReadOnly && product.id && (
+  <AddToCart productId={product.id} productInventory={product.inventory} className="add-to-cart" />
+)}
         </div>
       </div>
-    );    
+    </div>
+  );
 }

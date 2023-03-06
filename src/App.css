@@ -100,10 +100,11 @@ body {
 
 /** Add to cart styles  */
 .addToCartContainer {
+  bottom: 0;
+  margin-left: 2px;
   display: flex;
   justify-content: left;
   margin-bottom: 10px;
-  margin-left: 20px;
   align-items: center;
 }
 
@@ -271,23 +272,25 @@ body {
 }
 
 .product-details {
+  height: 75px;
   padding: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
 }
 
 .product-name {
+  position: absolute;
   font-size: 18px;
   margin: 0 0 10px;
-  color: #333;
 }
 
 .product-price {
   font-size: 16px;
   font-weight: bold;
-  margin: 0;
-  align-self: flex-start;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 @media (max-width: 768px) {
@@ -317,9 +320,7 @@ body {
 .product-image {
   width: 100%;
   max-height: 100%;
-  /* set a max-height to fill the available space while maintaining aspect ratio */
   object-fit: cover;
-  /* fill the container */
   border: 1px solid #ddd;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
 }
@@ -342,12 +343,12 @@ body {
 .product-price,
 .product-subcategory {
   font-size: 18px;
-  margin: 0 0 10px;
+  margin: 0 5px 10px;
 }
 
 input[type="text"],
 textarea {
-  width: 100%;
+  width: 50%;
   padding: 0.5rem;
   border: 1px solid #8dd2b1;
   background-color: #f0f7ed;
@@ -363,6 +364,44 @@ textarea {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+}
+
+.edit-field select {
+  width: 50%;
+  padding: 0.5rem;
+  border: 1px solid #8dd2b1;
+  background-color: #f0f7ed;
+  border-radius: 2px;
+}
+
+.edit-actions {
+  margin-bottom: 0.5em;
+}
+
+.btn-save {
+  margin-right: 10px;
+}
+
+.btn-edit {
+  margin-bottom: 0.5em;
+}
+
+.btn-save,
+.btn-edit,
+.btn-cancel {
+  border: none;
+  padding-bottom: ;
+  cursor: pointer;
+  background-color: #3D8161;
+  color: #ecf9fb;
+  border-radius: 2px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 29px;
+  font-size: 15px;
+  font-weight: 250;
 }
 
 /** Login/Register Styles */
@@ -550,6 +589,15 @@ label {
   font-size: 1.2rem;
 }
 
+input[type="number"],
+textarea {
+  padding: 0.5rem;
+  border: 1px solid #8dd2b1;
+  background-color: #f0f7ed;
+  border-radius: 2px;
+  height: 30px;
+}
+
 .create-product-select {
   width: 100%;
   padding: 0.5rem;
@@ -557,6 +605,7 @@ label {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1.2rem;
+  background-color: #f0f7ed;
 }
 
 .create-product-submit-button {
