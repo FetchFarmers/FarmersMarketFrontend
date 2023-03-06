@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AddToCart from '../../cart_components/AddToCart';
 import { fetchUserData } from '../../../user_api';
-import { deleteProduct } from '../../../products_api';
 
 function Bakery() {
   const [products, setProducts] = useState([]);
@@ -37,15 +36,6 @@ function Bakery() {
     getUserData();
   }, [token]);
 
-  const handleDelete = async (productId) => {
-    try {
-      await deleteProduct(productId);
-      setProducts(products.filter(product => product.id !== productId));
-    } catch (error) {
-      console.log('There was a problem deleting the product:', error);
-    }
-  };
-
   return (
     <div className='products-page'>
       <h3 className='product-title'>Bakery</h3>
@@ -56,10 +46,9 @@ function Bakery() {
               <img className="product-image" src={product.imageURL} alt={product.name} />
               <div className="product-details">
                 <h3 className='product-name'>{product.name}</h3>
-                <p className='product-price'>${product.price}</p>
+                <div className='product-price'>${product.price}</div>
               </div>
             </Link>
-            {isAdmin && <button onClick={() => handleDelete(product.id)}>Delete</button>}
             {product.id && <AddToCart productId={product.id} productInventory={product.inventory} className="add-to-cart" />}
           </div>
         ))}
