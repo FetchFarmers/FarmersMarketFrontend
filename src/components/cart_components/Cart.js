@@ -13,6 +13,7 @@ import {
 function Cart() {
   const [userOrderProducts, setUserOrderProducts] = useState([])
   const [quantity, setQuantity] = useState(0);
+  const [userMessage, setUserMessage] = useState("")
 
   const randomString =  () => {
     return crypto.randomUUID()+"(TS-"+Date.now()+")"
@@ -46,7 +47,13 @@ function Cart() {
   async function handleRemoveItem(orderProductId){
     try{
       const results = await fetchRemoveOrderProduct (orderProductId)
-      loadUserOpenOrders()
+      console.log('results :>> ', results);
+      if (!results.orderProductId){
+        setUserMessage("Sorry there was an error removing your item please try again")
+        console.log(userMessage)
+      } else {  
+        loadUserOpenOrders()
+      }
 
     } catch (error) {
       console.error(error);
@@ -57,8 +64,12 @@ function Cart() {
   async function handleUpdateItem(orderProductId) {
     try{
       const results = await fetchUpdateOrderProductQuantity (orderProductId, quantity)
-      loadUserOpenOrders()
-
+      if (results.quantity === quantity){
+        setUserMessage("Sorry there was an error updating your item please try again")
+        console.log(userMessage)
+      } else {  
+        loadUserOpenOrders()
+      }
     } catch (error) {
       console.error(error);
     }
@@ -98,6 +109,3 @@ function Cart() {
 }
 
 export default Cart;
-
-
-// className="addToCartButton" onClick={handleAddToCartClick}><FontAwesomeIcon  icon={faCartArrowDown}/></button

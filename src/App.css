@@ -442,9 +442,3 @@ label{
   font-weight: 300;
   margin-left: 5px
 }
-
-/* <div className='editCartControlsContainer'>
-<button className="editCartButtons" onClick={() =>handleRemoveItem(item.orderProductId)} >Remove Item</button>
-<input className='quantityDropdown' type="number" defaultValue={item.quantity} onChange={(event) => setQuantity(event.target.value)} min={1} max={item.inventory || 10}/>
-<button className="editCartButtons" onClick={() => handleUpdateItem(item.orderProductId)}>Update&nbsp;<FontAwesomeIcon  icon={faCartShopping}/></button>
-</div> */
