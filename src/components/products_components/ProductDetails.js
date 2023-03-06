@@ -39,7 +39,7 @@ function ProductDetails() {
           <p className='product-inventory'>Inventory: {product.inventory}</p>
           <p className='product-subcategory'>Subcategory: {product.subcategory}</p>
           <p className='product-price'>${product.price}</p>
-          {product.id && <AddToCart productId={product.id} onClick={() => handleAddToCart(product.id)} className='add-to-cart' />}
+          {product.id && <AddToCart productId={product.id} productInventory={product.inventory} className="add-to-cart" />}
         </div>
       </div>
     </div>

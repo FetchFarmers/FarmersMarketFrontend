@@ -38,7 +38,7 @@ function EggsAndDairy() {
                   <p className='product-price'>${product.price}</p>
                 </div>
               </Link>
-              {product.id && <AddToCart productId={product.id} onClick={() => handleAddToCart(product.id)} className="add-to-cart" />}
+              {product.id && <AddToCart productId={product.id} productInventory={product.inventory} className="add-to-cart" />}
             </div>
           ))}
         </div>

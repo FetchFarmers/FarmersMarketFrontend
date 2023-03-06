@@ -92,7 +92,6 @@ function Cart() {
         ))}
         <h4>Order Total: ${orderSum.toFixed(2)}</h4>
       </ul>}
-      
     </div>
   );
 }
