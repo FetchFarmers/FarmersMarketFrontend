@@ -40,7 +40,7 @@ function Login() {
             <input className="logIn_signUp_entry" type="password" value={password} onChange={(event) => setPassword(event.target.value)}  required/><br/>
             <input className="logIn_signUp_submitButton" type="submit" ></input>
         </form>
-        <Link className="signUp_Link" to="/signup">Don't have an account? Sign Up here!</Link>
+        <Link className="signUp_Link" to="/user/register">Don't have an account? Sign Up here!</Link>
     </div>
   );
 }
