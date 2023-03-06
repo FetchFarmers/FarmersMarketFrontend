@@ -6,6 +6,7 @@ import { getAllProducts } from "../../products_api";
 import { getProductsByCategory } from "../../products_api";
 import { getProductsBySubcategory } from "../../products_api";
 import { menuItems } from "../../menuItems";
+import { deleteProduct } from "../../products_api";
 
 export default function AdminPage() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -61,6 +62,15 @@ export default function AdminPage() {
     setSubcategoryFilter(event.target.value);
   };
 
+  const handleDelete = async (productId) => {
+    try {
+      await deleteProduct(productId);
+      setProducts(products.filter(product => product.id !== productId));
+    } catch (error) {
+      console.log('There was a problem deleting the product:', error);
+    }
+  };
+
   return (
     <div>
       {isAdmin ? (
@@ -100,6 +110,7 @@ export default function AdminPage() {
             <div key={product.id}>
               <h3><Link to={`/products/${product.id}`}>{product.name}</Link></h3>
               <p>Inventory: {product.inventory}</p>
+              {<button onClick={() => handleDelete(product.id)}>Delete</button>}
             </div>
           ))}
         </div>
@@ -109,3 +120,4 @@ export default function AdminPage() {
     </div>
   );
       }  
+
