@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import AddToCart from '../../cart_components/AddToCart';
-import handleAddToCart from '../../cart_components/AddToCart';
-
-// import { 
-    // todo call api functions here
-//  } from '../products_api'; //! not positive about the path might need another dot or two??
 
 function MeatAndSeafood() {
     const [products, setProducts] = useState([]);
