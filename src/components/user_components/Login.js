@@ -29,7 +29,6 @@ function Login() {
     }
   }
 
-  
   return (
     <div className="logIn_signUp_container">
         <h1 className="logIn_signUp_Title">Log In </h1>

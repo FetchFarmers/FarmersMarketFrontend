@@ -14,7 +14,7 @@ a:hover {
 }
 
 body {
-  width: 100%;
+  /* width: 100%; */
   color: #2a5c46;
   height: 100vh;
   display: flex;
@@ -350,7 +350,7 @@ input[type="text"],
 textarea {
   /* width: 50%; */
   padding: 0.5rem;
-  border: 1px solid #8dd2b1;
+  border: 1px solid #ccc;
   background-color: #f0f7ed;
   border-radius: 2px;
   height: 30px;
@@ -415,6 +415,7 @@ textarea {
   margin-top: 75px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 23vh;
   box-shadow: 0px 2.9826px 7.4564px rgba(0, 0, 0, 0.3);
 }
 
@@ -559,18 +560,20 @@ label {
   align-items: center;
 }
 
-.admin-page-products{
+.admin-page-products {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  max-width: 1200px; /* set max-width as desired */
-  margin-top: 2rem; /* add some margin between products and filters */
+  max-width: 1200px;
+  /* set max-width as desired */
+  margin-top: 2rem;
+  /* add some margin between products and filters */
 }
 
-.admin-page h1,
-.admin-page h2 {
-  margin: 2rem 0;
+.admin-page-subtitle, .admin-page-title{
+  margin-top: 1.5em;
+  font-size: 30px;
 }
 
 .admin-page .filter-section {
@@ -589,14 +592,14 @@ label {
 .admin-page-filter-select {
   padding: 0.5rem;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 18px;
+  border-radius: 2px;
+  font-size: 16px;
   background-color: #f0f7ed;
 }
 
 .admin-page-product {
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 2px;
   padding: 1rem;
   flex-basis: calc(33.33% - 1rem);
   margin-bottom: 2rem;
@@ -626,8 +629,8 @@ label {
   width: 450px;
   padding: 30px;
   border: 1px solid #ccc;
-  background-color: #fffeee;
-}
+  border-radius: 2px;
+  }
 
 .create-product-label {
   font-size: 18px;
@@ -640,8 +643,8 @@ label {
   padding: 0.5rem;
   margin-bottom: 1rem;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 12px;
+  border-radius: 2px;
+  font-size: 16px;
   text-align: left;
 }
 
@@ -660,7 +663,7 @@ textarea {
   padding: 0.5rem;
   margin-bottom: 1rem;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 2px;
   font-size: 16px;
   background-color: #f0f7ed;
   text-align: left;
@@ -671,11 +674,11 @@ textarea {
   color: white;
   border: none;
   padding: 10px 16px;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 2px;
   cursor: pointer;
 }
 
@@ -709,6 +712,10 @@ textarea {
   margin-left: 5px
 }
 
+.success-message{
+  margin: 10px 0 0 10px;
+}
+
 .create-product-submit-button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
@@ -726,7 +733,7 @@ textarea {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  border-radius: 5px;
+  border-radius: 2px;
   cursor: pointer;
 }
 

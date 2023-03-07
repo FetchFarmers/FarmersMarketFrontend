@@ -8,6 +8,7 @@ import Products from './components/products_components/Products';
 import User from './components/user_components/User';
 import Cart from './components/cart_components/Cart';
 import AdminPage from './components/user_components/AdminPage';
+import Search from './components/Search';
 
 function App() {
   const [cartItemTotal, setCartItemTotal] = useState(JSON.parse(window.localStorage.getItem("CartTotal")))
