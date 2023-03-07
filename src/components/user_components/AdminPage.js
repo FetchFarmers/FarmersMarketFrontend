@@ -7,6 +7,7 @@ import { getProductsByCategory } from "../../products_api";
 import { getProductsBySubcategory } from "../../products_api";
 import { menuItems } from "../../menuItems";
 import { deleteProduct } from "../../products_api";
+import { updateProduct } from "../../products_api";
 
 export default function AdminPage() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -15,6 +16,7 @@ export default function AdminPage() {
   const [products, setProducts] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState('');
   const [subcategoryFilter, setSubcategoryFilter] = useState('');
+  const [updatedProduct, setUpdatedProduct] = useState({ inventory: '', });
 
   useEffect(() => {
     const getUserData = async () => {
@@ -71,17 +73,21 @@ export default function AdminPage() {
     }
   };
 
+  const handleProductCreated = (newProduct) => {
+    setProducts([...products, newProduct]);
+  };
+
   return (
-    <div>
+    <div className="admin-page">
       {isAdmin ? (
         <div>
-          <h1>Welcome, {userData && userData.username}!</h1>
-          <CreateProduct />
-          <h2>Products</h2>
-          <div>
-            <div>
-              <label>Filter by Category:</label>
-              <select value={categoryFilter} onChange={handleCategoryFilter}>
+          <h1 className="admin-page-title">Welcome, {userData && userData.username}!</h1>
+          <CreateProduct onProductCreated={handleProductCreated} />
+          <h2 className="admin-page-subtitle">Products</h2>
+          <div className="admin-page-filters">
+            <div className="admin-page-filter">
+              <label className="admin-page-filter-label">Filter by Category:</label>
+              <select value={categoryFilter} onChange={handleCategoryFilter} className="admin-page-filter-select">
                 <option value="All Products">All Products</option>
                 {menuItems.map((item) => (
                   <option key={item.url} value={item.title}>
@@ -91,9 +97,9 @@ export default function AdminPage() {
               </select>
             </div>
             {categoryFilter && categoryFilter !== 'All Products' && (
-              <div>
-                <label>Filter by Subcategory:</label>
-                <select value={subcategoryFilter} onChange={handleSubcategoryFilter}>
+              <div className="admin-page-filter">
+                <label className="admin-page-filter-label">Filter by Subcategory:</label>
+                <select value={subcategoryFilter} onChange={handleSubcategoryFilter} className="admin-page-filter-select">
                   <option value="">All {categoryFilter} Products</option>
                   {menuItems
                     .find((item) => item.title === categoryFilter)
@@ -106,18 +112,22 @@ export default function AdminPage() {
               </div>
             )}
           </div>
-          {products.map((product) => (
-            <div key={product.id}>
-              <h3><Link to={`/products/${product.id}`}>{product.name}</Link></h3>
-              <p>Inventory: {product.inventory}</p>
-              {<button onClick={() => handleDelete(product.id)}>Delete</button>}
-            </div>
-          ))}
+          <div className="admin-page-products">
+            {products.map((product) => (
+              <div key={product.id} className="admin-page-product">
+                <div className="admin-page-product-info">
+                  <h3 className="admin-page-product-name"><Link to={`/products/${product.id}`}>{product.name}</Link></h3>
+                  <p className="admin-page-product-inventory">Inventory: {product.inventory}</p>
+                </div>
+                <button className='btn-delete' onClick={() => handleDelete(product.id)}>Delete</button>
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
         <h1>Access Denied</h1>
       )}
     </div>
   );
-      }  
+}
 
