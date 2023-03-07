@@ -1,19 +1,9 @@
 import React from 'react';
-import backgroundImage from './images/Adams_Township_Sunny_Farm.jpg'
+import backgroundImage from './images/image-from-rawpixel-id-3259575-original.jpg';
 
-function Homepage() {
-    
+function Homepage() {   
   return (
-    <div
-      className='background-image'
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        minHeight: '100vh'
-      }}
-    >
+    <div className='background-image' style={{backgroundImage: `url(${backgroundImage})`}}>
     </div>
   );
 }
