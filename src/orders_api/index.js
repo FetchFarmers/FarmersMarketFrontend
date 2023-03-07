@@ -142,6 +142,25 @@ export async function fetchCancelOrder(orderId){
 
 }
 
+export async function fetchAllOpenOrders() {
+
+  try {
+
+    const url = `https://farmers-market-1oeq.onrender.com/api/orders/open`;
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+      }});
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+  
+}
 
 // Below are my comments with error handling and input validation
 

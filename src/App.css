@@ -101,7 +101,7 @@ body {
 /** Add to cart styles  */
 .addToCartContainer {
   bottom: 0;
-  margin-left: 2px;
+  margin-left: 10px;
   display: flex;
   justify-content: left;
   margin-bottom: 10px;
@@ -390,7 +390,7 @@ textarea {
 .btn-edit,
 .btn-cancel {
   border: none;
-  padding-bottom: ;
+  /* padding-bottom: ; */
   cursor: pointer;
   background-color: #3D8161;
   color: #ecf9fb;
@@ -459,7 +459,7 @@ label {
   border-radius: 5px;
 }
 
-/* Footer Styles */
+/** Footer Styles */
 
 .footer {
   position: relative;
@@ -552,9 +552,9 @@ label {
   margin-left: 5px
 }
 
-/* Admin Page */
+/** Admin Page */
 
-/* Create New Product */
+/** Create New Product */
 
 .create-product-container {
   display: flex;
