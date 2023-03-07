@@ -8,6 +8,7 @@ function Bakery() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const [userData, setUserData] = useState(null);
+  const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
     fetch('https://farmers-market-1oeq.onrender.com/api/products/category/Bakery')
@@ -36,11 +37,26 @@ function Bakery() {
     getUserData();
   }, [token]);
 
+  const handleSearch = e => {
+    setSearchInput(e.target.value);
+  };
+
+  const filteredProducts = products.filter(
+    product =>
+      product.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchInput.toLowerCase()) ||
+      product.subcategory.toLowerCase().includes(searchInput.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
   return (
     <div className='products-page'>
       <h3 className='product-title'>Bakery</h3>
+      <div className='search-bar'>
+        <input type='text' placeholder='Search' onChange={handleSearch} />
+      </div>
       <div className="product-list">
-        {products.map(product => (
+        {filteredProducts.map(product => (
           <div key={product.id} className="product">
             <Link to={`/products/${product.id}`}>
               <img className="product-image" src={product.imageURL} alt={product.name} />

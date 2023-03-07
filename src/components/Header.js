@@ -41,7 +41,7 @@ const Header = ({cartItemTotal, setCartItemTotal}) => {
         <nav className="headerNavBarContainer">
           <ul className="menus">
             {menuItems.map((menu, index) => {
-              return <MenuItems items={menu} key={index} />;
+              return <MenuItems items={menu} key={index} />
             })}
           </ul>
         </nav>

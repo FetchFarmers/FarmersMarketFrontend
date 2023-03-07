@@ -64,23 +64,23 @@ export default function CreateProduct({ onProductCreated }) {
       ) : (
         <form onSubmit={handleSubmit} className="create-product-form">
           <div>
-            <label className="create-product-label">Name</label>
+            <label className="create-product-label">Name:</label>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="create-product-input" />
           </div>
           <div>
-            <label className="create-product-label">Description</label>
+            <label className="create-product-label">Description:</label>
             <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="create-product-input" />
           </div>
           <div>
-            <label className="create-product-label">Inventory</label>
+            <label className="create-product-label">Inventory:</label>
             <input type="number" value={inventory} onChange={(e) => setInventory(e.target.value)} className="create-product-input" />
           </div>
           <div>
-            <label className="create-product-label">Price</label>
+            <label className="create-product-label">Price:</label>
             <input type="number" step="0.01" value={price} onChange={(e) => setPrice(e.target.value)} className="create-product-input" />
           </div>
           <div>
-            <label className="create-product-label">Category</label>
+            <label className="create-product-label">Category:</label>
             <select
               value={category}
               onChange={(e) => {
@@ -99,7 +99,7 @@ export default function CreateProduct({ onProductCreated }) {
             </select>
             {category && (
               <div>
-                <label className="create-product-label">Subcategory</label>
+                <label className="create-product-label">Subcategory:</label>
                 <select value={subcategory} onChange={(e) => setSubcategory(e.target.value)} className="create-product-select">
                   <option value="">Select a subcategory</option>
                   {menuItems
@@ -114,7 +114,7 @@ export default function CreateProduct({ onProductCreated }) {
             )}
           </div>
           <div>
-            <label className="create-product-label">Image URL</label>
+            <label className="create-product-label">Image URL:</label>
             <input type="text" value={imageURL} onChange={(e) => setImageURL(e.target.value)} className="create-product-input" />
           </div>
           <div className='create-product-buttons'>
