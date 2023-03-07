@@ -4,6 +4,7 @@ import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { fetchAddToOrder } from '../../orders_api';
 
 
+
 const AddToCart = ({ productId, productInventory}) => {
   const [quantity, setQuantity] = useState(1);
   const token = window.localStorage.getItem("token")
@@ -25,13 +26,20 @@ const AddToCart = ({ productId, productInventory}) => {
       if (sessionId) {
         const results = await fetchAddToOrder(sessionId, productId, quantity, token)
         console.log('fetchAddToOrderResults :>> ', results);
+        const cartTotal =JSON.parse( window.localStorage.getItem("CartTotal"))
+        const newCartTotal = cartTotal + quantity
+        window.localStorage.setItem("CartTotal", newCartTotal)
 
       } else {
         const newSessionId = randomString()
         window.localStorage.setItem("fetchSessionId", newSessionId )
         const results = await fetchAddToOrder(sessionId, productId, quantity, token)
         console.log('fetchAddToOrderResults :>> ', results);
- 
+        const cartTotal =JSON.parse( window.localStorage.getItem("CartTotal"))
+        const newCartTotal = cartTotal + quantity
+        console.log(newCartTotal)
+        window.localStorage.setItem("CartTotal", newCartTotal)
+        
       }
 
     } catch (error) {

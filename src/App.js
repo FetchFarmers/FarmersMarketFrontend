@@ -10,11 +10,11 @@ import Cart from './components/cart_components/Cart';
 import AdminPage from './components/user_components/AdminPage';
 
 function App() {
-  const[cartItemTotal, setCartItemTotal] = useState(0)
+  const [cartItemTotal, setCartItemTotal] = useState(JSON.parse(window.localStorage.getItem("CartTotal")))
 
   return (
     <div className="App">
-      <Header cartItemTotal={cartItemTotal}/>
+      <Header setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/>
       <Products/>
       <User/>
       <Routes>

@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
 
-const Header = ({cartItemTotal}) => {
-
+const Header = ({cartItemTotal, setCartItemTotal}) => {
   let navigate = useNavigate();
   const username = window.localStorage.getItem("username")
   const isAdmin = window.localStorage.getItem("isAdmin")

@@ -19,8 +19,7 @@ function Cart({setCartItemTotal, cartItemTotal}) {
   const [orderId, setOrderId] = useState(0)
 
   const randomString =  () => {
-    const date = new Date()
-    return crypto.randomUUID()+"("+date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear()+")"
+    return crypto.randomUUID()+"("+ new Date()+")"
   }
   
   async function loadUserOpenOrders() {
@@ -34,8 +33,8 @@ function Cart({setCartItemTotal, cartItemTotal}) {
         console.log('results :>> ', results);
         let numOfItems = 0
         results.products.map((product) => numOfItems += product.quantity)
+        window.localStorage.setItem("CartTotal", numOfItems)
         setCartItemTotal(numOfItems)
-        console.log('cartItemTotal :>> ', cartItemTotal);
 
       } else {
         const newSessionId = randomString();
@@ -45,8 +44,9 @@ function Cart({setCartItemTotal, cartItemTotal}) {
         setOrderId(() => results.id)
         let numOfItems = 0
         results.products.map((product) => numOfItems += product.quantity)
+        window.localStorage.setItem("CartTotal", numOfItems)
         setCartItemTotal(numOfItems)
-        console.log('cartItemTotal :>> ', cartItemTotal);
+
       }
 
     } catch (error) {
@@ -62,11 +62,11 @@ function Cart({setCartItemTotal, cartItemTotal}) {
     try{
       const results = await fetchRemoveOrderProduct (orderProductId)
       console.log('results :>> ', results);
-      if (!results.orderProductId){
+      if (results.id === orderProductId ){
+        loadUserOpenOrders()
+      } else {  
         setUserMessage("Sorry there was an error removing your item please try again")
         console.log(userMessage)
-      } else {  
-        loadUserOpenOrders()
       }
 
     } catch (error) {
@@ -118,6 +118,7 @@ function Cart({setCartItemTotal, cartItemTotal}) {
       console.log(results)
       loadUserOpenOrders()
       setCartItemTotal(0)
+      cartItemTotal()
       
     } catch (error) {
       console.error(error);
