@@ -1,23 +1,31 @@
-Introduction
-Fetch Farm is an online farmer's market that allows customers to browse through various farm products, add them to their cart, and checkout. The website allows users to create an account and log in to access personalized features. Administrators can add, edit, or delete products from the website.
+Fetch Farm
+Fetch Farm is an online farmers market where customers can browse products by category and subcategory, add them to a cart, and checkout. Customers can create an account and log in to track their orders, save their payment information, and view their order history.
 
-Getting Started
-To get started with Fetch Farm, navigate to the website's homepage. Here, you can browse through the categories and subcategories of the various farm products that are available. If you find a product you like, simply click on it to view more details, such as its price and description. You can add the product to your cart by clicking the "Add to Cart" button.
+Features
+Browse products by category and subcategory
+Add products to a cart and checkout
+Create an account and log in
+Track orders, save payment information, and view order history
+Admins can create new products
+Admins can view and filter products on the admin page
+Admins can edit individual products by navigating from the admin page and clicking edit
+Technologies
+React.js for the frontend
+Node.js and Express.js for the backend
+PostgreSQL for the database
+Installation
+Clone the repository
+Run npm install in both the client and server directories to install dependencies
+Set up a PostgreSQL database and add the database URI to the .env file in the server directory
+Run npm run dev in the server directory to start the backend server and client simultaneously
+Contact
+If you have any questions or issues, please contact us by submitting an issue on GitHub or messaging us through our social media channels.
 
-Creating an Account
-To create an account, click on the "Sign Up" button in the top right corner of the website. You will be prompted to enter your username and create a password. Once you have created your account, you can log in to access your personalized features.
+Thank you for choosing Fetch Farm!
 
-Logging In
-To log in, click on the "Log In" button in the top right corner of the website. Enter your username and password to access your account.
+Usage
+Browse products by category and subcategory on the home page. Click on a product to view more details and add it to your cart. When you're ready to checkout, click on the cart icon in the top right corner and follow the prompts to enter your payment information.
 
-Adding Products
-If you are an administrator, you can add products to the website by logging in to your account and navigating to the "Add Product" page. Here, you can enter details about the product, such as its name, price, and description.
+To create an account, click on the "Sign Up" button in the top right corner and follow the prompts to enter your personal and payment information. You can log in to your account at any time by clicking on the "Log In" button.
 
-Editing Products
-To edit an existing product, log in to your administrator account and navigate to the padmin page. Naviagte to a product and click on the "Edit" button to make changes to the product's details.
-
-Deleting Products
-To delete a product, log in to your administrator account and navigate to the product. Click on the "Delete" button to remove the product from the website.
-
-Conclusion
-Fetch Farm is an online farmer's market that makes it easy for customers to browse and purchase farm products. With personalized features for registered users and administrative features for administrators, Fetch Farm is a great choice for anyone looking to buy or sell farm products online.
+Admins can create, edit, and delete products by logging in and navigating to the admin page. Products can be deleted by viewing and filtering products on the admin page, and edited by navigating from the admin page to the individual product and clicking edit.
