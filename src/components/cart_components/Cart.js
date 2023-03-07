@@ -89,7 +89,7 @@ function Cart({setCartItemTotal, cartItemTotal}) {
     }
 
   }
-
+  
   async function handleCheckout() {
     try{
 
@@ -132,34 +132,41 @@ function Cart({setCartItemTotal, cartItemTotal}) {
       orderSum += item.price*item.quantity
     )
   }
+  let taxes = orderSum*.05
       
 
   return (
-    <div className="cartContainer">
+    <div className='mainCartPage'>
+    <div className="cartProductsCtr">
       <h1 className='pageTitle' >My Cart {cartItemTotal !== 0 && <>({cartItemTotal} items)</>}</h1>
       {(!userOrderProducts) && <h3 className='pageTitle' >Your cart is currently empty</h3>}
       {userOrderProducts && <ul>
         {userOrderProducts.map((item) =>
-          (<div>
+          (<div className='cartProductCtr'>
             <div key={item.id}>
-              <h4>{item.name} ({item.quantity} x ${item.price})</h4>
-              <h4>Total: ${(item.price*item.quantity).toFixed(2)}</h4>
-              <div className='editCartControlsContainer'>
-                <input className='quantityDropdown' type="number" defaultValue={item.quantity} onChange={(event) => setQuantity(event.target.value)} min={1} max={item.inventory || 10}/>
-                <button className="editCartButtons" onClick={() => handleUpdateItem(item.orderProductId)}>Update&nbsp;<FontAwesomeIcon  icon={faCartShopping}/></button>
-                <button className="editCartButtons" onClick={() =>handleRemoveItem(item.orderProductId)} >Remove All</button>
+              <h4 className='cartProdTitle'>{item.name} ({item.quantity} x ${item.price})</h4>
+              <h4 className='cartProdTotal'>Total: ${(item.price*item.quantity).toFixed(2)}</h4>
+              <div className='editCartBntCtr'>
+                <input className='cartQtyDropdown' type="number" defaultValue={item.quantity} onChange={(event) => setQuantity(event.target.value)} min={1} max={item.inventory || 10}/>
+                <button className="updateCartBtn" onClick={() => handleUpdateItem(item.orderProductId)}>Update&nbsp;<FontAwesomeIcon  icon={faCartShopping}/></button>
+                <button className="editCartBtn" onClick={() =>handleRemoveItem(item.orderProductId)} >Remove All</button>
               </div>
             </div>
           </div>
-        ))}
-        <h3>Order Total: ${orderSum.toFixed(2)}</h3>
-        <div className='editCartControlsContainer'>
-        {cartItemTotal !== 0 &&<button className="editCartButtons" onClick={() =>handleCheckout()} >Checkout</button>}
-        {cartItemTotal !== 0 &&<button className="editCartButtons" onClick={() =>handleCancelOrder()} >Cancel Order</button>}
+        ))}</ul>}
+        <div className="checkoutDetailsCtr">
+          <h3 className='sumTotal'>Products Total: ${orderSum.toFixed(2)}</h3>
+          <h3 className='shippingCharge'>Shipping: $5.99</h3>
+          <h3 className='taxes'>taxes: ${taxes.toFixed(2)}</h3>
+          <h3 className='orderTotal'>Order Total: ${(orderSum+taxes+5.99).toFixed(2)}</h3>
+
+          <div className='manageCartBntCtr'>
+            {cartItemTotal !== 0 &&<button className="checkoutCartBtn" onClick={() => handleCheckout()} >Checkout</button>}
+            {cartItemTotal !== 0 &&<button className="cancelOrderBtn" onClick={() => handleCancelOrder()} >Cancel Order</button>}
+          </div>
         </div>
-      </ul>}
     </div>
-  );
+  </div>);
 }
 
 export default Cart;

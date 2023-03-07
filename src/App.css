@@ -431,7 +431,7 @@ label {
 .logIn_signUp_entry {
   margin-bottom: 20px;
   width: 200px;
-  border: 1px solid #3D8161;
+  border: 1px solid #ccc;
   background-color: #f0f7ed;
   height: 28px;
 }
@@ -454,8 +454,8 @@ label {
   margin-bottom: 30px;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
-  font-weight: 200;
+  font-size: 15px;
+  font-weight: 250;
   border-radius: 2px;
 }
 
@@ -629,7 +629,8 @@ label {
   width: 450px;
   padding: 30px;
   border: 1px solid #ccc;
-  border-radius: 2px;}
+  border-radius: 2px;
+  }
 
 .create-product-label {
   font-size: 18px;
@@ -739,3 +740,6 @@ textarea {
 .btn-delete:hover {
   background-color: #da190b;
 }
+
+
+
