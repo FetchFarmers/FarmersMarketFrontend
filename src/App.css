@@ -430,7 +430,7 @@ label {
 .logIn_signUp_entry {
   margin-bottom: 20px;
   width: 200px;
-  border: 1px solid #3D8161;
+  border: 1px solid #ccc;
   background-color: #f0f7ed;
   height: 28px;
 }
@@ -453,9 +453,9 @@ label {
   margin-bottom: 30px;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
-  font-weight: 200;
-  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 250;
+  border-radius: 2px;
 }
 
 /** Footer Styles */
@@ -625,7 +625,7 @@ label {
   flex-direction: column;
   width: 450px;
   padding: 30px;
-  border: 1px solid #8dd2b1;
+  border: 1px solid #ccc;
   background-color: #fffeee;
 }
 
@@ -648,7 +648,7 @@ label {
 input[type="number"],
 textarea {
   padding: 0.5rem;
-  border: 1px solid #8dd2b1;
+  border: 1px solid #ccc;
   background-color: #f0f7ed;
   border-radius: 2px;
   height: 30px;
@@ -733,3 +733,6 @@ textarea {
 .btn-delete:hover {
   background-color: #da190b;
 }
+
+
+
