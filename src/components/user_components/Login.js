@@ -35,7 +35,7 @@ function Login() {
         <h1 className="logIn_signUp_Title">Log In </h1>
         <form onSubmit={handleLogin} className="form">
             <label>User Name</label><br/>
-            <input className="logIn_signUp_entry" type="text" value={username} onChange={(event) => setUsername(event.target.value)} required/><br/>
+            <input className="logIn_signUp_entry" type="username" value={username} onChange={(event) => setUsername(event.target.value)} required/><br/>
             <label>Password</label><br/>
             <input className="logIn_signUp_entry" type="password" value={password} onChange={(event) => setPassword(event.target.value)}  required/><br/>
             <input className="logIn_signUp_submitButton" type="submit" ></input>

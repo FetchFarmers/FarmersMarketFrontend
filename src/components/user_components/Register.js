@@ -44,7 +44,7 @@ function Register () {
             <h1 className="logIn_signUp_pageTitle">Create Account </h1>
             <form onSubmit={handleSignUp} className="form">
                 <label>User Name</label><br/>
-                <input className="logIn_signUp_entry" type="text" value={username} onChange={(event) => setUsername(event.target.value)} required/><br/>
+                <input className="logIn_signUp_entry" type="username" value={username} onChange={(event) => setUsername(event.target.value)} required/><br/>
                 <label>Email Address</label><br/>
                 <input className="logIn_signUp_entry" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required/><br/>
                 <label>Password - minimum 8 characters</label><br/>
