@@ -11,13 +11,13 @@ import AdminPage from './components/user_components/AdminPage';
 import Search from './components/Search';
 
 function App() {
-  const [cartItemTotal, setCartItemTotal] = useState(JSON.parse(window.localStorage.getItem("CartTotal")))
+  const [cartItemTotal, setCartItemTotal] = useState(JSON.parse(window.localStorage.getItem("cartTotal")||0))
 
   return (
     <div className="App">
-      <Header setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/>
-      <Products/>
-      <User/>
+      <Header cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal}/>
+      <Products setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/>
+      <User setCartItemTotal={setCartItemTotal}/>
       <Routes>
         <Route path="/" element={ <HomePage/> } />
         <Route path="/my_cart" element={ <Cart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />

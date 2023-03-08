@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import AddToCart from "../../../cart_components/AddToCart";
 
 
-const EggsButterProducts = () => {
+const EggsButterProducts = ({setCartItemTotal, cartItemTotal}) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const EggsButterProducts = () => {
                 <p className='product-price'>${product.price}</p>
               </div>
             </Link>
-            {product.id && <AddToCart productId={product.id} productInventory={product.inventory} className="add-to-cart" />}
+            {product.id && <AddToCart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} productId={product.id} productInventory={product.inventory} className="add-to-cart" />}
           </div>
         ))}
       </div>
