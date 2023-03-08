@@ -1,24 +1,31 @@
+// Import React and useState hook from react library
 import React, { useState } from 'react';
-import { createReview } from '../api';
+// Import createReview function from api file
+import { createReview } from '../../reviews_api';
 
+// Define ReviewForm component that accepts productId as a prop
 function ReviewForm({ productId }) {
+  // Define state variables for title, details and starRating
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
   const [starRating, setStarRating] = useState('');
 
+  // Define submit handler function that will be called when the form is submitted
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Prevent the default form submission behavior
     try {
+      // Call the createReview function with the productId, title, details and starRating
       const review = await createReview(productId, { title, details, starRating });
-      console.log('Review created:', review);
-      setTitle('');
-      setDetails('');
-      setStarRating('');
+      console.log('Review created:', review); // Log the created review to the console
+      setTitle(''); // Reset title state
+      setDetails(''); // Reset details state
+      setStarRating(''); // Reset starRating state
     } catch (error) {
-      console.error(error);
+      console.error(error); // Log any errors to the console
     }
   };
 
+  // Return a form with inputs for title, details and starRating and a submit button
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="title">Title:</label>
@@ -35,4 +42,5 @@ function ReviewForm({ productId }) {
   );
 }
 
+// Export the ReviewForm component as the default export
 export default ReviewForm;
