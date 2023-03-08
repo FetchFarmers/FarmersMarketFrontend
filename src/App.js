@@ -8,7 +8,6 @@ import Products from './components/products_components/Products';
 import User from './components/user_components/User';
 import Cart from './components/cart_components/Cart';
 import AdminPage from './components/user_components/AdminPage';
-import Search from './components/Search';
 import Reviews from './components/reviews_components/Reviews';
 import ReviewForm from './components/reviews_components/ReviewForm';
 
@@ -28,9 +27,6 @@ function App() {
         <Route path="/products/:productId/reviews" element={<Reviews />} />
         <Route path="/products/:productId/reviews/new" element={<ReviewForm />} />
       </Routes>
-      <Products />
-      <User />
-      <Search />
       <Footer />
     </div>
   );
