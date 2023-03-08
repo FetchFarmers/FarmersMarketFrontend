@@ -15,6 +15,9 @@ const Header = ({cartItemTotal, setCartItemTotal}) => {
     window.localStorage.removeItem("token")
     window.localStorage.removeItem("username")
     window.localStorage.removeItem("isAdmin")
+    window.localStorage.removeItem("fetchSessionId")
+    window.localStorage.removeItem("cartTotal")
+    setCartItemTotal(0)
     navigate("/");
   }
 

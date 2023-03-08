@@ -5,8 +5,8 @@ import {
     fetchLogin
  } from '../../user_api';
 
-function Login() {
-
+function Login({setCartItemTotal}) {
+  const [userMessage, setUserMessage] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   let navigate = useNavigate()
@@ -16,13 +16,21 @@ function Login() {
     try {  
       const user = await fetchLogin(username, password);
       console.log('logInUserResults :>> ', user);
-      window.localStorage.setItem("username", user.user.username);
-      window.localStorage.setItem("token", user.token);
-      window.localStorage.setItem("isAdmin", user.user.isAdmin)
-      console.log('user.isAdmin :>> ', user.user.isAdmin);
-      setUsername("")
-      setPassword("")
-      navigate("/")
+      
+      if(user.message === "you're logged in!" ){
+        window.localStorage.setItem("username", user.user.username);
+        window.localStorage.setItem("token", user.token);
+        window.localStorage.setItem("isAdmin", user.user.isAdmin)
+        console.log('user.isAdmin :>> ', user.user.isAdmin);
+        setCartItemTotal(0)
+        setUsername("")
+        setPassword("")
+        navigate("/")
+
+      } else {
+        setUserMessage("Username or password is incorrect. Please try again")
+        setTimeout(() => setUserMessage(""), 3000);
+      }
 
     } catch (error) {
       console.error(error);
@@ -39,6 +47,7 @@ function Login() {
             <input className="logIn_signUp_entry" type="password" value={password} onChange={(event) => setPassword(event.target.value)}  required/><br/>
             <input className="logIn_signUp_submitButton" type="submit" ></input>
         </form>
+        {userMessage &&<h5 className='logInErrorMessage'>{userMessage}</h5>}
         <Link className="signUp_Link" to="/user/register">Don't have an account? Sign Up here!</Link>
     </div>
   );

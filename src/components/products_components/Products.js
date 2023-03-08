@@ -30,36 +30,36 @@ import PorkProducts from './meat_seafood_components/subcats/Pork'
 import SeafoodProducts from './meat_seafood_components/subcats/Seafood'
 
 
-function Products() {
+function Products({setCartItemTotal, cartItemTotal}) {
     return (
         <div className="App">
           <Routes>
-            <Route path="/products/bakery" element={ <Bakery/> } />
-              <Route path="/products/bread" element={ <BreadProducts/> } />
-              <Route path="/products/pastries_desserts" element={ <DessertProducts/> } />
-              <Route path="/products/glutenfree_vegan" element={ <GlutenFreeVeganProducts/> } />
-              <Route path="/products/savory_baked_goods" element={ <SavoryProducts/> } /> 
-              <Route path="/products/seasonal" element={ <SeasonalProducts/> } /> 
+            <Route path="/products/bakery" element={ <Bakery setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
+              <Route path="/products/bread" element={ <BreadProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
+              <Route path="/products/pastries_desserts" element={ <DessertProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
+              <Route path="/products/glutenfree_vegan" element={ <GlutenFreeVeganProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/>} />
+              <Route path="/products/savory_baked_goods" element={ <SavoryProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } /> 
+              <Route path="/products/seasonal" element={ <SeasonalProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } /> 
 
-            <Route path="/products/meat_seafood" element={ <MeatAndSeafood/> } />
-              <Route path="/products/beef" element={ <BeefProducts/> } />
-              <Route path="/products/deli" element={ <DeliProducts/> } />
-              <Route path="/products/lamb" element={ <LambProducts/> } />
-              <Route path="/products/poultry" element={ <PoultryProducts/> } /> 
-              <Route path="/products/pork" element={ <PorkProducts/> } /> 
-              <Route path="/products/seafood" element={ <SeafoodProducts/> } /> 
+            <Route path="/products/meat_seafood" element={ <MeatAndSeafood setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
+              <Route path="/products/beef" element={ <BeefProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
+              <Route path="/products/deli" element={ <DeliProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
+              <Route path="/products/lamb" element={ <LambProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
+              <Route path="/products/poultry" element={ <PoultryProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } /> 
+              <Route path="/products/pork" element={ <PorkProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } /> 
+              <Route path="/products/seafood" element={ <SeafoodProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } /> 
 
-            <Route path="/products/dairy" element={ <Dairy/> } />
-              <Route path="/products/cheese" element={ <CheeseProducts/> } />
-              <Route path="/products/eggs_butter" element={ <EggsButterProducts/> } />
-              <Route path="/products/milk" element={ <MilkProducts/> } />
-              <Route path="/products/yogurt" element={ <YogurtProducts/> } /> 
+            <Route path="/products/dairy" element={ <Dairy setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
+              <Route path="/products/cheese" element={ <CheeseProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
+              <Route path="/products/eggs_butter" element={ <EggsButterProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
+              <Route path="/products/milk" element={ <MilkProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
+              <Route path="/products/yogurt" element={ <YogurtProducts setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } /> 
 
-            <Route path="/products/produce" element={ <Produce/> } />
-              <Route path="/products/fruit" element={ <Fruit/> } />
-              <Route path="/products/vegetables" element={ <Vegetables/> } />
+            <Route path="/products/produce" element={ <Produce setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
+              <Route path="/products/fruit" element={ <Fruit setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
+              <Route path="/products/vegetables" element={ <Vegetables setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/> } />
 
-              <Route path="/products/:id" element={<ProductDetails />} />
+              <Route path="/products/:id" element={<ProductDetails setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/>} />
 
           </Routes>
         </div>

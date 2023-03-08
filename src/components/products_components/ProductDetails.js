@@ -5,7 +5,7 @@ import { updateProduct } from '../../products_api';
 import { fetchUserData } from '../../user_api';
 import { menuItems } from '../../menuItems';
 
-export default function ProductDetails() {
+export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [updatedProduct, setUpdatedProduct] = useState({
@@ -168,7 +168,7 @@ export default function ProductDetails() {
             )}
           </form>
           {isReadOnly && product.id && (
-            <AddToCart productId={product.id} productInventory={product.inventory} className="add-to-cart" />
+            <AddToCart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} productId={product.id} productInventory={product.inventory} className="add-to-cart" />
           )}
         </div>
       </div>

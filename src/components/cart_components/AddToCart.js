@@ -5,8 +5,9 @@ import { fetchAddToOrder } from '../../orders_api';
 
 
 
-const AddToCart = ({ productId, productInventory}) => {
+const AddToCart = ({ productId, productInventory, setCartItemTotal, cartItemTotal}) => {
   const [quantity, setQuantity] = useState(1);
+  const [userMessage, setUserMessage] = useState("")
   const token = window.localStorage.getItem("token")
 
   const handleAddToCartClick = (event) => {
@@ -15,31 +16,36 @@ const AddToCart = ({ productId, productInventory}) => {
   }
 
   const randomString =  () => {
-    return crypto.randomUUID()+"(TS-"+Date.now()+")"
+    return crypto.randomUUID()+"("+ new Date()+")"
   }
 
   async function handleAddToCart(productId) {
     try {  
 
-      const sessionId = window.localStorage.getItem("fetchSessionId")
+      let sessionId = window.localStorage.getItem("fetchSessionId")
 
-      if (sessionId) {
-        const results = await fetchAddToOrder(sessionId, productId, quantity, token)
-        console.log('fetchAddToOrderResults :>> ', results);
-        const cartTotal =JSON.parse( window.localStorage.getItem("CartTotal"))
-        const newCartTotal = cartTotal + quantity
-        window.localStorage.setItem("CartTotal", newCartTotal)
-
-      } else {
+      if(!sessionId) {
         const newSessionId = randomString()
         window.localStorage.setItem("fetchSessionId", newSessionId )
-        const results = await fetchAddToOrder(sessionId, productId, quantity, token)
-        console.log('fetchAddToOrderResults :>> ', results);
-        const cartTotal =JSON.parse( window.localStorage.getItem("CartTotal"))
-        const newCartTotal = cartTotal + quantity
-        console.log(newCartTotal)
-        window.localStorage.setItem("CartTotal", newCartTotal)
-        
+      }
+
+      sessionId = window.localStorage.getItem("fetchSessionId")
+      const results = await fetchAddToOrder(sessionId, productId, quantity, token)
+      console.log('fetchAddToOrderResults :>> ', results);
+
+      if(results.id) {
+        let newCartItemTotal = cartItemTotal*1+quantity*1
+        console.log(newCartItemTotal)
+        setCartItemTotal(newCartItemTotal);
+        window.localStorage.setItem("cartTotal", newCartItemTotal)
+        setUserMessage("Added to cart!!")
+        setTimeout(() => setUserMessage(""), 1500);
+      } else if (results.message === "duplicate key value violates unique constraint \"order_products_orderId_productId_key\"") {
+        setUserMessage("Already in Cart. View cart to adjust quantity")
+        setTimeout(() => setUserMessage(""), 1500);
+      } else {
+        setUserMessage("Error adding product please try again")
+        setTimeout(() => setUserMessage(""), 1500);
       }
 
     } catch (error) {
@@ -49,6 +55,7 @@ const AddToCart = ({ productId, productInventory}) => {
 
   return (
     <div>
+    <h5 className='addToCartUserMessage'>{userMessage}</h5>
     <div className='addToCartContainer'>
       <input className='quantityDropdown'
         type="number"
