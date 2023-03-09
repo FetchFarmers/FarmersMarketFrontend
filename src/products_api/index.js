@@ -9,6 +9,7 @@ async function initAuth() {
   token = localStorage.getItem('token');
   userData = await fetchUserData(token);
 }
+
 const searchProducts = async (searchQuery) => {
   try {
     const response = await fetch(`${BASE_URL}/products/search?q=${searchQuery}`);
