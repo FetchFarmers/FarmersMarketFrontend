@@ -9,6 +9,16 @@ async function initAuth() {
   token = localStorage.getItem('token');
   userData = await fetchUserData(token);
 }
+const searchProducts = async (searchQuery) => {
+  try {
+    const response = await fetch(`${BASE_URL}/products/search?q=${searchQuery}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 
 async function createProduct(productData) {
   try {
@@ -41,7 +51,7 @@ async function getAllProducts() {
   }
 }
 
-export async function getProductsByCategory(category) {
+async function getProductsByCategory(category) {
   try {
     const response = await fetch(`${BASE_URL}/products/category/${category}`);
     const data = await response.json();
@@ -103,6 +113,6 @@ async function deleteProduct(id) {
   }
 }
 
-export { createProduct, updateProduct, deleteProduct, getAllProducts, getProductsBySubcategory };
+export { searchProducts, createProduct, updateProduct, deleteProduct, getAllProducts, getProductsByCategory, getProductsBySubcategory };
 
 
