@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faArrowsRotate, faCartShopping } from '@fortawesome/free-solid-svg-icons'
+
 
 import { 
   fetchRemoveOrderProduct,
@@ -144,35 +145,43 @@ function Cart({setCartItemTotal, cartItemTotal}) {
 
   return (
     <div className='mainCartPage'>
-    <div className="cartProductsCtr">
-      <h1 className='pageTitle' >My Cart {cartItemTotal !== 0 && <>({cartItemTotal} items)</>}</h1>
-      {cartItemTotal === 0 && <h3 className='pageTitle' >Your cart is currently empty</h3>}
-      {userOrderProducts && <ul>
-        {userOrderProducts.map((item) =>
-          (<div className='cartProductCtr'>
-            <div key={item.id}>
-              <h4 className='cartProdTitle'>{item.name} ({item.quantity} x ${item.price})</h4>
-              <h4 className='cartProdTotal'>Total: ${(item.price*item.quantity).toFixed(2)}</h4>
-              <div className='editCartBntCtr'>
-                <input className='cartQtyDropdown' type="number" defaultValue={item.quantity} onChange={(event) => setQuantity(event.target.value)} min={1} max={item.inventory || 10}/>
-                <button className="updateCartBtn" onClick={() => handleUpdateItem(item.orderProductId)}>Update&nbsp;<FontAwesomeIcon  icon={faCartShopping}/></button>
-                <button className="editCartBtn" onClick={() =>handleRemoveItem(item.orderProductId)} >Remove All</button>
+      <h3 className='cartPageTitle' >Shopping Cart</h3>
+      <div className='cartDetailsCtr'>
+        <div className="cartProductsCtr">
+          <h3 className="cartProductsCtrTitle">Products {cartItemTotal !== 0 && <>({cartItemTotal} {cartItemTotal > 1 ? <>items</> : <>item</>})</>}</h3>
+          {cartItemTotal === 0 && <h4 className='cartEmptyMessage' >Your cart is currently empty</h4>}
+          {userOrderProducts && <div>
+            {userOrderProducts.map((item) =>
+              (<div className='cartProductCtr'>
+                <div key={item.id}>
+                  <div className='cartProductCtrTop'>
+                    <p className='cartProdTitle'>{item.name} - ${item.price} each</p>
+                    <button className="editCartBtn" onClick={() =>handleRemoveItem(item.orderProductId)} >X</button>
+                  </div>  
+                  <div className='editCartBntCtr'>
+                    <h4>Quantity</h4>
+                    <input className='cartQtyDropdown' type='number' defaultValue={item.quantity} onChange={(event) => setQuantity(event.target.value)} min={1} max={item.inventory || 10}/>
+                    <button className="updateCartBtn" onClick={() => handleUpdateItem(item.orderProductId)}><FontAwesomeIcon  icon={faArrowsRotate}/></button>
+                    <h4 className='cartProdTotal'>Total: ${(item.price*item.quantity).toFixed(2)}</h4>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        ))}</ul>}
+            ))}</div>}
+        </div>        
         <div className="checkoutDetailsCtr">
-          {cartItemTotal !== 0 &&<h3 className='sumTotal'>Products Total: ${orderSum.toFixed(2)}</h3>}
-          {cartItemTotal !== 0 &&<h3 className='shippingCharge'>Shipping: $5.99</h3>}
-          {cartItemTotal !== 0 &&<h3 className='taxes'>taxes: ${taxes.toFixed(2)}</h3>}
-          {cartItemTotal !== 0 &&<h3 className='orderTotal'>Order Total: ${(orderSum+taxes+5.99).toFixed(2)}</h3>}
-          <div className='manageCartBntCtr'>
-            { cartItemTotal !== 0 &&<button className="checkoutCartBtn" onClick={() => handleCheckout()} >Checkout</button>}
-            {cartItemTotal !== 0 &&<button className="cancelOrderBtn" onClick={() => handleCancelOrder()} >Cancel Order</button>}
-          </div>
+        <h3 className="cartProductsCtrTitle">Order Details</h3>
+              {cartItemTotal !== 0 &&<h3 className='sumTotal'>Products Total: ${orderSum.toFixed(2)}</h3>}
+              {cartItemTotal !== 0 &&<h3 className='shippingCharge'>Delivery Fee: $5.99</h3>}
+              {cartItemTotal !== 0 &&<h3 className='taxes'>Taxes: ${taxes.toFixed(2)}</h3>}
+                {cartItemTotal !== 0 &&<h3 className='orderTotal'>Order Total: ${(orderSum+taxes+5.99).toFixed(2)}</h3>}
+              <div className='manageCartBntCtr'>
+                { cartItemTotal !== 0 &&<button className="checkoutCartBtn" onClick={() => handleCheckout()} >Checkout</button>}
+                { cartItemTotal !== 0 &&<button className="cancelOrderBtn" onClick={() => handleCancelOrder()} >Cancel Order</button>}
+              </div>
         </div>
+      </div>
     </div>
-  </div>);
+  );
 }
 
 export default Cart;
