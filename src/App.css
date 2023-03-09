@@ -158,11 +158,13 @@ body {
 }
 
 .menu-items a {
+  font-size: 16px;
   display: block;
   font-size: inherit;
   color: inherit;
   text-decoration: none;
 }
+
 .menu-items button {
   display: flex;
   align-items: center;
@@ -173,11 +175,18 @@ body {
   cursor: pointer;
   width: 100%;
 }
-.menu-items>a,
+
+.menu-items>a{
+ padding: 5px 10px 5px 10px;
+ font-weight: 100;
+ font-size: 16px;
+}
+
 .menu-items button {
   text-align: left;
-  padding: 0.7rem 1rem;
+  padding: 10px 1rem;
 }
+
 .menu-items:hover, .dropdown-item:hover {
   background-color: #c2e0c6;
   transition: background-color 0.3s ease-in-out;
@@ -189,8 +198,7 @@ body {
   z-index: 1000;
   transition: opacity 0.2s ease-in-out;
   min-width: 10rem;
-  padding: 0.5rem 0; 
-  margin: 0.125rem 0 0;
+  padding: 0;
   font-size: 16px;
   color: #212529;
   text-align: left;
@@ -243,6 +251,7 @@ body {
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
   position: relative;
+  max-width: 500px;
 }
 .product:hover {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -490,9 +499,7 @@ label {
   justify-content: center;
   width: 100%;
   max-width: 1200px;
-  /* set max-width as desired */
   margin-top: 2rem;
-  /* add some margin between products and filters */
 }
 .admin-page-subtitle, .admin-page-title{
   margin-top: 1.5em;
