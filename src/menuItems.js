@@ -56,7 +56,7 @@ export const menuItems = [
       url: '/products/produce',
       submenu: [
         {
-          title: 'Fresh Fruit',
+          title: 'Fresh Fruits',
           url: 'fruit',
         },
         {
