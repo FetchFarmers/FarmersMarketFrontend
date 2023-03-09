@@ -1,24 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function Footer() {
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHidden(window.pageYOffset > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <footer className="footer">
+    <footer className={`footer ${hidden ? 'hidden' : ''}`}>
       <div className="footerTop">
         <div className="spacingContainer"></div>
-        {/* <img src="/path/to/logo.png" alt="Logo" className="logoImage" /> */}
         <div className="spacingContainer"></div>
       </div>
-      <div className="footerBottom">
-        <div className="footerNavBarContainer">
-          <ul className="menus">
-            <li className="menuIcon"><a href="#">Home</a></li>
-            <li className="menuIcon"><a href="#">About</a></li>
-            <li className="menuIcon"><a href="#">Contact Us</a></li>
-            <li className="menuIcon"><a href="#">FAQ</a></li>
-          </ul>
-        </div>
-        <div className="copy">&copy; 2023 Fetch Farmers</div>
+      <div className="footerNavBarContainer">
+        <ul className="footer-menus">
+          <li>
+            <Link className="menuIcon" to="/">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link className="menuIcon" to="/about">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link className="menuIcon" to="/contact">
+              Contact Us
+            </Link>
+          </li>
+          <li>
+            <Link className="menuIcon" to="/faq">
+              FAQ
+            </Link>
+          </li>
+        </ul>
       </div>
+      <div className="copy">&copy; 2023 Fetch Farmers</div>
     </footer>
   );
 }

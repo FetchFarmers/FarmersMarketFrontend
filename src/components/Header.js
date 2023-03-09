@@ -49,11 +49,10 @@ const Header = ({ cartItemTotal, setCartItemTotal }) => {
             {menuItems.map((menu, index) => {
               return <MenuItems items={menu} key={index} />
             })}
-            <li>
-            <div>
-      <SearchBar />
-    </div>            </li>
           </ul>
+          <div className='searchbar'>
+                <SearchBar />
+              </div>
         </nav>
       </div>
     </div>
