@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AddToCart from '../../cart_components/AddToCart';
 import { fetchUserData } from '../../../user_api';
 
-function Bakery() {
+function Bakery({setCartItemTotal, cartItemTotal}) {
   const [products, setProducts] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [token, setToken] = useState(window.localStorage.getItem('token'));
@@ -65,7 +65,7 @@ function Bakery() {
                 <div className='product-price'>${product.price}</div>
               </div>
             </Link>
-            {product.id && <AddToCart productId={product.id} productInventory={product.inventory} className="add-to-cart" />}
+            {product.id && <AddToCart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} productId={product.id} productInventory={product.inventory} className="add-to-cart" />}
           </div>
         ))}
       </div>

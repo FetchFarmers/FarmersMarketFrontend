@@ -3,11 +3,7 @@ import {Link} from 'react-router-dom';
 import AddToCart from '../../../cart_components/AddToCart';
 
 
-// import { 
-    // todo call api functions here
-//  } from '../products_api'; //! not positive about the path might need another dot or two??
-
-function Vegetables() {
+function Vegetables({setCartItemTotal, cartItemTotal}) {
     const [products, setProducts] = useState([]);
   
     useEffect(() => {
@@ -39,7 +35,7 @@ function Vegetables() {
                   <p className='product-price'>${product.price}</p>
                 </div>
               </Link>
-              {product.id && <AddToCart productId={product.id} productInventory={product.inventory} className="add-to-cart" />}
+              {product.id && <AddToCart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} productId={product.id} productInventory={product.inventory} className="add-to-cart" />}
             </div>
           ))}
         </div>

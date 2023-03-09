@@ -30,11 +30,13 @@ function Cart({setCartItemTotal, cartItemTotal}) {
         const results = await fetchUserOpenOrders(sessionId);
         setUserOrderProducts(() => results.products);
         setOrderId(() => results.id)
-        console.log('results :>> ', results);
+        console.log('loadOrderResults :>> ', results);
         let numOfItems = 0
-        results.products.map((product) => numOfItems += product.quantity)
-        window.localStorage.setItem("CartTotal", numOfItems)
-        setCartItemTotal(numOfItems)
+        if (results.products) {
+          results.products.map((product) => numOfItems += product.quantity)
+          setCartItemTotal(numOfItems)
+          window.localStorage.setItem("cartTotal", numOfItems)
+        }
 
       } else {
         const newSessionId = randomString();
@@ -43,9 +45,11 @@ function Cart({setCartItemTotal, cartItemTotal}) {
         setUserOrderProducts(() => results.products);
         setOrderId(() => results.id)
         let numOfItems = 0
-        results.products.map((product) => numOfItems += product.quantity)
-        window.localStorage.setItem("CartTotal", numOfItems)
-        setCartItemTotal(numOfItems)
+        if (results.products) {
+          results.products.map((product) => numOfItems += product.quantity)
+          setCartItemTotal(numOfItems)
+          window.localStorage.setItem("cartTotal", numOfItems)
+        }
 
       }
 
@@ -61,7 +65,7 @@ function Cart({setCartItemTotal, cartItemTotal}) {
   async function handleRemoveItem(orderProductId){
     try{
       const results = await fetchRemoveOrderProduct (orderProductId)
-      console.log('results :>> ', results);
+      console.log('RemoveItemResults :>> ', results);
       if (results.id === orderProductId ){
         loadUserOpenOrders()
       } else {  
@@ -78,6 +82,7 @@ function Cart({setCartItemTotal, cartItemTotal}) {
   async function handleUpdateItem(orderProductId) {
     try{
       const results = await fetchUpdateOrderProductQuantity (orderProductId, quantity)
+      console.log('UpdateItemResults :>> ', results);
       if (results.quantity === quantity){
         setUserMessage("Sorry there was an error updating your item please try again")
         console.log(userMessage)
@@ -97,12 +102,14 @@ function Cart({setCartItemTotal, cartItemTotal}) {
       console.log('orderDate :>> ', orderDate);
 
       const results = await fetchCheckout (orderId, orderSum, orderDate)
+      console.log('checkoutResults :>> ', results);
       if (!results.isCheckedOut){
         setUserMessage("Sorry there was an error updating your item please try again")
         console.log(userMessage)
       } else {  
-        loadUserOpenOrders()
+        setUserOrderProducts([])
         setCartItemTotal(0)
+        window.localStorage.removeItem("cartTotal")
 
       }
     } catch (error) {
@@ -115,10 +122,10 @@ function Cart({setCartItemTotal, cartItemTotal}) {
     try{
 
       const results = await fetchCancelOrder(orderId)
-      console.log(results)
-      loadUserOpenOrders()
+      console.log('cancelOrderResults :>> ', results);
+      setUserOrderProducts([])
       setCartItemTotal(0)
-      cartItemTotal()
+      window.localStorage.removeItem("cartTotal")
       
     } catch (error) {
       console.error(error);
@@ -139,7 +146,7 @@ function Cart({setCartItemTotal, cartItemTotal}) {
     <div className='mainCartPage'>
     <div className="cartProductsCtr">
       <h1 className='pageTitle' >My Cart {cartItemTotal !== 0 && <>({cartItemTotal} items)</>}</h1>
-      {(!userOrderProducts) && <h3 className='pageTitle' >Your cart is currently empty</h3>}
+      {cartItemTotal === 0 && <h3 className='pageTitle' >Your cart is currently empty</h3>}
       {userOrderProducts && <ul>
         {userOrderProducts.map((item) =>
           (<div className='cartProductCtr'>
@@ -155,13 +162,12 @@ function Cart({setCartItemTotal, cartItemTotal}) {
           </div>
         ))}</ul>}
         <div className="checkoutDetailsCtr">
-          <h3 className='sumTotal'>Products Total: ${orderSum.toFixed(2)}</h3>
-          <h3 className='shippingCharge'>Shipping: $5.99</h3>
-          <h3 className='taxes'>taxes: ${taxes.toFixed(2)}</h3>
-          <h3 className='orderTotal'>Order Total: ${(orderSum+taxes+5.99).toFixed(2)}</h3>
-
+          {cartItemTotal !== 0 &&<h3 className='sumTotal'>Products Total: ${orderSum.toFixed(2)}</h3>}
+          {cartItemTotal !== 0 &&<h3 className='shippingCharge'>Shipping: $5.99</h3>}
+          {cartItemTotal !== 0 &&<h3 className='taxes'>taxes: ${taxes.toFixed(2)}</h3>}
+          {cartItemTotal !== 0 &&<h3 className='orderTotal'>Order Total: ${(orderSum+taxes+5.99).toFixed(2)}</h3>}
           <div className='manageCartBntCtr'>
-            {cartItemTotal !== 0 &&<button className="checkoutCartBtn" onClick={() => handleCheckout()} >Checkout</button>}
+            { cartItemTotal !== 0 &&<button className="checkoutCartBtn" onClick={() => handleCheckout()} >Checkout</button>}
             {cartItemTotal !== 0 &&<button className="cancelOrderBtn" onClick={() => handleCancelOrder()} >Cancel Order</button>}
           </div>
         </div>
