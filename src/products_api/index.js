@@ -1,15 +1,44 @@
+import { fetchUserData } from "../user_api";
+
 const BASE_URL = 'https://farmers-market-1oeq.onrender.com/api';
 
+let token = null;
+let userData = null;
+
+async function initAuth() {
+  token = localStorage.getItem('token');
+  userData = await fetchUserData(token);
+}
+const searchProducts = async (searchQuery) => {
+  try {
+    const response = await fetch(`${BASE_URL}/products/search?q=${searchQuery}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 async function createProduct(productData) {
-  const response = await fetch(`${BASE_URL}/products`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(productData),
-  });
-  const product = await response.json();
-  return product;
+  try {
+    if (!userData || !userData.isAdmin) {
+      await initAuth();
+    }
+    const response = await fetch(`${BASE_URL}/products`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify(productData),
+    });
+    const product = await response.json();
+    return product;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
 async function getAllProducts() {
@@ -22,7 +51,7 @@ async function getAllProducts() {
   }
 }
 
-export async function getProductsByCategory(category) {
+async function getProductsByCategory(category) {
   try {
     const response = await fetch(`${BASE_URL}/products/category/${category}`);
     const data = await response.json();
@@ -42,44 +71,48 @@ async function getProductsBySubcategory(subcategory) {
   }
 }
 
-// async function getCategory(productId) {
-//   const response = await fetch(`${BASE_URL}/products/${productId}/category`);
-//   const category = await response.json();
-//   return category;
-// }
-
 async function updateProduct(id, updates) {
   try {
+    if (!userData || !userData.isAdmin) {
+      await initAuth();
+    }
     const response = await fetch(`${BASE_URL}/products/${id}`, {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
-      body: JSON.stringify(updates)
+      body: JSON.stringify(updates),
     });
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    throw error;
   }
 }
 
 async function deleteProduct(id) {
   try {
+    if (!userData || !userData.isAdmin) {
+      await initAuth();
+    }
     const response = await fetch(`${BASE_URL}/products/${id}`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
     });
     if (!response.ok) {
       throw new Error('Failed to delete product');
     }
   } catch (error) {
-    console.log('Error:', error.message);
+    console.error(error);
+    throw error;
   }
 }
 
-export { createProduct, updateProduct, deleteProduct, getAllProducts, getProductsBySubcategory };
+export { searchProducts, createProduct, updateProduct, deleteProduct, getAllProducts, getProductsByCategory, getProductsBySubcategory };
 
 

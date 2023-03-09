@@ -10,6 +10,8 @@ import Cart from './components/cart_components/Cart';
 import AdminPage from './components/user_components/AdminPage';
 import Reviews from './components/reviews_components/Reviews';
 import ReviewForm from './components/reviews_components/ReviewForm';
+import SearchBar from './components/products_components/SearchBar';
+import SearchResults from './components/products_components/SearchResults';
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
       <User setCartItemTotal={setCartItemTotal}/>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<SearchBar />} />
+        <Route path="/search" element={<SearchResults />} />
         <Route path="/my_cart" element={<Cart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/products/:productId/reviews" element={<Reviews />} />
