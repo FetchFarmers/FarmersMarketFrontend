@@ -12,6 +12,9 @@ import Reviews from './components/reviews_components/Reviews';
 import ReviewForm from './components/reviews_components/ReviewForm';
 import SearchBar from './components/products_components/SearchBar';
 import SearchResults from './components/products_components/SearchResults';
+import AboutUs from './components/products_components/AboutUs';
+import ContactUs from './components/products_components/ContactUs';
+import FAQ from './components/products_components/FAQ';
 
 
 function App() {
@@ -26,6 +29,9 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/" element={<SearchBar />} />
         <Route path="/search" element={<SearchResults />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/faq" element={<FAQ />} />
         <Route path="/my_cart" element={<Cart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/products/:productId/reviews" element={<Reviews />} />

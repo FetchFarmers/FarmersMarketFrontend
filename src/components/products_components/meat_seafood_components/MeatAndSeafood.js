@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import AddToCart from '../../cart_components/AddToCart';
-import Search from '../../Search';
 
 function MeatAndSeafood({setCartItemTotal, cartItemTotal}) {
     const [products, setProducts] = useState([]);

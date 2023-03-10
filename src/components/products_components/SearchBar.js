@@ -21,19 +21,20 @@ function SearchBar() {
         subcategoryWords.includes(word.toLowerCase()) ||
         descriptionWords.includes(word.toLowerCase()));
     });
+    
     setSearchResults(filteredProducts);
-    navigate('/search', { state: { searchResults: filteredProducts } });
+    navigate('/search', { state: { searchQuery, searchResults: products } });
   };
 
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      handleSearch(event);
-    }
-  };
+  // const handleKeyDown = (event) => {
+  //   if (event.key === 'Enter') {
+  //     handleSearch(event);
+  //   }
+  // };
 
   return (
     <div className="searchBar">

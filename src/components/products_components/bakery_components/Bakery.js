@@ -37,26 +37,11 @@ function Bakery({setCartItemTotal, cartItemTotal}) {
     getUserData();
   }, [token]);
 
-  const handleSearch = e => {
-    setSearchInput(e.target.value);
-  };
-
-  const filteredProducts = products.filter(
-    product =>
-      product.name.toLowerCase().includes(searchInput.toLowerCase()) ||
-      product.category.toLowerCase().includes(searchInput.toLowerCase()) ||
-      product.subcategory.toLowerCase().includes(searchInput.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchInput.toLowerCase())
-  );
-
   return (
     <div className='products-page'>
       <h3 className='product-title'>Bakery</h3>
-      <div className='search-bar'>
-        <input type='text' placeholder='Search' onChange={handleSearch} />
-      </div>
       <div className="product-list">
-        {filteredProducts.map(product => (
+        {products.map(product => (
           <div key={product.id} className="product">
             <Link to={`/products/${product.id}`}>
               <img className="product-image" src={product.imageURL} alt={product.name} />
