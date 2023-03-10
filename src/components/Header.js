@@ -11,7 +11,7 @@ const Header = ({ cartItemTotal, setCartItemTotal }) => {
 
   let navigate = useNavigate();
   const username = window.localStorage.getItem("username")
-  const isAdmin = window.localStorage.getItem("isAdmin")
+  const isAdmin = JSON.parse(window.localStorage.getItem("isAdmin"))
 
   const handleLogout = (event) => {
     event.preventDefault();

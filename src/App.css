@@ -830,7 +830,7 @@ textarea {
   border-radius: 2px;
   width: auto;
   min-width: 600px;
-  max-height: 55vh;
+  max-height: 52vh;
   border: 1px #ccc;
 }
 .cartProductsCtrTitle{
@@ -859,7 +859,7 @@ textarea {
   border-radius: 2px;
   width: auto;
   min-width: 600px;
-  max-height: 55vh;
+  max-height: 50vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -920,9 +920,17 @@ textarea {
   font-weight: 500;
 }
 .cartQtyTotalCtr{
+  display: flex;
+  flex-direction: row;
   height: 30px;
   display: flex;
+  justify-content: space-between;
+}
+.cartQtyCtr{
+  justify-self: flex-start;
   align-items: flex-end;
+  display: flex;
+  flex-direction: row;
 }
 .cartQtyTitle{
   color: #5c606bcf;
@@ -945,10 +953,16 @@ textarea {
   background-color: white !important;
 }
 .cartProdTotal{
+  align-content: flex-end;
   font-size: 15px;
   margin: 0px;
-  margin-left: 300px;
+  margin-right: 5px;
   padding-bottom: 7px;
+}
+.inventoryMsg {
+  color: #da190b;
+  font-size: 12px;
+  font-weight: 200;
 }
 .checkoutDetailsCtr{
   display: flex;
@@ -964,11 +978,76 @@ textarea {
   margin-right: 20px;
   margin-left: 20px;
   height: fit-content;
-
+}
+.cartCheckoutDetailsCtrTitle{
+  font-size: 25px;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 15px;
+  align-self: center;
+}
+.sumTotal{
+  font-size: 15px;
+  margin-block-start: 8px;
+  color: #2a5c46;
+  font-weight: 500;
+}
+.shippingCharge{
+  font-size: 15px;
+  margin-block-start: 8px;
+  color: #2a5c46;
+  font-weight: 500;
+}
+.taxes{
+  font-size: 15px;
+  margin-block-start: 8px;
+  color: #2a5c46;
+  font-weight: 500;
 }
 .manageCartBtnCtr{
   display: flex;
-  margin: 10px;
+}
+.checkoutCartBtn{
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  background-color: #3D8161;
+  color: #e6f3e0;
+  border-radius: 2px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
+  font-weight: 300;
+
+}
+.cancelOrderBtn{
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  background-color: #da190b;
+  color: white;
+  border-radius: 2px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
+  font-weight: 300;
+  margin-left: 5px;
 }
 
 /* Search */
