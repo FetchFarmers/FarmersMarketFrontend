@@ -16,7 +16,7 @@ const AddToCart = ({ productId, productInventory, setCartItemTotal, cartItemTota
   }
 
   const randomString =  () => {
-    return crypto.randomUUID()+"("+ new Date()+")"
+    return crypto.randomUUID()
   }
 
   async function handleAddToCart(productId) {
