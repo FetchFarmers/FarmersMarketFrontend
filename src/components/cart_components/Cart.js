@@ -19,6 +19,7 @@ function Cart({setCartItemTotal, cartItemTotal}) {
   const [quantity, setQuantity] = useState(0);
   const [userMessage, setUserMessage] = useState("")
   const [orderId, setOrderId] = useState(0)
+  const [checkoutError, setCheckoutError] = useState(false)
 
   const randomString =  () => {
     return crypto.randomUUID()
@@ -26,6 +27,7 @@ function Cart({setCartItemTotal, cartItemTotal}) {
   
   async function loadUserOpenOrders() {
     try {  
+      setCheckoutError(false)
       const sessionId = window.localStorage.getItem("fetchSessionId")
 
       if (!sessionId) {
@@ -40,6 +42,14 @@ function Cart({setCartItemTotal, cartItemTotal}) {
       setUserOrderProducts(() => sortedProducts);
       setOrderId(() => results.id)
       console.log('loadOrderResults :>> ', results);
+
+      for (let i = 0; i < sortedProducts.length; i++) {
+        if (sortedProducts[i].inventory < sortedProducts[i].quantity) {
+          setCheckoutError(true)
+        }
+      }
+
+      console.log('checkoutError :>> ', checkoutError);
 
       let numOfItems = 0
       if (results.products) {
@@ -74,8 +84,7 @@ function Cart({setCartItemTotal, cartItemTotal}) {
 
   }
 
-  async function handleUpdateItem(orderProductId, event) {
-    console.log('am I getting here?');
+  async function handleUpdateItem(orderProductId) {
 
     try{
       const results = await fetchUpdateOrderProductQuantity (orderProductId, quantity)
@@ -152,29 +161,32 @@ function Cart({setCartItemTotal, cartItemTotal}) {
                   (<div className='cartProductCtr'>
                     <div key={item.id}>
                       <div className='cartProductCtrTop'>
-                        <p className='cartProdTitle'>{item.name}<class className ='itemPrice'> - ${item.price} each</class></p>
+                        <p className='cartProdTitle'>{item.name}<span className ='itemPrice'> - ${item.price} each</span></p>
                         <button className="xFromCartBtn" onClick={() =>handleRemoveItem(item.orderProductId)} >X</button>
                       </div>  
                       <div className='cartQtyTotalCtr'>
-                        <h4 className='cartQtyTitle'>Quantity</h4>
-                        <form onClick={(event)=>handleUpdateItem(item.orderProductId)}>
-                        <input className='cartQtyDropdown' type='number' defaultValue={item.quantity} onChange={(event) => setQuantity(event.target.value)} min={1} max={item.inventory || 10}/>
-                        </form>
+                        <div className='cartQtyCtr'>
+                          <h4 className='cartQtyTitle'>Quantity</h4>
+                          <form onClick={(event)=>handleUpdateItem(item.orderProductId)}>
+                          <input className='cartQtyDropdown' type='number' defaultValue={item.quantity} onChange={(event) => setQuantity(event.target.value)} min={1} max={item.inventory || 10}/>
+                          </form>
+                        </div>
                         <h4 className='cartProdTotal'>${(item.price*item.quantity).toFixed(2)}</h4>
                       </div>
+                      {(item.inventory < item.quantity) &&<p className='inventoryMsg'>Only {item.inventory} of this item are still available please adjust your quantity</p>}
                     </div>
                   </div>
             ))}</div>}
           </div>        
         </div>  
         {cartItemTotal !== 0 && <div className="checkoutDetailsCtr">
-          <h3 className="cartProductsCtrTitle">Order Details</h3>
+          <h3 className="cartCheckoutDetailsCtrTitle">Order Details</h3>
           <h3 className='sumTotal'>Products Total: ${orderSum.toFixed(2)}</h3>
           <h3 className='shippingCharge'>Delivery Fee: $5.99</h3>
           <h3 className='taxes'>Taxes: ${taxes.toFixed(2)}</h3>
           <h3 className='orderTotal'>Order Total: ${(orderSum+taxes+5.99).toFixed(2)}</h3>
           <div className='manageCartBtnCtr'>
-            <button className="checkoutCartBtn" onClick={() => handleCheckout()} >Checkout</button>
+            {!checkoutError && <button className="checkoutCartBtn" onClick={() => handleCheckout()} >Checkout</button>}
             <button className="cancelOrderBtn" onClick={() => handleCancelOrder()} >Cancel Order</button>
           </div>
         </div>}
