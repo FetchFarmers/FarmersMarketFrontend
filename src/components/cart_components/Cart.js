@@ -1,8 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowsRotate, faCartShopping } from '@fortawesome/free-solid-svg-icons'
-import { createPath } from 'react-router';
 
 import { 
   fetchRemoveOrderProduct,
@@ -173,7 +170,8 @@ function Cart({setCartItemTotal, cartItemTotal}) {
                         </div>
                         <h4 className='cartProdTotal'>${(item.price*item.quantity).toFixed(2)}</h4>
                       </div>
-                      {(item.inventory < item.quantity) &&<p className='inventoryMsg'>Only {item.inventory} of this item are still available please adjust your quantity</p>}
+                      {(item.inventory !== 0) && (item.inventory < item.quantity) &&<p className='inventoryMsg'>Only {item.inventory} of this item are still available please adjust your quantity</p>}
+                      {(item.inventory === 0) && <p className='inventoryMsg'>This item is no longer available. Please remove.</p>}
                     </div>
                   </div>
             ))}</div>}
@@ -187,8 +185,9 @@ function Cart({setCartItemTotal, cartItemTotal}) {
           <h3 className='orderTotal'>Order Total: ${(orderSum+taxes+5.99).toFixed(2)}</h3>
           <div className='manageCartBtnCtr'>
             {!checkoutError && <button className="checkoutCartBtn" onClick={() => handleCheckout()} >Checkout</button>}
-            <button className="cancelOrderBtn" onClick={() => handleCancelOrder()} >Cancel Order</button>
+            <button className="cancelOrderBtn" onClick={() => handleCancelOrder()} >Cancel Order</button>  
           </div>
+          {checkoutError && <p className='inventoryMsg'>There is an issue with your selected products. Please review to proceed</p>}
         </div>}
       </div>
     </div>
