@@ -1,25 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowsRotate, faCartShopping } from '@fortawesome/free-solid-svg-icons'
-import { createPath } from 'react-router';
+import { Link } from 'react-router-dom';
+
 
 import { 
   fetchRemoveOrderProduct,
   fetchUpdateOrderProductQuantity,
   fetchUserOpenOrders,
-  fetchCheckout,
   fetchCancelOrder,
 } from '../../orders_api'; 
 
 
 
-function Cart({setCartItemTotal, cartItemTotal}) {
-  const [userOrderProducts, setUserOrderProducts] = useState([])
+const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderProducts, setUserOrderProducts, setCartTotal}) => {
   const [quantity, setQuantity] = useState(0);
   const [userMessage, setUserMessage] = useState("")
-  const [orderId, setOrderId] = useState(0)
   const [checkoutError, setCheckoutError] = useState(false)
+
 
   const randomString =  () => {
     return crypto.randomUUID()
@@ -29,12 +26,10 @@ function Cart({setCartItemTotal, cartItemTotal}) {
     try {  
       setCheckoutError(false)
       const sessionId = window.localStorage.getItem("fetchSessionId")
-
       if (!sessionId) {
         const newSessionId = randomString();
         window.localStorage.setItem("fetchSessionId", newSessionId )
       }
-        
       const results = await fetchUserOpenOrders(sessionId);
       const resultProducts = results.products
       const sortedProducts = resultProducts.sort((a, b) => (a.name > b.name) ? 1: -1);
@@ -42,26 +37,23 @@ function Cart({setCartItemTotal, cartItemTotal}) {
       setUserOrderProducts(() => sortedProducts);
       setOrderId(() => results.id)
       console.log('loadOrderResults :>> ', results);
-
       for (let i = 0; i < sortedProducts.length; i++) {
         if (sortedProducts[i].inventory < sortedProducts[i].quantity) {
           setCheckoutError(true)
         }
       }
-
-      console.log('checkoutError :>> ', checkoutError);
-
       let numOfItems = 0
       if (results.products) {
         results.products.map((product) => numOfItems += product.quantity)
         setCartItemTotal(numOfItems)
         window.localStorage.setItem("cartTotal", numOfItems)
       }
-
     } catch (error) {
       console.error(error);
     }
   }
+
+
 
   useEffect(() => {
     loadUserOpenOrders()
@@ -77,15 +69,12 @@ function Cart({setCartItemTotal, cartItemTotal}) {
         setUserMessage("Sorry there was an error removing your item please try again")
         console.log(userMessage)
       }
-
     } catch (error) {
       console.error(error);
     }
-
   }
 
   async function handleUpdateItem(orderProductId) {
-
     try{
       const results = await fetchUpdateOrderProductQuantity (orderProductId, quantity)
       console.log('UpdateItemResults :>> ', results);
@@ -98,35 +87,10 @@ function Cart({setCartItemTotal, cartItemTotal}) {
     } catch (error) {
       console.error(error);
     }
-
   }
   
-  async function handleCheckout() {
-    try{
-
-      const orderDate = new Date()
-      console.log('orderDate :>> ', orderDate);
-
-      const results = await fetchCheckout (orderId, orderSum, orderDate)
-      console.log('checkoutResults :>> ', results);
-      if (!results.isCheckedOut){
-        setUserMessage("Sorry there was an error updating your item please try again")
-        console.log(userMessage)
-      } else {  
-        setUserOrderProducts([])
-        setCartItemTotal(0)
-        window.localStorage.removeItem("cartTotal")
-
-      }
-    } catch (error) {
-      console.error(error);
-    }
-
-  }
-
   async function handleCancelOrder() {
     try{
-
       const results = await fetchCancelOrder(orderId)
       console.log('cancelOrderResults :>> ', results);
       setUserOrderProducts([])
@@ -136,7 +100,6 @@ function Cart({setCartItemTotal, cartItemTotal}) {
     } catch (error) {
       console.error(error);
     }
-
   }
 
   let orderSum = 0
@@ -161,35 +124,39 @@ function Cart({setCartItemTotal, cartItemTotal}) {
                   (<div className='cartProductCtr'>
                     <div key={item.id}>
                       <div className='cartProductCtrTop'>
-                        <p className='cartProdTitle'>{item.name}<span className ='itemPrice'> - ${item.price} each</span></p>
+                      <Link to={`/products/${item.id}`}><p className='cartProdTitle'>{item.name}<span className ='itemPrice'> - ${item.price} each</span></p></Link>
                         <button className="xFromCartBtn" onClick={() =>handleRemoveItem(item.orderProductId)} >X</button>
                       </div>  
                       <div className='cartQtyTotalCtr'>
                         <div className='cartQtyCtr'>
                           <h4 className='cartQtyTitle'>Quantity</h4>
-                          <form onClick={(event)=>handleUpdateItem(item.orderProductId)}>
+                          <form onClick={()=>handleUpdateItem(item.orderProductId)}>
                           <input className='cartQtyDropdown' type='number' defaultValue={item.quantity} onChange={(event) => setQuantity(event.target.value)} min={1} max={item.inventory || 10}/>
                           </form>
                         </div>
                         <h4 className='cartProdTotal'>${(item.price*item.quantity).toFixed(2)}</h4>
                       </div>
-                      {(item.inventory < item.quantity) &&<p className='inventoryMsg'>Only {item.inventory} of this item are still available please adjust your quantity</p>}
+                      {(item.inventory !== 0) && (item.inventory < item.quantity) &&<p className='inventoryMsg'>Only {item.inventory} of this item are still available please adjust your quantity</p>}
+                      {(item.inventory === 0) && <p className='inventoryMsg'>This item is no longer available. Please remove.</p>}
                     </div>
                   </div>
             ))}</div>}
           </div>        
-        </div>  
-        {cartItemTotal !== 0 && <div className="checkoutDetailsCtr">
-          <h3 className="cartCheckoutDetailsCtrTitle">Order Details</h3>
-          <h3 className='sumTotal'>Products Total: ${orderSum.toFixed(2)}</h3>
-          <h3 className='shippingCharge'>Delivery Fee: $5.99</h3>
-          <h3 className='taxes'>Taxes: ${taxes.toFixed(2)}</h3>
-          <h3 className='orderTotal'>Order Total: ${(orderSum+taxes+5.99).toFixed(2)}</h3>
-          <div className='manageCartBtnCtr'>
-            {!checkoutError && <button className="checkoutCartBtn" onClick={() => handleCheckout()} >Checkout</button>}
-            <button className="cancelOrderBtn" onClick={() => handleCancelOrder()} >Cancel Order</button>
-          </div>
-        </div>}
+        </div>
+        <div>  
+          {cartItemTotal !== 0 && <div className="checkoutDetailsCtr">
+            <h3 className="cartCheckoutDetailsCtrTitle">Order Details</h3>
+            <h3 className='sumTotal'>Products Total: ${orderSum.toFixed(2)}</h3>
+            <h3 className='shippingCharge'>Delivery Fee: $5.99</h3>
+            <h3 className='taxes'>Taxes: ${taxes.toFixed(2)}</h3>
+            <h3 className='orderTotal'>Order Total: ${(orderSum+taxes+5.99).toFixed(2)}</h3>
+            <div className='manageCartBtnCtr'>
+              {!checkoutError && <Link onClick={() => setCartTotal((orderSum+taxes+5.99).toFixed(2))} to='/order/payment'><button className="checkoutCartBtn" >Checkout</button></Link>}
+              <button className="cancelOrderBtn" onClick={() => handleCancelOrder()} >Cancel Order</button>  
+            </div>
+            {checkoutError && <p className='inventoryMsg'>There is an issue with your selected products. Please review to proceed</p>}
+          </div>}
+        </div>
       </div>
     </div>
   );

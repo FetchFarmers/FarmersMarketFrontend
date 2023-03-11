@@ -823,14 +823,14 @@ textarea {
   padding-top: 35px;
   padding-right: 0px;
   padding-bottom: 0px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   margin-right: 20px;
   margin-left: 20px;
   max-width: 800px;
   border-radius: 2px;
   width: auto;
-  min-width: 600px;
-  max-height: 52vh;
+  min-width: 550px;
+  max-height: 50vh;
   border: 1px #ccc;
 }
 .cartProductsCtrTitle{
@@ -858,8 +858,8 @@ textarea {
   max-width: 800px;
   border-radius: 2px;
   width: auto;
-  min-width: 600px;
-  max-height: 50vh;
+  min-width: 550px;
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -882,7 +882,7 @@ textarea {
   height: auto;
   width: auto;
   min-width: 460px;
-  max-width: 500px;
+  max-width: 450px;
   border-radius: 2px;
 }
 .cartProductCtrTop{
@@ -894,7 +894,7 @@ textarea {
   max-width: 500px;
 }
 .cartProdTitle{
-  font-size: 17px;
+  font-size: 15px;
   margin-block-start: 8px;
   color: #2a5c46;
   font-weight: 800;
@@ -924,6 +924,7 @@ textarea {
   flex-direction: row;
   height: 30px;
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
 }
 .cartQtyCtr{
@@ -934,30 +935,33 @@ textarea {
 }
 .cartQtyTitle{
   color: #5c606bcf;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   margin-bottom: 0px;
-  padding-bottom: 5.5px;
-  border-bottom: 1px solid #ccc;
+  padding-bottom: 6.5px;
+  border-bottom: 1px solid rgb(224, 224, 224);
 }
 .cartQtyDropdown{
   color: #2a5c46 !important;
-  font-size: 16px !important;
+  font-size: 15px !important;
   font-weight: 400 !important;
   padding: 0 !important;
   width: 40px;
   text-align: center !important;
   border: none !important;
   border-radius: 0 !important;
-  border-bottom: 1px solid #ccc !important;
+  border-bottom: 1px solid rgb(224, 224, 224) !important;
   background-color: white !important;
 }
 .cartProdTotal{
+  box-sizing: border-box;
   align-content: flex-end;
   font-size: 15px;
   margin: 0px;
+  width: fit-content;
+  height: fit-content;
   margin-right: 5px;
-  padding-bottom: 7px;
+  padding-bottom: 6px;
 }
 .inventoryMsg {
   color: #da190b;
@@ -972,7 +976,7 @@ textarea {
   padding: 35px;
   padding-right: 40px;
   padding-bottom: 25px;
-  min-width: 600px;
+  min-width: 550px;
   max-width: 800px;
   border-radius: 2px;
   margin-right: 20px;
@@ -1016,17 +1020,17 @@ textarea {
   cursor: pointer;
   outline: inherit;
   background-color: #3D8161;
-  color: #e6f3e0;
+  color: white;
   border-radius: 2px;
   text-decoration: none;
   justify-content: center;
   align-items: center;
   display: flex;
+  margin-right: 5px;
   width: 100px;
   height: 30px;
   font-size: 14px;
   font-weight: 300;
-
 }
 .cancelOrderBtn{
   background: none;
@@ -1036,7 +1040,7 @@ textarea {
   font: inherit;
   cursor: pointer;
   outline: inherit;
-  background-color: #da190b;
+  background-color: #6a6a6a;
   color: white;
   border-radius: 2px;
   text-decoration: none;
@@ -1047,7 +1051,63 @@ textarea {
   height: 30px;
   font-size: 14px;
   font-weight: 300;
-  margin-left: 5px;
+}
+.paymentForm{
+  display: flex;
+  box-shadow: .75px .75px 2px rgba(0, 0, 0, 0.1), 3px 3px 6px rgba(0, 0, 0, 0.1), -.5px -.5px 1.5px rgba(0,0,0,0.1);
+  flex-direction: column;
+  justify-content: center;
+  padding: 25px;
+  padding-right: 40px;
+  padding-bottom: 25px;
+  min-width: 600px;
+  max-width: 800px;
+  border-radius: 2px;
+  margin-right: 20px;
+  margin-bottom: 15px;
+  margin-left: 20px;
+  height: fit-content;                         
+}
+.paymentHeaders{
+  margin-top: 0px;
+}
+.payBtn{
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  background-color: #3D8161;
+  color: white;
+  border-radius: 2px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-right: 5px;
+  margin-top: 10px;
+  width: 100px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: 300;
+}
+.paymentSuccessMsgCtr{
+  display: flex;
+  box-shadow: .75px .75px 2px rgba(0, 0, 0, 0.1), 3px 3px 6px rgba(0, 0, 0, 0.1), -.5px -.5px 1.5px rgba(0,0,0,0.1);
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+  padding-right: 40px;
+  padding-bottom: 25px;
+  min-width: 600px;
+  max-width: 800px;
+  border-radius: 2px;
+  margin-right: 20px;
+  margin-bottom: 15px;
+  margin-left: 20px;
+  height: fit-content;    
 }
 
 /* Search */

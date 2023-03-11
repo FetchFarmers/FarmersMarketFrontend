@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { menuItems } from "../menuItems";
 import MenuItems from './MenuItems';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

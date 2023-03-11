@@ -159,7 +159,52 @@ export async function fetchAllOpenOrders() {
   } catch (error) {
     throw error;
   }
-  
+
+}
+
+export async function fetchStripe() {
+
+  try {
+    const url = `https://farmers-market-1oeq.onrender.com/api/config`;
+    const response = await fetch(url, {
+      method: "GET", 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    
+    const data = await response.json()
+
+    return data;
+  } catch(error) {
+    throw error;
+  }
+
+}
+
+export async function fetchStripePaymentIntent(checkoutPrice) {
+
+  try {
+    const url = `https://farmers-market-1oeq.onrender.com/api/create-payment-intent`;
+    const response = await fetch(url, {
+      method: "POST", 
+      headers: {
+        'Content-Type': 'application/json',
+      },     
+      body: JSON.stringify(
+        {
+          checkoutPrice: checkoutPrice
+        }
+      )
+    })
+    
+    const data = await response.json()
+
+    return data;
+  } catch(error) {
+    throw error;
+  }
+
 }
 
 // Below are my comments with error handling and input validation
