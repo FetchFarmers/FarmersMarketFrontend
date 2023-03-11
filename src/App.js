@@ -6,7 +6,6 @@ import Header from './components/Header';
 import Footer from './components/Footer'
 import Products from './components/products_components/Products';
 import User from './components/user_components/User';
-import Cart from './components/cart_components/Cart';
 import AdminPage from './components/user_components/AdminPage';
 import Reviews from './components/reviews_components/Reviews';
 import ReviewForm from './components/reviews_components/ReviewForm';
@@ -15,7 +14,8 @@ import SearchResults from './components/products_components/SearchResults';
 import AboutUs from './components/products_components/AboutUs';
 import ContactUs from './components/products_components/ContactUs';
 import FAQ from './components/products_components/FAQ';
-import Completion from './components/cart_components/Completion';
+import CartIndex from './components/cart_components/CartIndex';
+
 
 function App() {
   const [cartItemTotal, setCartItemTotal] = useState(JSON.parse(window.localStorage.getItem("cartTotal")||0))
@@ -25,6 +25,7 @@ function App() {
       <Header cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal}/>
       <Products setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/>
       <User setCartItemTotal={setCartItemTotal}/>
+      <CartIndex setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/" element={<SearchBar />} />
@@ -32,11 +33,9 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/faq" element={<FAQ />} />
-        <Route path="/my_cart" element={<Cart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/products/:productId/reviews" element={<Reviews />} />
         <Route path="/products/:productId/reviews/new" element={<ReviewForm />} />
-        <Route path="/payment_completion" element={<Completion/>}/>
       </Routes>
       <Footer />
     </div>

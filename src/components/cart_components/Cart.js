@@ -1,33 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import CheckoutForm from "./CheckoutForm";
+
 
 import { 
   fetchRemoveOrderProduct,
   fetchUpdateOrderProductQuantity,
   fetchUserOpenOrders,
-  fetchCheckout,
   fetchCancelOrder,
-  fetchStripe, 
-  fetchStripePaymentIntent,
 } from '../../orders_api'; 
 
 
 
-const Cart = ({setCartItemTotal, cartItemTotal}) => {
-  const [userOrderProducts, setUserOrderProducts] = useState([])
+const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderProducts, setUserOrderProducts, setCartTotal}) => {
   const [quantity, setQuantity] = useState(0);
   const [userMessage, setUserMessage] = useState("")
-  const [orderId, setOrderId] = useState(0)
   const [checkoutError, setCheckoutError] = useState(false)
-  const [stripePromise, setStripePromise] = useState(null);
-  const [clientSecret, setClientSecret] = useState("");
-  const [readyToCheckout, setReadyToCheckout] = useState(false)
-  //todo - remove next line and add into props - it is the amount in pennies so you will need to do calculation for that
-  const checkoutPrice = 10000
+
 
   const randomString =  () => {
     return crypto.randomUUID()
@@ -64,28 +53,10 @@ const Cart = ({setCartItemTotal, cartItemTotal}) => {
     }
   }
 
-  const loadStripePublishableKey = async () => {
-    try {
-      const {publishableKey} = await fetchStripe();
-      setStripePromise(loadStripe(publishableKey));
-    } catch(error) {
-      console.error(error);
-    }
-  }
 
-  const loadStripePaymentIntent = async () => {
-    try {
-      const {clientSecret} = await fetchStripePaymentIntent(checkoutPrice);
-      setClientSecret(clientSecret);
-    } catch(error) {
-      console.error(error);
-    }
-  }
 
   useEffect(() => {
     loadUserOpenOrders()
-    loadStripePublishableKey()
-    loadStripePaymentIntent()
   }, [])
 
   async function handleRemoveItem(orderProductId){
@@ -118,26 +89,6 @@ const Cart = ({setCartItemTotal, cartItemTotal}) => {
     }
   }
   
-  async function handleCheckout() {
-    try{
-      const orderDate = new Date()
-      console.log('orderDate :>> ', orderDate);
-
-      const results = await fetchCheckout (orderId, orderSum, orderDate)
-      console.log('checkoutResults :>> ', results);
-      if (!results.isCheckedOut){
-        setUserMessage("Sorry there was an error updating your item please try again")
-        console.log(userMessage)
-      } else {  
-        setUserOrderProducts([])
-        setCartItemTotal(0)
-        window.localStorage.removeItem("cartTotal")
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   async function handleCancelOrder() {
     try{
       const results = await fetchCancelOrder(orderId)
@@ -179,7 +130,7 @@ const Cart = ({setCartItemTotal, cartItemTotal}) => {
                       <div className='cartQtyTotalCtr'>
                         <div className='cartQtyCtr'>
                           <h4 className='cartQtyTitle'>Quantity</h4>
-                          <form onClick={(event)=>handleUpdateItem(item.orderProductId)}>
+                          <form onClick={()=>handleUpdateItem(item.orderProductId)}>
                           <input className='cartQtyDropdown' type='number' defaultValue={item.quantity} onChange={(event) => setQuantity(event.target.value)} min={1} max={item.inventory || 10}/>
                           </form>
                         </div>
@@ -200,18 +151,10 @@ const Cart = ({setCartItemTotal, cartItemTotal}) => {
             <h3 className='taxes'>Taxes: ${taxes.toFixed(2)}</h3>
             <h3 className='orderTotal'>Order Total: ${(orderSum+taxes+5.99).toFixed(2)}</h3>
             <div className='manageCartBtnCtr'>
-              {!checkoutError && <button className="checkoutCartBtn" onClick={() => setReadyToCheckout(true)} >Checkout</button>}
+              {!checkoutError && <Link onClick={() => setCartTotal((orderSum+taxes+5.99).toFixed(2))} to='/order/payment'><button className="checkoutCartBtn" >Checkout</button></Link>}
               <button className="cancelOrderBtn" onClick={() => handleCancelOrder()} >Cancel Order</button>  
             </div>
             {checkoutError && <p className='inventoryMsg'>There is an issue with your selected products. Please review to proceed</p>}
-                      {readyToCheckout && <div>
-              {clientSecret && stripePromise && (
-              <Elements stripe={stripePromise} options={{ clientSecret }}>
-                <CheckoutForm handleCheckout={handleCheckout} />
-              </Elements>
-            )}
-          </div>}
-  
           </div>}
         </div>
       </div>
