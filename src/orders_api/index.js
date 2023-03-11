@@ -159,7 +159,54 @@ export async function fetchAllOpenOrders() {
   } catch (error) {
     throw error;
   }
-  
+
+}
+
+export async function fetchStripe() {
+
+  try {
+    //todo - change to render url 
+    const url = `http://localhost:3000/api/config`;
+    const response = await fetch(url, {
+      method: "GET", 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    
+    const data = await response.json()
+
+    return data;
+  } catch(error) {
+    throw error;
+  }
+
+}
+
+export async function fetchStripePaymentIntent(checkoutPrice) {
+
+  try {
+    //todo - change to render url 
+    const url = `http://localhost:3000/api/create-payment-intent`;
+    const response = await fetch(url, {
+      method: "POST", 
+      headers: {
+        'Content-Type': 'application/json',
+      },     
+      body: JSON.stringify(
+        {
+          checkoutPrice: checkoutPrice
+        }
+      )
+    })
+    
+    const data = await response.json()
+
+    return data;
+  } catch(error) {
+    throw error;
+  }
+
 }
 
 // Below are my comments with error handling and input validation

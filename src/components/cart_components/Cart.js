@@ -1,5 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from "./CheckoutForm";
 
 import { 
   fetchRemoveOrderProduct,
@@ -7,16 +11,23 @@ import {
   fetchUserOpenOrders,
   fetchCheckout,
   fetchCancelOrder,
+  fetchStripe, 
+  fetchStripePaymentIntent,
 } from '../../orders_api'; 
 
 
 
-function Cart({setCartItemTotal, cartItemTotal}) {
+const Cart = ({setCartItemTotal, cartItemTotal}) => {
   const [userOrderProducts, setUserOrderProducts] = useState([])
   const [quantity, setQuantity] = useState(0);
   const [userMessage, setUserMessage] = useState("")
   const [orderId, setOrderId] = useState(0)
   const [checkoutError, setCheckoutError] = useState(false)
+  const [stripePromise, setStripePromise] = useState(null);
+  const [clientSecret, setClientSecret] = useState("");
+  const [readyToCheckout, setReadyToCheckout] = useState(false)
+  //todo - remove next line and add into props - it is the amount in pennies so you will need to do calculation for that
+  const checkoutPrice = 10000
 
   const randomString =  () => {
     return crypto.randomUUID()
@@ -26,12 +37,10 @@ function Cart({setCartItemTotal, cartItemTotal}) {
     try {  
       setCheckoutError(false)
       const sessionId = window.localStorage.getItem("fetchSessionId")
-
       if (!sessionId) {
         const newSessionId = randomString();
         window.localStorage.setItem("fetchSessionId", newSessionId )
       }
-        
       const results = await fetchUserOpenOrders(sessionId);
       const resultProducts = results.products
       const sortedProducts = resultProducts.sort((a, b) => (a.name > b.name) ? 1: -1);
@@ -39,29 +48,44 @@ function Cart({setCartItemTotal, cartItemTotal}) {
       setUserOrderProducts(() => sortedProducts);
       setOrderId(() => results.id)
       console.log('loadOrderResults :>> ', results);
-
       for (let i = 0; i < sortedProducts.length; i++) {
         if (sortedProducts[i].inventory < sortedProducts[i].quantity) {
           setCheckoutError(true)
         }
       }
-
-      console.log('checkoutError :>> ', checkoutError);
-
       let numOfItems = 0
       if (results.products) {
         results.products.map((product) => numOfItems += product.quantity)
         setCartItemTotal(numOfItems)
         window.localStorage.setItem("cartTotal", numOfItems)
       }
-
     } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const loadStripePublishableKey = async () => {
+    try {
+      const {publishableKey} = await fetchStripe();
+      setStripePromise(loadStripe(publishableKey));
+    } catch(error) {
+      console.error(error);
+    }
+  }
+
+  const loadStripePaymentIntent = async () => {
+    try {
+      const {clientSecret} = await fetchStripePaymentIntent(checkoutPrice);
+      setClientSecret(clientSecret);
+    } catch(error) {
       console.error(error);
     }
   }
 
   useEffect(() => {
     loadUserOpenOrders()
+    loadStripePublishableKey()
+    loadStripePaymentIntent()
   }, [])
 
   async function handleRemoveItem(orderProductId){
@@ -74,15 +98,12 @@ function Cart({setCartItemTotal, cartItemTotal}) {
         setUserMessage("Sorry there was an error removing your item please try again")
         console.log(userMessage)
       }
-
     } catch (error) {
       console.error(error);
     }
-
   }
 
   async function handleUpdateItem(orderProductId) {
-
     try{
       const results = await fetchUpdateOrderProductQuantity (orderProductId, quantity)
       console.log('UpdateItemResults :>> ', results);
@@ -95,12 +116,10 @@ function Cart({setCartItemTotal, cartItemTotal}) {
     } catch (error) {
       console.error(error);
     }
-
   }
   
   async function handleCheckout() {
     try{
-
       const orderDate = new Date()
       console.log('orderDate :>> ', orderDate);
 
@@ -113,17 +132,14 @@ function Cart({setCartItemTotal, cartItemTotal}) {
         setUserOrderProducts([])
         setCartItemTotal(0)
         window.localStorage.removeItem("cartTotal")
-
       }
     } catch (error) {
       console.error(error);
     }
-
   }
 
   async function handleCancelOrder() {
     try{
-
       const results = await fetchCancelOrder(orderId)
       console.log('cancelOrderResults :>> ', results);
       setUserOrderProducts([])
@@ -133,7 +149,6 @@ function Cart({setCartItemTotal, cartItemTotal}) {
     } catch (error) {
       console.error(error);
     }
-
   }
 
   let orderSum = 0
@@ -158,7 +173,7 @@ function Cart({setCartItemTotal, cartItemTotal}) {
                   (<div className='cartProductCtr'>
                     <div key={item.id}>
                       <div className='cartProductCtrTop'>
-                        <p className='cartProdTitle'>{item.name}<span className ='itemPrice'> - ${item.price} each</span></p>
+                      <Link to={`/products/${item.id}`}><p className='cartProdTitle'>{item.name}<span className ='itemPrice'> - ${item.price} each</span></p></Link>
                         <button className="xFromCartBtn" onClick={() =>handleRemoveItem(item.orderProductId)} >X</button>
                       </div>  
                       <div className='cartQtyTotalCtr'>
@@ -176,19 +191,29 @@ function Cart({setCartItemTotal, cartItemTotal}) {
                   </div>
             ))}</div>}
           </div>        
-        </div>  
-        {cartItemTotal !== 0 && <div className="checkoutDetailsCtr">
-          <h3 className="cartCheckoutDetailsCtrTitle">Order Details</h3>
-          <h3 className='sumTotal'>Products Total: ${orderSum.toFixed(2)}</h3>
-          <h3 className='shippingCharge'>Delivery Fee: $5.99</h3>
-          <h3 className='taxes'>Taxes: ${taxes.toFixed(2)}</h3>
-          <h3 className='orderTotal'>Order Total: ${(orderSum+taxes+5.99).toFixed(2)}</h3>
-          <div className='manageCartBtnCtr'>
-            {!checkoutError && <button className="checkoutCartBtn" onClick={() => handleCheckout()} >Checkout</button>}
-            <button className="cancelOrderBtn" onClick={() => handleCancelOrder()} >Cancel Order</button>  
-          </div>
-          {checkoutError && <p className='inventoryMsg'>There is an issue with your selected products. Please review to proceed</p>}
-        </div>}
+        </div>
+        <div>  
+          {cartItemTotal !== 0 && <div className="checkoutDetailsCtr">
+            <h3 className="cartCheckoutDetailsCtrTitle">Order Details</h3>
+            <h3 className='sumTotal'>Products Total: ${orderSum.toFixed(2)}</h3>
+            <h3 className='shippingCharge'>Delivery Fee: $5.99</h3>
+            <h3 className='taxes'>Taxes: ${taxes.toFixed(2)}</h3>
+            <h3 className='orderTotal'>Order Total: ${(orderSum+taxes+5.99).toFixed(2)}</h3>
+            <div className='manageCartBtnCtr'>
+              {!checkoutError && <button className="checkoutCartBtn" onClick={() => setReadyToCheckout(true)} >Checkout</button>}
+              <button className="cancelOrderBtn" onClick={() => handleCancelOrder()} >Cancel Order</button>  
+            </div>
+            {checkoutError && <p className='inventoryMsg'>There is an issue with your selected products. Please review to proceed</p>}
+                      {readyToCheckout && <div>
+              {clientSecret && stripePromise && (
+              <Elements stripe={stripePromise} options={{ clientSecret }}>
+                <CheckoutForm handleCheckout={handleCheckout} />
+              </Elements>
+            )}
+          </div>}
+  
+          </div>}
+        </div>
       </div>
     </div>
   );

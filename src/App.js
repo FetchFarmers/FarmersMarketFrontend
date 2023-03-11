@@ -15,7 +15,7 @@ import SearchResults from './components/products_components/SearchResults';
 import AboutUs from './components/products_components/AboutUs';
 import ContactUs from './components/products_components/ContactUs';
 import FAQ from './components/products_components/FAQ';
-
+import Completion from './components/cart_components/Completion';
 
 function App() {
   const [cartItemTotal, setCartItemTotal] = useState(JSON.parse(window.localStorage.getItem("cartTotal")||0))
@@ -36,11 +36,13 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/products/:productId/reviews" element={<Reviews />} />
         <Route path="/products/:productId/reviews/new" element={<ReviewForm />} />
+        <Route path="/payment_completion" element={<Completion/>}/>
       </Routes>
       <Footer />
     </div>
   );
 }
+
 
 export default App;
 

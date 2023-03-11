@@ -830,7 +830,7 @@ textarea {
   border-radius: 2px;
   width: auto;
   min-width: 600px;
-  max-height: 52vh;
+  max-height: 100%;
   border: 1px #ccc;
 }
 .cartProductsCtrTitle{
@@ -859,7 +859,7 @@ textarea {
   border-radius: 2px;
   width: auto;
   min-width: 600px;
-  max-height: 50vh;
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -1016,7 +1016,7 @@ textarea {
   cursor: pointer;
   outline: inherit;
   background-color: #3D8161;
-  color: #e6f3e0;
+  color: white;
   border-radius: 2px;
   text-decoration: none;
   justify-content: center;
@@ -1037,7 +1037,7 @@ textarea {
   font: inherit;
   cursor: pointer;
   outline: inherit;
-  background-color: #da190b;
+  background-color: #6a6a6a;
   color: white;
   border-radius: 2px;
   text-decoration: none;
@@ -1048,6 +1048,9 @@ textarea {
   height: 30px;
   font-size: 14px;
   font-weight: 300;
+}
+.paymentForm{
+ margin-top: 15px;                            
 }
 
 /* Search */
