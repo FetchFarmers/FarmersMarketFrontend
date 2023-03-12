@@ -31,9 +31,9 @@ export async function fetchUserOpenOrders(sessionId) {
       )
     });
     const data = await response.json();
-     
-    if (data) {
-      return [data]
+
+    if (data[0]) {
+      return data[0]
     } else {
       return {error: "No open orders"}
     }
