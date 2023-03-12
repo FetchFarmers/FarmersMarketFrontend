@@ -73,6 +73,8 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
     return <div>Loading...</div>;
   }
 
+  const productName = product ? product.name : '';
+  
   return (
     <div className='product-details-page'>
       <h3 className='product-title'>{product.name}</h3>
@@ -173,7 +175,8 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
           )}
         </div>
       </div>
-      <Reviews productId={id} />
+      {/* <Reviews productId={id} /> */}
+      <Reviews productName={productName} productId={id} />
     </div>
   );
 }
