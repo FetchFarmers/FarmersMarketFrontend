@@ -35,7 +35,7 @@ function App() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/products/:productId/reviews" element={<Reviews />} />
-        <Route path="/products/:productId/reviews/new" element={<ReviewForm />} />
+        <Route path="/reviews" element={<ReviewForm />} />
       </Routes>
       <Footer />
     </div>
