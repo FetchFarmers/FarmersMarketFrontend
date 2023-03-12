@@ -9,6 +9,7 @@ import {
   fetchUserOpenOrders,
   fetchCancelOrder,
 } from '../../orders_api'; 
+import Loading from '../Loading';
 
 
 
@@ -16,6 +17,7 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
   const [quantity, setQuantity] = useState(0);
   const [userMessage, setUserMessage] = useState("")
   const [checkoutError, setCheckoutError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
 
   const randomString =  () => {
@@ -25,6 +27,7 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
   async function loadUserOpenOrders() {
     try {  
       setCheckoutError(false)
+      setLoading(true)
       const sessionId = window.localStorage.getItem("fetchSessionId")
       if (!sessionId) {
         const newSessionId = randomString();
@@ -48,6 +51,7 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
         setCartItemTotal(numOfItems)
         window.localStorage.setItem("cartTotal", numOfItems)
       }
+      setLoading(false)
     } catch (error) {
       console.error(error);
     }
@@ -112,7 +116,9 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
       
 
   return (
-    <div className='mainCartPage'>
+    <div>
+    {loading && <Loading/>}
+    {!loading &&<div className='mainCartPage'>
       <h3 className='cartPageTitle' >Shopping Cart</h3>
       <div className='cartDetailsCtr'>
         <div className='cartProductsOutsideCtr'>
@@ -158,6 +164,7 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
           </div>}
         </div>
       </div>
+    </div>}
     </div>
   );
 }
