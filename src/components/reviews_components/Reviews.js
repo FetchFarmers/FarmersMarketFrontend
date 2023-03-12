@@ -28,7 +28,7 @@ function Reviews() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const review = await createReview({ productId, title, details, starRating });
+      const review = await createReview(productId,{title, details, starRating });
       setReviews([...reviews, review]);
       setTitle('');
       setDetails('');
@@ -49,7 +49,8 @@ function Reviews() {
         <label>Details:</label>
         <input type="text" value={details} onChange={(event) => setDetails(event.target.value)} />
         <label>Star rating:</label>
-        <input type="number" value={starRating} onChange={(event) => setStarRating(parseInt(event.target.value))} />
+        <input type="number" value={starRating} onChange={(event) => setStarRating(parseInt(event.target.value))}
+          min="0" max="5" />
         <button type="submit">Submit Review</button>
       </form>
     </div>
