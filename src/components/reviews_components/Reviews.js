@@ -7,9 +7,10 @@ import { getAllReviewsByProductId, createReview } from '../../reviews_api/index.
 import ReviewsList from './ReviewsList';
 import './review.css'; // import the CSS file here
 
-function Reviews() {
+function Reviews(props) {
   // Get productId from URL params and initialize state variables
-  const { productId } = useParams();
+  // const { productId } = useParams();
+  const { productId } = props;
   const [reviews, setReviews] = useState([]);
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
@@ -41,7 +42,8 @@ function Reviews() {
   // Render the component with necessary components and props
   return (
     <div className="reviews-container">
-      <h1 className="reviews-heading">Reviews for Product {productId}</h1>
+      {/* <h1 className="reviews-heading">Reviews for Product {productId}</h1> */}
+      <h1 className="reviews-heading">Reviews for {props.productName} ({props.productId})</h1>
       <ReviewsList reviews={reviews} />
       <form onSubmit={handleSubmit}>
         <label>Title:</label>
