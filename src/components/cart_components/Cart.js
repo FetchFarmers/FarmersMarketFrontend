@@ -35,21 +35,23 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
       }
       const results = await fetchUserOpenOrders(sessionId);
       const resultProducts = results.products
-      const sortedProducts = resultProducts.sort((a, b) => (a.name > b.name) ? 1: -1);
-      console.log('sortedProducts :>> ', sortedProducts);
-      setUserOrderProducts(() => sortedProducts);
-      setOrderId(() => results.id)
-      console.log('loadOrderResults :>> ', results);
-      for (let i = 0; i < sortedProducts.length; i++) {
-        if (sortedProducts[i].inventory < sortedProducts[i].quantity) {
-          setCheckoutError(true)
-        }
-      }
-      let numOfItems = 0
       if (results.products) {
-        results.products.map((product) => numOfItems += product.quantity)
-        setCartItemTotal(numOfItems)
-        window.localStorage.setItem("cartTotal", numOfItems)
+        const sortedProducts = resultProducts.sort((a, b) => (a.name > b.name) ? 1: -1);
+        console.log('sortedProducts :>> ', sortedProducts);
+        setUserOrderProducts(() => sortedProducts);
+        setOrderId(() => results.id)
+        console.log('loadOrderResults :>> ', results);
+        for (let i = 0; i < sortedProducts.length; i++) {
+          if (sortedProducts[i].inventory < sortedProducts[i].quantity) {
+            setCheckoutError(true)
+          }
+        }
+        let numOfItems = 0
+        if (results.products) {
+          results.products.map((product) => numOfItems += product.quantity)
+          setCartItemTotal(numOfItems)
+          window.localStorage.setItem("cartTotal", numOfItems)
+        }
       }
       setLoading(false)
     } catch (error) {
