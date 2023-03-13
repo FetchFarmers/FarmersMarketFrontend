@@ -96,10 +96,93 @@ body {
   margin-left: 0px;
 }
 
+/* Mobile view */
+
+@media only screen and (max-width: 600px) {
+    
+  .dropdown {
+    position: static;
+    margin-top: 0px;
+    display: none;
+    width: 100%;
+  }
+  .menu-items:hover .dropdown {
+    display: block;
+  }
+
+  .userControlsLoginLink{
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 18px;
+  font-size: 16px;
+  width: 100%;
+  height: 40px;
+  transition: all 0.3s ease;
+  text-align: left;
+  margin-top: 6px;
+  }
+
+  .user-links{
+    margin-bottom: 6px;
+  }
+
+  .menu-items{
+  background-color: #e6f3e0;
+  display: flex;
+  transition: all 0.3s ease;
+  font-size: 60px;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: center;
+  }
+  
+  .mobileUserControls {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  }
+  /* hamburger menu */
+  .hamburgerMenu {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  }
+  
+  .hamburgerLine {
+  width: 100%;
+  height: 2px;
+  background-color: #2a5c46;
+  border-radius: 10px;
+  }
+  
+  /* Search */
+  .searchbar {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  left: 0;
+  right: 0;
+  }
+  
+  .searchbar input[type="text"] {
+  width: 100vw;
+  }
+}
+
 /** Add to cart styles  */
 .addToCartContainer {
   bottom: 0;
-  margin-left: 10px;
+  margin-left: 3px;
   display: flex;
   justify-content: left;
   margin-bottom: 10px;
@@ -151,7 +234,7 @@ body {
   position: relative;
   font-size: 17px;
   font-weight: 100;
-  color: #2a5c46;
+  color: #3D8161;
   padding: 0;
   margin-bottom: 7px;
   transition: opacity 0.2s ease-in-out;
@@ -183,7 +266,7 @@ body {
 }
 
 .menu-items button {
-  text-align: left;
+  text-align: center;
   padding: 10px 1rem;
 }
 
@@ -654,7 +737,7 @@ textarea {
 
 /* Search */
  .searchbar{
-  margin-top: 50px;
+  margin-top: 10px;
   right: 10px;
   position: absolute;
  }
