@@ -171,7 +171,7 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
             )}
           </form>
           {isReadOnly && product.id && (
-            <AddToCart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} productId={product.id} productInventory={product.inventory} className="add-to-cart" />
+            <AddToCart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} productId={product.id} productInventory={product.inventory} className="add-to-cart-detail-page" />
           )}
         </div>
       </div>
