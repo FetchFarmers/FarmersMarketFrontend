@@ -59,6 +59,39 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
     }
   }
 
+  async function reloadUserOpenOrders() {
+    try {  
+      setCheckoutError(false)
+      const sessionId = window.localStorage.getItem("fetchSessionId")
+      if (!sessionId) {
+        const newSessionId = randomString();
+        window.localStorage.setItem("fetchSessionId", newSessionId )
+      }
+      const results = await fetchUserOpenOrders(sessionId);
+      const resultProducts = results.products
+      if (results.products) {
+        const sortedProducts = resultProducts.sort((a, b) => (a.name > b.name) ? 1: -1);
+        console.log('sortedProducts :>> ', sortedProducts);
+        setUserOrderProducts(() => sortedProducts);
+        setOrderId(() => results.id)
+        console.log('loadOrderResults :>> ', results);
+        for (let i = 0; i < sortedProducts.length; i++) {
+          if (sortedProducts[i].inventory < sortedProducts[i].quantity) {
+            setCheckoutError(true)
+          }
+        }
+        let numOfItems = 0
+        if (results.products) {
+          results.products.map((product) => numOfItems += product.quantity)
+          setCartItemTotal(numOfItems)
+          window.localStorage.setItem("cartTotal", numOfItems)
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 
 
   useEffect(() => {
@@ -70,7 +103,7 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
       const results = await fetchRemoveOrderProduct (orderProductId)
       console.log('RemoveItemResults :>> ', results);
       if (results.id === orderProductId ){
-        loadUserOpenOrders()
+        reloadUserOpenOrders()
       } else {  
         setUserMessage("Sorry there was an error removing your item please try again")
         console.log(userMessage)
@@ -88,7 +121,7 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
         setUserMessage("Sorry there was an error updating your item please try again")
         console.log(userMessage)
       } else {  
-        loadUserOpenOrders()
+        reloadUserOpenOrders()
       }
     } catch (error) {
       console.error(error);
