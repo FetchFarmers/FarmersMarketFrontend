@@ -37,7 +37,7 @@ body {
   flex-direction: column;
   background-color: #e6f3e0;
   height: 230px;
-  width: 100vw;
+  width: 100%;
   box-shadow: 0px 10.9826px 10.4564px rgba(0, 0, 0, 0.12);
 }
 .headerTop {
@@ -63,7 +63,7 @@ body {
   justify-content: space-between;
   margin-top: 10px;
   margin-bottom: 15px;
-  margin-right: 30px;
+  margin-right: 15px;
   align-items: flex-start;
 }
 .userControlsLoginLink {
@@ -1101,13 +1101,14 @@ textarea {
   padding: 25px;
   padding-right: 40px;
   padding-bottom: 25px;
-  min-width: 600px;
-  max-width: 800px;
+  width: clamp(400px, 55%, 800px);
   border-radius: 2px;
+  margin-top: 40px;
   margin-right: 20px;
   margin-bottom: 15px;
   margin-left: 20px;
   height: fit-content;    
+  text-align: center;
 }
 
 /* Search */

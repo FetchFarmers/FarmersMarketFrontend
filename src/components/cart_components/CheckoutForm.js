@@ -16,7 +16,7 @@ const CheckoutForm = ({ orderId, setUserOrderProducts, cartTotal, setCartItemTot
 
   async function handleCheckout() {
     try{
-      const orderDate = new Date()
+      const orderDate = new Date().toLocaleDateString('en-US')
       console.log('orderDate :>> ', orderDate);
 
       const results = await fetchCheckout (orderId, cartTotal, orderDate)
