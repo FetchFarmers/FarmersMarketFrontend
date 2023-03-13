@@ -156,6 +156,7 @@ export async function fetchAllOpenOrders() {
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
+        
       }});
 
     const data = await response.json();
@@ -166,6 +167,27 @@ export async function fetchAllOpenOrders() {
   }
 
 }
+
+export async function fetchUserClosedOrders() {
+
+  try {
+    const header = setHeader()
+    console.log('header :>> ', header);
+
+    const url = "https://farmers-market-1oeq.onrender.com/api/orders/user/order_history";
+    const response = await fetch(url, {
+      method: "GET",
+      headers: header
+    });
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 
 export async function fetchStripe() {
 
