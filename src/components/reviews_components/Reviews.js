@@ -1,4 +1,3 @@
-
 // Import necessary modules and components
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -45,20 +44,24 @@ function Reviews(props) {
       {/* <h1 className="reviews-heading">Reviews for Product {productId}</h1> */}
       <h1 className="reviews-heading">Reviews for {props.productName} ({props.productId})</h1>
       <ReviewsList reviews={reviews} />
-      <form onSubmit={handleSubmit}>
-        <label>Title:</label>
-        <input type="text" value={title} onChange={(event) => setTitle(event.target.value)} />
-        <label>Details:</label>
-        <input type="text" value={details} onChange={(event) => setDetails(event.target.value)} />
-        <label>Star rating:</label>
-        <input type="number" value={starRating} onChange={(event) => setStarRating(parseInt(event.target.value))}
+      <form className="reviews-form" onSubmit={handleSubmit}>
+        <label className="reviews-form-label">Title:</label>
+        <input className="reviews-form-input" type="text" value={title} onChange={(event) => setTitle(event.target.value)} />
+        <label className="reviews-form-label">Details:</label>
+        <input className="reviews-form-input" type="text" value={details} onChange={(event) => setDetails(event.target.value)} />
+        <label className="reviews-form-label">Star rating:</label>
+        <input className="reviews-form-input" type="number" value={starRating} onChange={(event) => setStarRating(parseInt(event.target.value))}
           min="0" max="5" />
-        <button type="submit">Submit Review</button>
+        <button className="reviews-form-submit" type="submit">Submit Review</button>
       </form>
     </div>
   );
 }
 
 export default Reviews;
+
+
+
+ 
 
 
