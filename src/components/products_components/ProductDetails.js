@@ -20,6 +20,7 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
   });
   const [isAdmin, setIsAdmin] = useState(false);
   const [isReadOnly, setIsReadOnly] = useState(true); // Add state variable for read-only/edit mode
+  
 
   useEffect(() => {
     fetch(`https://farmers-market-1oeq.onrender.com/api/products/${id}`)
@@ -176,14 +177,10 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
         </div>
       </div>
       {/* <Reviews productId={id} /> */}
-      <Reviews productName={productName} productId={id} />
+      <Reviews productName={productName} productId={product.id}/>
     </div>
   );
 }
-
-
-
-
 
 
 // import React, { useState, useEffect } from 'react';
@@ -192,8 +189,9 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
 // import { updateProduct } from '../../products_api';
 // import { fetchUserData } from '../../user_api';
 // import { menuItems } from '../../menuItems';
+// import Reviews from '../reviews_components/Reviews.js';
 
-// export default function ProductDetails() {
+// export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
 //   const { id } = useParams();
 //   const [product, setProduct] = useState(null);
 //   const [updatedProduct, setUpdatedProduct] = useState({
@@ -260,6 +258,8 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
 //     return <div>Loading...</div>;
 //   }
 
+//   const productName = product ? product.name : '';
+  
 //   return (
 //     <div className='product-details-page'>
 //       <h3 className='product-title'>{product.name}</h3>
@@ -356,10 +356,18 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
 //             )}
 //           </form>
 //           {isReadOnly && product.id && (
-//             <AddToCart productId={product.id} productInventory={product.inventory} className="add-to-cart" />
+//             <AddToCart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} productId={product.id} productInventory={product.inventory} className="add-to-cart-detail-page" />
 //           )}
 //         </div>
 //       </div>
+//       {/* <Reviews productId={id} /> */}
+//       <Reviews productName={productName} productId={id} />
 //     </div>
 //   );
 // }
+
+
+
+
+
+ 

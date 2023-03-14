@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
 import SearchBar from './products_components/SearchBar';
-import { useMediaQuery } from '@material-ui/core';
+// import { useMediaQuery } from '@material-ui/core';
 
 const Header = ({ cartItemTotal, setCartItemTotal }) => {
 
@@ -25,7 +25,7 @@ const Header = ({ cartItemTotal, setCartItemTotal }) => {
     navigate("/");
   }
 
-  const isMobile = useMediaQuery('(max-width:600px)');
+  // const isMobile = useMediaQuery('(max-width:600px)');
   const [showMenu, setShowMenu] = useState(false);
 
   const handleToggleMenu = () => {
@@ -42,7 +42,7 @@ const Header = ({ cartItemTotal, setCartItemTotal }) => {
                 <SearchBar />
               </div>
           </div>
-          {isMobile && (
+          {/* {isMobile && ( */}
             <div className="headerUserControlsContainer">
               <div className="hamburgerMenu" onClick={handleToggleMenu}>
                 <div className="hamburgerLine" />
@@ -70,8 +70,8 @@ const Header = ({ cartItemTotal, setCartItemTotal }) => {
                 </nav>
               )}
             </div>
-          )}
-          {!isMobile && (
+          {/* )} */}
+          {/* {!isMobile && ( */}
             <nav className="headerUserControlsContainer">
               {!username && <Link className="userControlsLoginLink" to="/user/login">Log In</Link>}
               {username && <button className="userControlsLoginLink" onClick={handleLogout}>Log Out</button>}
@@ -84,9 +84,9 @@ const Header = ({ cartItemTotal, setCartItemTotal }) => {
               </Link>
               {isAdmin && <Link className="userControlsLoginLink" to="/admin">Admin</Link>}
             </nav>
-          )}
+          {/* )} */}
         </div>
-        {!isMobile && (
+        {/* {!isMobile && ( */}
           <div className="headerLinksContainer">
             <nav className="headerNavBarContainer">
               <ul className="menus">
@@ -96,7 +96,7 @@ const Header = ({ cartItemTotal, setCartItemTotal }) => {
               </ul>
             </nav>
           </div>
-        )}
+        {/* )} */}
       </div>
     );
 }
