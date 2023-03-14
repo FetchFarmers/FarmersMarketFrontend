@@ -35,7 +35,7 @@ function App() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/admin" element={<AdminPage />} />
-        <Route path="/reviews" element={<ReviewForm token={token} setToken={setToken} />} />
+        {/* <Route path="/reviews" element={<ReviewForm token={token} setToken={setToken} />} /> */}
         <Route path="/products/:productId/reviews" element={<Reviews token={token} />} />
       </Routes>
       <Footer />

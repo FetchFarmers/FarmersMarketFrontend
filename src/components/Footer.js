@@ -45,9 +45,9 @@ function Footer() {
             </Link>
           </li>
           <li>
-            <Link className="menuIcon" to="/reviews">
+            {/* <Link className="menuIcon" to="/reviews">
               Reviews
-            </Link>
+            </Link> */}
           </li>
         </ul>
       </div>
