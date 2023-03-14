@@ -70,7 +70,7 @@ const Header = ({ cartItemTotal, setCartItemTotal }) => {
                 </nav>
               )}
             </div>
-          )}
+          {/* )} */}
           {/* {!isMobile && ( */}
             <nav className="headerUserControlsContainer">
               {!username && <Link className="userControlsLoginLink" to="/user/login">Log In</Link>}
@@ -84,7 +84,7 @@ const Header = ({ cartItemTotal, setCartItemTotal }) => {
               </Link>
               {isAdmin && <Link className="userControlsLoginLink" to="/admin">Admin</Link>}
             </nav>
-          )}
+          {/* )} */}
         </div>
         {/* {!isMobile && ( */}
           <div className="headerLinksContainer">
@@ -96,7 +96,7 @@ const Header = ({ cartItemTotal, setCartItemTotal }) => {
               </ul>
             </nav>
           </div>
-        )}
+        {/* )} */}
       </div>
     );
 }
