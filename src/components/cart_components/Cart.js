@@ -206,3 +206,9 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
 
 export default Cart;
 
+
+// const [loading, setLoading] = useState(false)
+// import Loading from '../Loading';
+// <div>
+// {loading && <Loading/>}
+// {!loading &&<div className='mainCartPage'>

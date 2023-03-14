@@ -8,7 +8,7 @@ const Loading = () => {
   return(
     <div className="mainCartPage">
       <div className="paymentSuccessMsgCtr">
-        <h1>loading <FontAwesomeIcon className='fas fa-spinner fa-spin'  icon={faSpinner} /></h1>
+        <h1>Loading <FontAwesomeIcon className='fas fa-spinner fa-spin'  icon={faSpinner} /></h1>
       </div>
     </div>
   )
