@@ -20,7 +20,7 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
   });
   const [isAdmin, setIsAdmin] = useState(false);
   const [isReadOnly, setIsReadOnly] = useState(true); // Add state variable for read-only/edit mode
-  
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     fetch(`https://farmers-market-1oeq.onrender.com/api/products/${id}`)
@@ -39,7 +39,7 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
       });
 
     // check if user is admin
-    const token = localStorage.getItem('token');
+    
     if (token) {
       fetchUserData(token)
         .then(userData => {
