@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AddToCart from '../../cart_components/AddToCart';
-
+import Loading from '../../Loading';
 
 function Produce({setCartItemTotal, cartItemTotal}) {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     fetch('https://farmers-market-1oeq.onrender.com/api/products/category/Produce')
       .then(response => {
         if (!response.ok) {
@@ -16,6 +18,7 @@ function Produce({setCartItemTotal, cartItemTotal}) {
       })
       .then(data => {
         setProducts(data);
+        setLoading(false);
       })
       .catch(error => {
         console.log('There was a problem with the API request:', error);
@@ -23,10 +26,12 @@ function Produce({setCartItemTotal, cartItemTotal}) {
   }, []);
 
   return (
-    <div className='products-page'>
-      <h3 className='product-title'>Fruits & Vegetables</h3>
-      <div className="product-list">
-        {products.map(product => (
+    <div>
+      {loading && <Loading/>}
+      {!loading &&<div className='products-page'>
+        <h3 className='product-title'>Fruits & Vegetables</h3>
+        <div className="product-list">
+          {products.map(product => (
           <div key={product.id} className="product">
             <Link to={`/products/${product.id}`}>
               <img className="product-image" src={product.imageURL} alt={product.name} />
@@ -37,8 +42,9 @@ function Produce({setCartItemTotal, cartItemTotal}) {
             </Link>
             {product.id && <AddToCart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} productId={product.id} productInventory={product.inventory} className="add-to-cart" />}
           </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </div>} 
     </div>
   );  
 }

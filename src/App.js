@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import Header from './components/Header';
-import Footer from './components/Footer';
+import Footer from './components/footer_components/Footer'
 import Products from './components/products_components/Products';
 import User from './components/user_components/User';
 import AdminPage from './components/user_components/AdminPage';
@@ -11,9 +11,9 @@ import Reviews from './components/reviews_components/Reviews';
 import ReviewForm from './components/reviews_components/ReviewForm';
 import SearchBar from './components/products_components/SearchBar';
 import SearchResults from './components/products_components/SearchResults';
-import AboutUs from './components/products_components/AboutUs';
-import ContactUs from './components/products_components/ContactUs';
-import FAQ from './components/products_components/FAQ';
+import AboutUs from './components/footer_components/AboutUs';
+import ContactUs from './components/footer_components/ContactUs';
+import FAQ from './components/footer_components/FAQ';
 import CartIndex from './components/cart_components/CartIndex';
 
 
