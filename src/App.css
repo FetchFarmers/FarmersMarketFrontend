@@ -1210,6 +1210,11 @@ textarea {
   height: fit-content;    
   text-align: center;
 }
+.testCardMsg{
+  font-size: 12px;
+  font-weight: 300;
+  align-self: center;
+}
 
 /* Search */
 
