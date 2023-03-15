@@ -5,27 +5,27 @@ export const menuItems = [
       submenu: [
         {
           title: 'Seafood',
-          url: 'seafood',
+          url: '/products/seafood',
         },
         {
           title: 'Beef',
-          url: 'beef',
+          url: '/products/beef',
         },
         {
           title: 'Pork',
-          url: 'pork',
+          url: '/products/pork',
         },
         {
           title: 'Poultry',
-          url: 'poultry',
+          url: '/products/poultry',
         },
         {
           title: 'Deli Meat & Charcuterie',
-          url: 'deli',
+          url: '/products/deli',
         },
         {
           title: 'Lamb',
-          url: 'lamb',
+          url: '/products/lamb',
         }
     ]
     },
@@ -35,19 +35,19 @@ export const menuItems = [
       submenu: [
         {
           title: 'Eggs & Butter',
-          url: 'eggs_butter',
+          url: '/products/eggs_butter',
         },
         {
           title: 'Milk & Cream',
-          url: 'milk',
+          url: '/products/milk',
         },
         {
             title: 'Cheese',
-            url: 'cheese',
+            url: '/products/cheese',
           },
         {
           title: 'Yogurt & Cultured Dairy',
-          url: 'yogurt',
+          url: '/products/yogurt',
         }
     ]
     },
@@ -57,11 +57,11 @@ export const menuItems = [
       submenu: [
         {
           title: 'Fresh Fruits',
-          url: 'fruit',
+          url: '/products/fruit',
         },
         {
           title: 'Fresh Vegetables',
-          url: 'vegetables',
+          url: '/products/vegetables',
         }
     ]
     },
@@ -71,23 +71,23 @@ export const menuItems = [
       submenu: [
         {
           title: 'Bread',
-          url: 'bread',
+          url: '/products/bread',
         },
         {
           title: 'Seasonal Specialties',
-          url: 'seasonal',
+          url: '/products/seasonal',
         },
         {
           title: 'Savory Baked Goods',
-          url: 'savory_baked_goods', 
+          url: '/products/savory_baked_goods', 
         },
         {
           title: 'Pastries & Desserts',
-          url: 'pastries_desserts',
+          url: '/products/pastries_desserts',
         },
         {
           title: 'Gluten-free & Vegan',
-          url: 'glutenfree_vegan',
+          url: '/products/glutenfree_vegan',
         }
     ]
     }

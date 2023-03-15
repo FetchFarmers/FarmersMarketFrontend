@@ -23,7 +23,7 @@ const CompletedOrderDetail = ({closedOrderDetails}) => {
   return (
     <div>
       <div className='mainCartPage'>
-        <h3 className='cartPageTitle' >Order on {closedOrderDetails.checkoutDate}</h3>
+        <h3 className='cartPageTitle' >Order from {closedOrderDetails.checkoutDate}</h3>
         <div className='cartDetailsCtr'>
           <div className='cartProductsOutsideCtr'>
           <h3 className="cartProductsCtrTitle">Products</h3>

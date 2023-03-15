@@ -155,12 +155,15 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
     {loading && <Loading/>}
     {!loading &&<div className='mainCartPage'>
       <h3 className='cartPageTitle' >Shopping Cart</h3>
-      <div className='cartDetailsCtr'>
-        <div className='cartProductsOutsideCtr'>
+      {cartItemTotal === 0 &&<div className="cartEmptyMsgCtr">
+        <h3 className="cartProductsCtrTitle">Products</h3>
+        {cartItemTotal === 0 && <h4 className='cartEmptyMessage' >Your cart is currently empty</h4>}
+      </div>}
+       <div className='cartDetailsCtr'>
+        {cartItemTotal !== 0 &&<div className='cartProductsOutsideCtr'>
         <h3 className="cartProductsCtrTitle">Products {cartItemTotal !== 0 && <>({cartItemTotal} {cartItemTotal > 1 ? <>items</> : <>item</>})</>}</h3>
           <div className="cartProductsCtr">
-            {cartItemTotal === 0 && <h4 className='cartEmptyMessage' >Your cart is currently empty</h4>}
-            {userOrderProducts && <div>
+            <div>
               {userOrderProducts.map((item) =>
                   (<div className='cartProductCtr'>
                     <div key={item.id}>
@@ -181,9 +184,9 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
                       {(item.inventory === 0) && <p className='inventoryMsg'>This item is no longer available. Please remove.</p>}
                     </div>
                   </div>
-            ))}</div>}
-          </div>        
-        </div>
+            ))}</div>
+          </div>
+        </div>}       
         <div>  
           {cartItemTotal !== 0 && <div className="checkoutDetailsCtr">
             <h3 className="cartCheckoutDetailsCtrTitle">Order Details</h3>
