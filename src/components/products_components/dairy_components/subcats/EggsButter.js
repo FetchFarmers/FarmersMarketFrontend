@@ -38,7 +38,9 @@ const EggsButterProducts = ({setCartItemTotal, cartItemTotal}) => {
                 <p className='product-price'>${product.price}</p>
               </div>
             </Link>
-            {product.id && <AddToCart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} productId={product.id} productInventory={product.inventory} className="add-to-cart" />}
+            <div className='addToCartMultiProdCtr'>
+              {product.id && <AddToCart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} productId={product.id} productInventory={product.inventory} className="add-to-cart" />}
+            </div>          
           </div>
           ))}
         </div>

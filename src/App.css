@@ -27,6 +27,7 @@ body {
   background-position: center;
   background-size: cover;
   min-height: 80vh;
+  width: 100%;
   background-attachment: fixed;
 }
 

@@ -49,7 +49,7 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
           console.log('There was a problem fetching user data:', error);
         });
     }
-  }, [id]);
+  }, [id, token]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -177,7 +177,7 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
         </div>
       </div>
       {/* <Reviews productId={id} /> */}
-      <Reviews productName={productName} productId={product.id}/>
+      {token && <Reviews productName={productName} productId={product.id}/>}
     </div>
   );
 }
