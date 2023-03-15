@@ -18,12 +18,13 @@ function Reviews(props) {
   // Fetch reviews for the current product on mount and when productId changes
   useEffect(() => {
     async function fetchReviews() {
+      if (!token) return
       console.log('productId :>> ', productId);
       const reviews = await getAllReviewsByProductId(productId);
       setReviews(reviews);
     }
     fetchReviews();
-  }, [productId]);
+  }, [token, productId]);
 
   // Submit a new review and update state variables accordingly
   const handleSubmit = async (event) => {
@@ -63,8 +64,6 @@ function Reviews(props) {
 export default Reviews;
 
 
-
-// // Import necessary modules and components
 // import React, { useState, useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
 // import { getAllReviewsByProductId, createReview } from '../../reviews_api/index.js';
@@ -75,7 +74,7 @@ export default Reviews;
 // function Reviews(props) {
 //   // Get productId from URL params and initialize state variables
 //   // const { productId } = useParams();
-//   const { productId } = props;
+//   const { productId, token } = props;
 //   const [reviews, setReviews] = useState([]);
 //   const [title, setTitle] = useState('');
 //   const [details, setDetails] = useState('');
@@ -84,6 +83,7 @@ export default Reviews;
 //   // Fetch reviews for the current product on mount and when productId changes
 //   useEffect(() => {
 //     async function fetchReviews() {
+//       console.log('productId :>> ', productId);
 //       const reviews = await getAllReviewsByProductId(productId);
 //       setReviews(reviews);
 //     }
@@ -94,7 +94,8 @@ export default Reviews;
 //   const handleSubmit = async (event) => {
 //     event.preventDefault();
 //     try {
-//       const review = await createReview(productId,{title, details, starRating });
+//       const review = await createReview(productId, { title, details, starRating }, token);
+//       console.log('New review:', review);
 //       setReviews([...reviews, review]);
 //       setTitle('');
 //       setDetails('');
@@ -109,7 +110,7 @@ export default Reviews;
 //     <div className="reviews-container">
 //       {/* <h1 className="reviews-heading">Reviews for Product {productId}</h1> */}
 //       <h1 className="reviews-heading">Reviews for {props.productName} ({props.productId})</h1>
-//       <ReviewsList reviews={reviews} />
+//       <ReviewsList reviews={reviews} token= {token}/>
 //       <form className="reviews-form" onSubmit={handleSubmit}>
 //         <label className="reviews-form-label">Title:</label>
 //         <input className="reviews-form-input" type="text" value={title} onChange={(event) => setTitle(event.target.value)} />
@@ -125,6 +126,10 @@ export default Reviews;
 // }
 
 // export default Reviews;
+
+
+
+
 
 
 
