@@ -742,6 +742,10 @@ textarea {
   position: absolute;
  }
 
+ .searchBar{
+  margin-top: 40px;
+ }
+
  /* About Us  */
  .about-us {
   max-width: 800px;
