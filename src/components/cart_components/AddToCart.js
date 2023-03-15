@@ -55,17 +55,17 @@ const AddToCart = ({ productId, productInventory, setCartItemTotal, cartItemTota
 
   return (
     <div>
-    <h5 className='addToCartUserMessage'>{userMessage}</h5>
-    <div className='addToCartContainer'>
-      <input className='quantityDropdown'
-        type="number"
-        value={quantity}
-        onChange={(event) => setQuantity(event.target.value)}
-        min={1}
-        max={productInventory}
-      />
-      <button className="addToCartButton" onClick={handleAddToCartClick}><FontAwesomeIcon  icon={faCartArrowDown}/></button>
-    </div>
+      <h5 className='addToCartUserMessage'>{userMessage}</h5>
+      <div className='addToCartContainer'>
+        {!productInventory && <h4 className='soldOutUserMessage'>Temporarily Sold Out </h4>}
+        {(productInventory !== 0) && <input className='quantityDropdown'type="number"
+          value={quantity}
+          onChange={(event) => setQuantity(event.target.value)}
+          min={1}
+          max={productInventory}
+        />}
+        {(productInventory !== 0) && <button className="addToCartButton" onClick={handleAddToCartClick}><FontAwesomeIcon  icon={faCartArrowDown}/></button>}
+       </div>
     </div>
   );
 };

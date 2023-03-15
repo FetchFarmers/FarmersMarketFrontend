@@ -61,7 +61,7 @@ const CheckoutForm = ({ orderId, setUserOrderProducts, cartTotal, setCartItemTot
 
   return (
     <form className='paymentForm' onSubmit={handlePayment}>
-      <h3 className='paymentHeaders'>Card Details</h3>
+      <h3 className='paymentHeaders'>Card Details&nbsp;&nbsp; <span className='testCardMsg'>To test checkout - Use card number 4242 4242 4242 4242</span></h3>
       <PaymentElement />
       <button className='payBtn' disabled={isProcessing}><span>{isProcessing ? "Processing ..." : "Pay now"}</span></button>
       {message &&<p>{message}</p>}
