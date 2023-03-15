@@ -8,7 +8,7 @@ import Products from './components/products_components/Products';
 import User from './components/user_components/User';
 import AdminPage from './components/user_components/AdminPage';
 import Reviews from './components/reviews_components/Reviews';
-import ReviewForm from './components/reviews_components/ReviewForm';
+// import ReviewForm from './components/reviews_components/ReviewForm';
 import SearchBar from './components/products_components/SearchBar';
 import SearchResults from './components/products_components/SearchResults';
 import AboutUs from './components/footer_components/AboutUs';

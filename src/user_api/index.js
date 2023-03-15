@@ -23,7 +23,8 @@ export async function fetchLogin(username, password) {
   }
 }
 
-export const fetchUserData = async (token) => {
+export const fetchUserData = async () => {
+  const token = window.localStorage.getItem('token')
   try {
     const response = await fetch('https://farmers-market-1oeq.onrender.com/api/users/me', {
       headers: {
@@ -37,6 +38,8 @@ export const fetchUserData = async (token) => {
   }
 };
 
+
+
 export async function fetchSignUp(username, password, email) {
 
   try {
@@ -49,6 +52,29 @@ export async function fetchSignUp(username, password, email) {
         {
           username: username,
           password: password,
+          email: email,
+        }
+      )
+    })
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function fetchUpdateUser(username, email) {
+
+  try {
+    const response = await fetch(`https://farmers-market-1oeq.onrender.com/api/users/me`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        {
+          username: username,
           email: email,
         }
       )

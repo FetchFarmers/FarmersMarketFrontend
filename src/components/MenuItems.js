@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Dropdown from './Dropdown';
 import { Link } from 'react-router-dom';
 
