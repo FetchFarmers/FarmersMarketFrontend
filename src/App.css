@@ -1456,6 +1456,11 @@ textarea {
   border: 1px solid #ccc;
   background-color: #f0f7ed;
 }
+.updateUserErrorMessage{
+  color: #da190b;
+  margin: 0px;
+  margin-top: 15px;
+}
 
 
 /* 404 */
