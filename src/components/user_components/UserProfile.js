@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom';
 import { fetchUserClosedOrders } from '../../orders_api';
 import { fetchUpdateUser, fetchUserData } from '../../user_api';
 import Loading from '../Loading';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSort } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSort } from '@fortawesome/free-solid-svg-icons';
 
 function UserProfile ({setClosedOrderDetails}) {
   const [loading, setLoading] = useState(false);
@@ -13,14 +13,14 @@ function UserProfile ({setClosedOrderDetails}) {
   const [user, setUser] = useState({});
   const [newUsername, setNewUsername] = useState("");
   const [newEmail, setNewEmail] = useState("");
-  const [isEditing, setIsEditing] = useState(false)
-  const [datedSort, setDatedSort] = useState([])
-  const [revDatedSort, setRevDatedSort] = useState([])
-  const [prodTotalSort, setProdTotalSort] = useState([])
-  const [revProdTotalSort, setRevProdTotalSort] = useState([])
-  const [priceSort, setPriceSort] = useState([])
-  const [revPriceSort, setRevPriceSort] = useState([])
-  const [userMessage, setUserMessage] = useState("")
+  const [isEditing, setIsEditing] = useState(false);
+  const [datedSort, setDatedSort] = useState([]);
+  const [revDatedSort, setRevDatedSort] = useState([]);
+  const [prodTotalSort, setProdTotalSort] = useState([]);
+  const [revProdTotalSort, setRevProdTotalSort] = useState([]);
+  const [priceSort, setPriceSort] = useState([]);
+  const [revPriceSort, setRevPriceSort] = useState([]);
+  const [userMessage, setUserMessage] = useState("");
 
 
   async function loadUserAndClosedOrders() {
@@ -29,9 +29,10 @@ function UserProfile ({setClosedOrderDetails}) {
       const results = await fetchUserClosedOrders();
       setOrderHistory(results);
       const userResults = await fetchUserData();
+      console.log('userResults :>> ', userResults);
       setUser(userResults);
-      setNewUsername(user.username)
-      setNewEmail(user.email)
+      setNewUsername(userResults.username);
+      setNewEmail(userResults.email);
       setLoading(false);
 
     } catch (error) {
@@ -43,8 +44,8 @@ function UserProfile ({setClosedOrderDetails}) {
     try {  
       const results = await fetchUserData();
       setUser(results);
-      setNewUsername(user.username)
-      setNewEmail(user.email)
+      setNewUsername(user.username);
+      setNewEmail(user.email);
 
     } catch (error) {
       console.error(error);
@@ -53,36 +54,36 @@ function UserProfile ({setClosedOrderDetails}) {
 
   async function loadSortedOrders() {
     if (datedSort[0]){
-      setOrderHistory(datedSort)
+      setOrderHistory(datedSort);
     }
     if (revDatedSort[0]){
-      setOrderHistory(revDatedSort)
+      setOrderHistory(revDatedSort);
     }
     if (prodTotalSort[0]) {
-      setOrderHistory(prodTotalSort)
+      setOrderHistory(prodTotalSort);
     }
     if (revProdTotalSort[0]) {
-      setOrderHistory(revProdTotalSort)
+      setOrderHistory(revProdTotalSort);
     }
     if (priceSort[0]) {
-      setOrderHistory(priceSort)
+      setOrderHistory(priceSort);
     }
     if (revPriceSort[0]) {
-      setOrderHistory(revPriceSort)
+      setOrderHistory(revPriceSort);
     }
   }
 
   async function handleUpdateUser(event) {
-    event.preventDefault() 
+    event.preventDefault();
     try {
-      const results = await fetchUpdateUser (newUsername, newEmail)
+      const results = await fetchUpdateUser (newUsername, newEmail);
       console.log('UpdateUserResults :>> ', results);
       if (!results.id){
         setUserMessage("Sorry there was an error updating your profile. Please try again")
-        console.log(userMessage)
+        console.log(userMessage);
       } else {  
-        loadUserData()
-        setIsEditing(false)
+        loadUserData();
+        setIsEditing(false);
       }
 
     } catch (error) {
@@ -91,68 +92,68 @@ function UserProfile ({setClosedOrderDetails}) {
   }
 
   function handleFilterByDate(event) {
-    event.preventDefault()
-    setPriceSort([])
-    setRevPriceSort([])
-    setProdTotalSort([])
-    setRevProdTotalSort([])
+    event.preventDefault();
+    setPriceSort([]);
+    setRevPriceSort([]);
+    setProdTotalSort([]);
+    setRevProdTotalSort([]);
 
     if (!datedSort[0]){
       const sort = orderHistory.sort((a, b) => {return new Date (a.checkoutDate) - new Date (b.checkoutDate)}); 
-      setDatedSort(sort)
-      setRevDatedSort([])
+      setDatedSort(sort);
+      setRevDatedSort([]);
     } else {
-      const sort = orderHistory.reverse()
-      setRevDatedSort(sort)
-      setDatedSort([])
+      const sort = orderHistory.reverse();
+      setRevDatedSort(sort);
+      setDatedSort([]);
     }
     
-    loadSortedOrders()
+    loadSortedOrders();
   }
 
   function handleFilterByItems(event) {
-    event.preventDefault()
-    setPriceSort([])
-    setRevPriceSort([])
-    setProdTotalSort([])
-    setRevProdTotalSort([])
+    event.preventDefault();
+    setPriceSort([]);
+    setRevPriceSort([]);
+    setProdTotalSort([]);
+    setRevProdTotalSort([]);
 
     if (!prodTotalSort[0]){
       const sort = orderHistory.sort((a, b) => {return a.products.length - b.products.length});   
-      setProdTotalSort(sort) 
-      setRevProdTotalSort([])
+      setProdTotalSort(sort);
+      setRevProdTotalSort([]);
     } else {
-      const sort = orderHistory.reverse()
-      setRevProdTotalSort(sort)
-      setProdTotalSort([])
+      const sort = orderHistory.reverse();
+      setRevProdTotalSort(sort);
+      setProdTotalSort([]);
     }
 
-    loadSortedOrders()
+    loadSortedOrders();
   }
 
   function handleFilterByPrice(event) {
     event.preventDefault()
-    setPriceSort([])
-    setRevPriceSort([])
-    setProdTotalSort([])
-    setRevProdTotalSort([])
+    setPriceSort([]);
+    setRevPriceSort([]);
+    setProdTotalSort([]);
+    setRevProdTotalSort([]);
 
     if (!priceSort[0]) {
       const sort = orderHistory.sort((a, b) => {return a.checkoutSum - b.checkoutSum});
-      setPriceSort(sort)
-      setRevPriceSort([])
+      setPriceSort(sort);
+      setRevPriceSort([]);
     } else {
-      const sort = orderHistory.reverse()
-      setRevPriceSort(sort)
-      setPriceSort([])
+      const sort = orderHistory.reverse();
+      setRevPriceSort(sort);
+      setPriceSort([]);
     }
 
-    loadSortedOrders() 
+    loadSortedOrders();
   }
   
 
   useEffect(() => {
-    loadUserAndClosedOrders()
+    loadUserAndClosedOrders();
   }, [])
 
   return (
@@ -180,6 +181,7 @@ function UserProfile ({setClosedOrderDetails}) {
                   {isEditing &&<input className='editUserBtn' type='submit' value='Submit'></input>}
                   {isEditing &&<button className='cancelEditUserBtn' onClick={()=>setIsEditing(false)}>Cancel</button>}
                 </div>
+                {userMessage &&<h5 className='updateUserErrorMessage'>{userMessage}</h5>}
               </div>
             </form>
           </div>

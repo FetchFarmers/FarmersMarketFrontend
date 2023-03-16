@@ -6,16 +6,16 @@ import CartIndex from './components/cart_components/CartIndex';
 import Reviews from './components/reviews_components/Reviews';
 import { Outlet, useParams } from 'react-router-dom';
 
-function Layout({ cartItemTotal, setCartItemTotal, token, setToken }) {
+function Layout({ cartItemTotal, setCartItemTotal }) {
   const { productId } = useParams();
 
   return (
     <div>
-      <Header cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal} token={token} />
-      <Products setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} setToken={setToken} />
-      <User setCartItemTotal={setCartItemTotal} setToken={setToken} />
-      <CartIndex setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} setToken={setToken} />
-      {productId && <Reviews productId={productId} token={token} />}
+      <Header cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal} />
+      <Products setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal}/>
+      <User setCartItemTotal={setCartItemTotal} />
+      <CartIndex setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} />
+      {productId && <Reviews productId={productId}/>}
       <Outlet />
     </div>
   );
