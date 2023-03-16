@@ -1,4 +1,5 @@
 //! This is where we will make all the User API calls 
+const token = window.localStorage.getItem('token')
 
 export async function fetchLogin(username, password) {
 
@@ -24,10 +25,11 @@ export async function fetchLogin(username, password) {
 }
 
 export const fetchUserData = async () => {
-  const token = window.localStorage.getItem('token')
+  
   try {
     const response = await fetch('https://farmers-market-1oeq.onrender.com/api/users/me', {
       headers: {
+      'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     });
@@ -37,8 +39,6 @@ export const fetchUserData = async () => {
     console.error(error);
   }
 };
-
-
 
 export async function fetchSignUp(username, password, email) {
 
@@ -67,10 +67,11 @@ export async function fetchSignUp(username, password, email) {
 export async function fetchUpdateUser(username, email) {
 
   try {
-    const response = await fetch(`https://farmers-market-1oeq.onrender.com/api/users/me`, {
-      method: "POST",
+    const response = await fetch(`https://farmers-market-1oeq.onrender.com/api/users/update/me`, {
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(
         {

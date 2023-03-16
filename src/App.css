@@ -276,7 +276,7 @@ body {
 .menu-items>a{
  padding: 5px 10px 5px 10px;
  font-weight: 100;
- font-size: 16px;
+ font-size: 15px;
 }
 .menu-items button {
   text-align: center;
@@ -292,8 +292,9 @@ body {
   z-index: 1000;
   transition: opacity 0.2s ease-in-out;
   min-width: 10rem;
-  padding: 0;
-  font-size: 16px;
+  padding: 0px;
+  padding-top: 8px;
+  font-size: 14px;
   color: #212529;
   text-align: left;
   list-style: none;
@@ -918,7 +919,8 @@ textarea {
   border-radius: 2px;
   width: auto;
   min-width: 550px;
-  height: 50.50vh;
+  height: fit-content;
+  max-height: 52vh;
   border: 1px #ccc;
 }
 .cartProductsCtrTitle{
@@ -939,7 +941,7 @@ textarea {
   padding: 35px;
   padding-top: 14px;
   padding-right: 40px;
-  padding-bottom: 0px;
+  padding-bottom: 15px;
   margin-bottom: 0px;
   margin-right: 0px;
   margin-left: 0px;
@@ -1107,7 +1109,7 @@ textarea {
   font: inherit;
   cursor: pointer;
   outline: inherit;
-  background-color: #3D8161;
+  background-color: #2a5c46;
   color: white;
   border-radius: 2px;
   text-decoration: none;
@@ -1220,7 +1222,7 @@ textarea {
   padding-top: 35px;
   padding-right: 0px;
   padding-bottom: 0px;
-  margin-bottom: 15px;
+  margin-bottom: 35px;
   margin-right: 20px;
   margin-left: 20px;
   max-width: 800px;
@@ -1234,7 +1236,7 @@ textarea {
   font-size: 25px;
   font-weight: 500;
   margin: 0;
-  margin-bottom: 45px;
+  margin-bottom: 35px;
 }
 .orderDtlsTitlesCtr{
   /* box-shadow: .5px .5px 2.5px rgba(0, 0, 0, 0.0), 2.5px 2.5px 2.5px rgba(0, 0, 0, 0.05), -.5px -.5px 1.5px rgba(0,0,0,0.1);; */
@@ -1243,6 +1245,7 @@ textarea {
   flex-direction: row;
   min-width: 520px;
   width: auto;
+  border-radius: 2px;
   justify-content: space-between;
   max-width: 800px;
   padding-top: 7px;
@@ -1353,11 +1356,9 @@ textarea {
   display: flex;
   box-shadow: .75px .75px 2px rgba(0, 0, 0, 0.1), 3px 3px 6px rgba(0, 0, 0, 0.1), -.5px -.5px 1.5px rgba(0,0,0,0.1);
   flex-direction: column;
-  align-items: center;
   justify-content: flex-start;
-  padding-top: 35px;
-  padding-right: 0px;
-  padding-bottom: 0px;
+  padding: 35px;
+  padding-bottom: 25px;
   margin-bottom: 15px;
   margin-right: 20px;
   margin-left: 20px;
@@ -1368,6 +1369,94 @@ textarea {
   height: fit-content;
   border: 1px #ccc;
 }
+.userDetailsTitle{
+  font-size: 25px;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 35px;
+  align-self: center;
+}
+.username_emailCtr{
+  display: flex;
+  width: 480px;
+  margin-bottom: 20px;
+  justify-content: flex-start;
+  align-items: center;
+}
+.username_emailTitle{
+  font-size: 16px;
+  font-weight:550;
+  width: 100px;
+  margin: 0;
+  height: auto;
+  margin-right: 15px;
+  padding: 0;
+}
+.username_email{
+  width: 175px;
+  color: #616161;
+  font-size: 16px;
+  font-weight:200;
+  margin: 0;
+  padding: 0;
+}
+.editUserBtn{
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  margin-top: 15px;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  background-color: #2a5c46;
+  color: white;
+  border-radius: 2px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
+  font-weight: 300;
+}
+.cancelEditUserBtn{
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  margin-top: 15px;
+  margin-left: 5px;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  background-color: #616161;
+  color: white;
+  border-radius: 2px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
+  font-weight: 300;
+}
+.editUserBtnCtr{
+  display: flex;
+}
+.editUserInputs{
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  background-color: #f0f7ed;
+  border-radius: 2px;
+  height: 30px;
+  width: 200px;
+  border: 1px solid #ccc;
+  background-color: #f0f7ed;
+}
+
 
 /* 404 */
 
