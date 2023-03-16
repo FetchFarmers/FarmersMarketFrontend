@@ -1369,3 +1369,17 @@ textarea {
   border: 1px #ccc;
 }
 
+/* 404 */
+
+.notfound-message {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.notfound-gif {
+  display: block;
+  margin: 0 auto;
+  width: 480px;
+  height: 360px;
+}

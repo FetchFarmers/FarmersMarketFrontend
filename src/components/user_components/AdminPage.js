@@ -17,6 +17,11 @@ export default function AdminPage() {
   const [categoryFilter, setCategoryFilter] = useState('');
   const [subcategoryFilter, setSubcategoryFilter] = useState('');
   const [updatedProduct, setUpdatedProduct] = useState({ inventory: '', });
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchTermChange = (event) => {
+    setSearchTerm(event.target.value);
+  };  
 
   useEffect(() => {
     const getUserData = async () => {
@@ -111,23 +116,38 @@ export default function AdminPage() {
                 </select>
               </div>
             )}
+            <div className="admin-page-filter">
+              <label className="admin-page-filter-label">Search by Product Name:</label>
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={handleSearchTermChange}
+                className="admin-page-filter-input"
+              />
+            </div>
           </div>
           <div className="admin-page-products">
-            {products.map((product) => (
-              <div key={product.id} className="admin-page-product">
-                <div className="admin-page-product-info">
-                  <h3 className="admin-page-product-name"><Link to={`/products/${product.id}`}>{product.name}</Link></h3>
-                  <p className="admin-page-product-inventory">Inventory: {product.inventory}</p>
+            {products
+              .filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
+              .map((product) => (
+                <div key={product.id} className="admin-page-product">
+                  <div className="admin-page-product-info">
+                    <h3 className="admin-page-product-name">
+                      <Link to={`/products/${product.id}`}>{product.name}</Link>
+                    </h3>
+                    <p className="admin-page-product-inventory">Inventory: {product.inventory}</p>
+                  </div>
+                  <button className="btn-delete" onClick={() => handleDelete(product.id)}>
+                    Delete
+                  </button>
                 </div>
-                <button className='btn-delete' onClick={() => handleDelete(product.id)}>Delete</button>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       ) : (
         <h1>Access Denied</h1>
       )}
     </div>
-  );
+  );  
 }
 

@@ -15,6 +15,8 @@ import AboutUs from './components/footer_components/AboutUs';
 import ContactUs from './components/footer_components/ContactUs';
 import FAQ from './components/footer_components/FAQ';
 import CartIndex from './components/cart_components/CartIndex';
+import PageNotFound from './PageNotFound';
+import Layout from './Layout';
 
 
 function App() {
@@ -23,20 +25,18 @@ function App() {
 
   return (
     <div className="App">
-      <Header cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal} token={token} />
-      <Products setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} setToken={setToken} />
-      <User setCartItemTotal={setCartItemTotal} setToken={setToken} />
-      <CartIndex setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} setToken={setToken} />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/" element={<SearchBar />} />
-        <Route path="/search" element={<SearchResults cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal} />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/admin" element={<AdminPage />} />
-        {/* <Route path="/reviews" element={<ReviewForm token={token} setToken={setToken} />} /> */}
-        <Route path="/products/:productId/reviews" element={<Reviews token={token} />} />
+        <Route path="/*" element={<Layout cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal} token={token} setToken={setToken} />}>
+          <Route index element={<HomePage />} />
+          <Route path="search" element={<SearchResults cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal} />} />
+          <Route path="about" element={<AboutUs />} />
+          <Route path="contact" element={<ContactUs />} />
+          <Route path="faq" element={<FAQ />} />
+          <Route path="admin" element={<AdminPage />} />
+          <Route path="products/:productId/reviews" element={<Reviews token={token} />} />
+          {/* <Route path="reviews" element={<ReviewForm token={token} setToken={setToken} />} /> */}
+        </Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
     </div>
