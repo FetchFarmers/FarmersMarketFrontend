@@ -5,6 +5,8 @@ import { updateProduct } from '../../products_api';
 import { fetchUserData } from '../../user_api';
 import { menuItems } from '../../menuItems';
 import Reviews from '../reviews_components/Reviews.js';
+import PageNotFound from '../../PageNotFound';
+import Loading from '../Loading';
 
 export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
   const { id } = useParams();
@@ -21,11 +23,13 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isReadOnly, setIsReadOnly] = useState(true); // Add state variable for read-only/edit mode
   const token = localStorage.getItem('token');
-
+  const [isLoading, setIsLoading] = useState(true);
+  
   useEffect(() => {
     fetch(`https://farmers-market-1oeq.onrender.com/api/products/${id}`)
       .then(response => {
         if (!response.ok) {
+          setIsLoading(false);
           throw new Error('Network response was not ok');
         }
         return response.json();
@@ -33,10 +37,14 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
       .then(data => {
         setProduct(data);
         setUpdatedProduct(data);
+        setIsLoading(false);
       })
       .catch(error => {
         console.log('There was a problem with the API request:', error);
+        setIsLoading(false);
+        setProduct(null);
       });
+
 
     // check if user is admin
     
@@ -70,11 +78,19 @@ export default function ProductDetails({setCartItemTotal, cartItemTotal}) {
     }
   };
 
-  if (!product) {
-    return <div>Loading...</div>;
+  if (isLoading) {
+    return <Loading />;
   }
 
-  const productName = product ? product.name : '';
+  if (!product || Object.keys(product).length === 0) {
+    return <PageNotFound />;
+  }  
+
+  let productName = product.name;
+
+  if (productName === 'error') {
+    return <PageNotFound />;
+  }
   
   return (
     <div className='product-details-page'>
