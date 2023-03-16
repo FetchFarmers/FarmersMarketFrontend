@@ -172,7 +172,6 @@ export async function fetchUserClosedOrders() {
 
   try {
     const header = setHeader()
-    console.log('header :>> ', header);
 
     const url = "https://farmers-market-1oeq.onrender.com/api/orders/user/order_history";
     const response = await fetch(url, {
