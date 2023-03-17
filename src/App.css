@@ -371,11 +371,21 @@ display: none;}
   width: 100%;
 }
 
+/* stuff that was in burger-menu branch that conflicts
 .menu-items>a {
   padding: 5px 10px 5px 10px;
   font-weight: 100;
   font-size: 15px;
+ */
+
+/* stuff that was in main that conflicts
+.menu-items>a{
+ padding: 5px 10px 5px 10px;
+ font-weight: 100;
+ font-size: 15px;
 }
+ */
+
 
 .menu-items button {
   text-align: center;
@@ -1600,6 +1610,99 @@ textarea {
   height: fit-content;
   border: 1px #ccc;
 }
+.userDetailsTitle{
+  font-size: 25px;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 35px;
+  align-self: center;
+}
+.username_emailCtr{
+  display: flex;
+  width: 480px;
+  margin-bottom: 20px;
+  justify-content: flex-start;
+  align-items: center;
+}
+.username_emailTitle{
+  font-size: 16px;
+  font-weight:550;
+  width: 100px;
+  margin: 0;
+  height: auto;
+  margin-right: 15px;
+  padding: 0;
+}
+.username_email{
+  width: 175px;
+  color: #616161;
+  font-size: 16px;
+  font-weight:200;
+  margin: 0;
+  padding: 0;
+}
+.editUserBtn{
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  margin-top: 15px;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  background-color: #2a5c46;
+  color: white;
+  border-radius: 2px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
+  font-weight: 300;
+}
+.cancelEditUserBtn{
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  margin-top: 15px;
+  margin-left: 5px;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  background-color: #616161;
+  color: white;
+  border-radius: 2px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
+  font-weight: 300;
+}
+.editUserBtnCtr{
+  display: flex;
+}
+.editUserInputs{
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  background-color: #f0f7ed;
+  border-radius: 2px;
+  height: 30px;
+  width: 200px;
+  border: 1px solid #ccc;
+  background-color: #f0f7ed;
+}
+.updateUserErrorMessage{
+  color: #da190b;
+  margin: 0px;
+  margin-top: 15px;
+}
+
 
 .userDetailsTitle {
   font-size: 25px;

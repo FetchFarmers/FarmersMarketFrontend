@@ -6,13 +6,13 @@ import {
  } from '../../user_api';
 
 function Login({setCartItemTotal}) {
-  const [userMessage, setUserMessage] = useState("")
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  let navigate = useNavigate()
+  const [userMessage, setUserMessage] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  let navigate = useNavigate();
 
   const handleLogin = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     try {  
       const user = await fetchLogin(username, password);
       console.log('logInUserResults :>> ', user);
@@ -20,15 +20,15 @@ function Login({setCartItemTotal}) {
       if(user.message === "you're logged in!" ){
         window.localStorage.setItem("username", user.user.username);
         window.localStorage.setItem("token", user.token);
-        window.localStorage.setItem("isAdmin", user.user.isAdmin)
+        window.localStorage.setItem("isAdmin", user.user.isAdmin);
         console.log('user.isAdmin :>> ', user.user.isAdmin);
-        setCartItemTotal(0)
-        setUsername("")
-        setPassword("")
-        navigate("/")
+        setCartItemTotal(0);
+        setUsername("");
+        setPassword("");
+        navigate("/");
 
       } else {
-        setUserMessage("Username or password is incorrect. Please try again")
+        setUserMessage("Username or password is incorrect. Please try again");
         setTimeout(() => setUserMessage(""), 3000);
       }
 

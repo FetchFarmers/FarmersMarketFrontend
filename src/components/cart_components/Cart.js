@@ -168,14 +168,14 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
                   (<div className='cartProductCtr'>
                     <div key={item.id}>
                       <div className='cartProductCtrTop'>
-                      <Link to={`/products/${item.id}`}><p className='cartProdTitle'>{item.name}<span className ='itemPrice'> - ${item.price} each</span></p></Link>
+                        <Link to={`/products/${item.id}`}><p className='cartProdTitle'>{item.name}<span className ='itemPrice'> - ${item.price} each</span></p></Link>
                         <button className="xFromCartBtn" onClick={() =>handleRemoveItem(item.orderProductId)} >X</button>
                       </div>  
                       <div className='cartQtyTotalCtr'>
                         <div className='cartQtyCtr'>
                           <h4 className='cartQtyTitle'>Quantity</h4>
                           <form onClick={()=>handleUpdateItem(item.orderProductId)}>
-                          <input className='cartQtyDropdown' type='number' defaultValue={item.quantity} onChange={(event) => setQuantity(event.target.value)} min={1} max={item.inventory || 10}/>
+                            <input className='cartQtyDropdown' type='number' defaultValue={item.quantity} onChange={(event) => setQuantity(event.target.value)} min={1} max={item.inventory || 10}/>
                           </form>
                         </div>
                         <h4 className='cartProdTotal'>${(item.price*item.quantity).toFixed(2)}</h4>
