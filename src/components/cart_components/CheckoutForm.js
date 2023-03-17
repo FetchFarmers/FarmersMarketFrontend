@@ -21,11 +21,11 @@ const CheckoutForm = ({ orderId, setUserOrderProducts, cartTotal, setCartItemTot
 
       const results = await fetchCheckout (orderId, cartTotal, orderDate);
       console.log('checkoutResults :>> ', results);
-      if (!results.isCheckedOut){
-      } else {  
+      if (results.isCheckedOut){  
         setUserOrderProducts([]);
         setCartItemTotal(0);
         window.localStorage.removeItem("cartTotal");
+        window.localStorage.removeItem("fetchSessionId")
       }
 
     } catch (error) {

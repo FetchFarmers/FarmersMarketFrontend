@@ -129,6 +129,7 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
       setUserOrderProducts([]);
       setCartItemTotal(0);
       window.localStorage.removeItem("cartTotal");
+      window.localStorage.removeItem("fetchSessionId")
       
     } catch (error) {
       console.error(error);
