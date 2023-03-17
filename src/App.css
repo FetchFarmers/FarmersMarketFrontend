@@ -371,20 +371,19 @@ display: none;}
   width: 100%;
 }
 
-/* stuff that was in burger-menu branch that conflicts
 .menu-items>a {
   padding: 5px 10px 5px 10px;
   font-weight: 100;
   font-size: 15px;
- */
+}
 
 /* stuff that was in main that conflicts
 .menu-items>a{
  padding: 5px 10px 5px 10px;
  font-weight: 100;
  font-size: 15px;
-}
- */
+} */
+
 
 
 .menu-items button {
