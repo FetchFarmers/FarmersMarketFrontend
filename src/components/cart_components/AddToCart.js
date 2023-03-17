@@ -1,50 +1,48 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { fetchAddToOrder } from '../../orders_api';
-
-
 
 const AddToCart = ({ productId, productInventory, setCartItemTotal, cartItemTotal}) => {
   const [quantity, setQuantity] = useState(1);
-  const [userMessage, setUserMessage] = useState("")
-  const token = window.localStorage.getItem("token")
-
-  const handleAddToCartClick = (event) => {
-    event.preventDefault()
-    handleAddToCart(productId);
-  }
-
+  const [userMessage, setUserMessage] = useState("");
+  const token = window.localStorage.getItem("token");
+  
   const randomString =  () => {
-    return crypto.randomUUID()
+    return crypto.randomUUID();
+  }
+  
+  function handleAddToCartClick(event) {
+    event.preventDefault();
+    handleAddToCart(productId);
   }
 
   async function handleAddToCart(productId) {
     try {  
 
-      let sessionId = window.localStorage.getItem("fetchSessionId")
+      let sessionId = window.localStorage.getItem("fetchSessionId");
 
       if(!sessionId) {
-        const newSessionId = randomString()
-        window.localStorage.setItem("fetchSessionId", newSessionId )
+        const newSessionId = randomString();
+        window.localStorage.setItem("fetchSessionId", newSessionId );
       }
 
-      sessionId = window.localStorage.getItem("fetchSessionId")
-      const results = await fetchAddToOrder(sessionId, productId, quantity, token)
+      sessionId = window.localStorage.getItem("fetchSessionId");
+      const results = await fetchAddToOrder(sessionId, productId, quantity, token);
       console.log('fetchAddToOrderResults :>> ', results);
 
       if(results.id) {
         let newCartItemTotal = cartItemTotal*1+quantity*1
         console.log(newCartItemTotal)
         setCartItemTotal(newCartItemTotal);
-        window.localStorage.setItem("cartTotal", newCartItemTotal)
-        setUserMessage("Added to cart!!")
+        window.localStorage.setItem("cartTotal", newCartItemTotal);
+        setUserMessage("Added to cart!!");
         setTimeout(() => setUserMessage(""), 1500);
       } else if (results.message === "duplicate key value violates unique constraint \"order_products_orderId_productId_key\"") {
-        setUserMessage("Already in Cart. View cart to adjust quantity")
+        setUserMessage("Already in Cart. View cart to adjust quantity");
         setTimeout(() => setUserMessage(""), 1500);
       } else {
-        setUserMessage("Error adding product please try again")
+        setUserMessage("Error adding product please try again");
         setTimeout(() => setUserMessage(""), 1500);
       }
 

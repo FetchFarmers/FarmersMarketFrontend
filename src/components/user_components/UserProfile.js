@@ -26,13 +26,13 @@ function UserProfile ({setClosedOrderDetails}) {
   async function loadUserAndClosedOrders() {
     try { 
       setLoading(true);
-      const results = await fetchUserClosedOrders();
-      setOrderHistory(results);
       const userResults = await fetchUserData();
       console.log('userResults :>> ', userResults);
       setUser(userResults);
       setNewUsername(userResults.username);
       setNewEmail(userResults.email);
+      const results = await fetchUserClosedOrders();
+      setOrderHistory(results);
       setLoading(false);
 
     } catch (error) {
@@ -194,8 +194,9 @@ function UserProfile ({setClosedOrderDetails}) {
                 <button onClick={handleFilterByPrice} className='orderHistoryHeaderLbl'>Price&nbsp;&nbsp;<FontAwesomeIcon  icon={faSort}/></button>
                 <p className='orderHistoryHeaderDtlLbl'>Details</p>
               </div>
+              {!orderHistory[0] && <p className='noOrdersMessage'>No previous orders found</p>}
               <div className='orderHistoryInsideCtr'>
-                {orderHistory.map((order) => (<div key={order.id} className='orderCtr'>
+                {orderHistory[0] && orderHistory.map((order) => (<div key={order.id} className='orderCtr'>
                   <p className='orderHistoryData'>{order.checkoutDate}</p>
                   <p className='orderHistoryData'>{order.products.length} items</p>
                   <p className='orderHistoryData'>${order.checkoutSum}</p>

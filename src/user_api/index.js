@@ -1,5 +1,5 @@
 //! This is where we will make all the User API calls 
-const token = window.localStorage.getItem('token')
+
 
 export async function fetchLogin(username, password) {
 
@@ -25,7 +25,7 @@ export async function fetchLogin(username, password) {
 }
 
 export const fetchUserData = async () => {
-  
+  const token = window.localStorage.getItem('token')
   try {
     const response = await fetch('https://farmers-market-1oeq.onrender.com/api/users/me', {
       headers: {
@@ -65,6 +65,7 @@ export async function fetchSignUp(username, password, email) {
 }
 
 export async function fetchUpdateUser(username, email) {
+  const token = window.localStorage.getItem('token')
 
   try {
     const response = await fetch(`https://farmers-market-1oeq.onrender.com/api/users/update/me`, {
