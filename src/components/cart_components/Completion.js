@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Completion = () => {
-  const isLoggedIn = window.localStorage.getItem("username")
+  const isLoggedIn = window.localStorage.getItem("username");
 
 
   return(

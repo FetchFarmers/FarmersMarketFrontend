@@ -30,23 +30,23 @@ const SavoryProducts = ({setCartItemTotal, cartItemTotal}) => {
       {!loading &&<div className='products-page'>
         <h3 className='product-title'>Bakery / Savory Baked Goods</h3>
         <div className="product-list">
-        {products.map(product => (
-        <div key={product.id} className="product">
-          <Link to={`/products/${product.id}`}>
-            <img className="product-image" src={product.imageURL} alt={product.name} />
-            <div className="product-details">
-              <h3 className='product-name'>{product.name}</h3>
-              <p className='product-price'>${product.price}</p>
-            </div>
-          </Link>
-          <div className='addToCartMultiProdCtr'>
+          {products.map(product => (
+          <div key={product.id} className="product">
+            <Link to={`/products/${product.id}`}>
+              <img className="product-image" src={product.imageURL} alt={product.name} />
+              <div className="product-details">
+                <h3 className='product-name'>{product.name}</h3>
+                <p className='product-price'>${product.price}</p>
+              </div>
+            </Link>
+            <div className='addToCartMultiProdCtr'>
               {product.id && <AddToCart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} productId={product.id} productInventory={product.inventory} className="add-to-cart" />}
-          </div>          
-      </div>
-      ))}
+            </div>          
+          </div>
+          ))}
+        </div>
+      </div>}
     </div>
-  </div>}
-</div>
   );  
 }
 

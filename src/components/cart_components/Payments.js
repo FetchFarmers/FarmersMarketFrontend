@@ -40,22 +40,16 @@ const Payments = ({ orderId, setUserOrderProducts, cartTotal, setCartItemTotal }
   }
 
   useEffect(() => {
-    loadStripePublishableKey()
-    loadStripePaymentIntent()
+    loadStripePublishableKey();
+    loadStripePaymentIntent();
   }, [])
 
   return (
     <div className="mainCartPage">
       {clientSecret && stripePromise && (<Elements stripe={stripePromise} options={{ clientSecret }}>
         <AddressForm/>
-        <CheckoutForm 
-          setCartItemTotal={setCartItemTotal} 
-          orderId={orderId} 
-          setUserOrderProducts={setUserOrderProducts}
-          cartTotal={cartTotal} 
-        />               
-      </Elements>
-      )}
+        <CheckoutForm setCartItemTotal={setCartItemTotal} orderId={orderId} setUserOrderProducts={setUserOrderProducts} cartTotal={cartTotal}/>               
+      </Elements>)}
     </div>
   );
 

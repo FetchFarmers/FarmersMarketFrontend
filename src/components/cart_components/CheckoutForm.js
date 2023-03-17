@@ -8,37 +8,38 @@ import {
 } from '../../orders_api'; 
 
 const CheckoutForm = ({ orderId, setUserOrderProducts, cartTotal, setCartItemTotal }) => {
-  const [isProcessing, setIsProcessing] = useState(false)
-  const [message, setMessage] = useState("")
-  const stripe = useStripe()
-  const elements = useElements() 
-  let navigate = useNavigate()
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [message, setMessage] = useState("");
+  const stripe = useStripe();
+  const elements = useElements();
+  let navigate = useNavigate();
 
   async function handleCheckout() {
     try{
-      const orderDate = new Date().toLocaleDateString('en-US')
+      const orderDate = new Date().toLocaleDateString('en-US');
       console.log('orderDate :>> ', orderDate);
 
-      const results = await fetchCheckout (orderId, cartTotal, orderDate)
+      const results = await fetchCheckout (orderId, cartTotal, orderDate);
       console.log('checkoutResults :>> ', results);
       if (!results.isCheckedOut){
       } else {  
-        setUserOrderProducts([])
-        setCartItemTotal(0)
-        window.localStorage.removeItem("cartTotal")
+        setUserOrderProducts([]);
+        setCartItemTotal(0);
+        window.localStorage.removeItem("cartTotal");
       }
+
     } catch (error) {
       console.error(error);
     }
   }
 
-  const handlePayment = async (event) => {
-    event.preventDefault()
+  async function handlePayment(event) {
+    event.preventDefault();
 
     if (!stripe || !elements) {
       return;
     }
-    setIsProcessing(true)
+    setIsProcessing(true);
     
     const { error } = await stripe.confirmPayment({
       elements,
@@ -46,8 +47,8 @@ const CheckoutForm = ({ orderId, setUserOrderProducts, cartTotal, setCartItemTot
     });
 
     if (!error) {
-      await handleCheckout()
-      navigate("/payment_completion")
+      await handleCheckout();
+      navigate("/payment_completion");
     }
 
     if (error) {
@@ -56,7 +57,7 @@ const CheckoutForm = ({ orderId, setUserOrderProducts, cartTotal, setCartItemTot
       setMessage("An unexpected error ocurred.");
     }
 
-    setIsProcessing(false)
+    setIsProcessing(false);
   }
 
   return (

@@ -7,17 +7,16 @@ import { getProductsByCategory } from "../../products_api";
 import { getProductsBySubcategory } from "../../products_api";
 import { menuItems } from "../../menuItems";
 import { deleteProduct } from "../../products_api";
-import { updateProduct } from "../../products_api";
+
 
 export default function AdminPage() {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [token, setToken] = useState(window.localStorage.getItem('token'));
   const [userData, setUserData] = useState(null);
   const [products, setProducts] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState('');
   const [subcategoryFilter, setSubcategoryFilter] = useState('');
-  const [updatedProduct, setUpdatedProduct] = useState({ inventory: '', });
   const [searchTerm, setSearchTerm] = useState('');
+  const token = window.localStorage.getItem('token')
 
   const handleSearchTermChange = (event) => {
     setSearchTerm(event.target.value);

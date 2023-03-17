@@ -377,15 +377,6 @@ display: none;}
   font-size: 15px;
 }
 
-/* stuff that was in main that conflicts
-.menu-items>a{
- padding: 5px 10px 5px 10px;
- font-weight: 100;
- font-size: 15px;
-} */
-
-
-
 .menu-items button {
   text-align: center;
   padding: 10px 1rem;
@@ -1802,6 +1793,16 @@ textarea {
   color: #da190b;
   margin: 0px;
   margin-top: 15px;
+}
+
+.noOrdersMessage{
+  font-size: 16px;
+  margin: 25px;
+  margin-bottom: 0px;
+  padding: 0;
+  color: #616161;
+  text-align: center;
+  font-weight: 525;
 }
 
 
