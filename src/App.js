@@ -40,7 +40,6 @@ import SearchResults from './components/products_components/SearchResults';
 import Login from './components/user_components/Login';
 import Register from './components/user_components/Register';
 import UserProfile from './components/user_components/UserProfile';
-import CompletedOrderDetail from './components/user_components/completedOrderDetail';
 import AdminPage from './components/user_components/AdminPage';
 
 //* Cart Imports *//
@@ -56,7 +55,6 @@ import FAQ from './components/footer_components/FAQ';
 
 function App() {
   const [cartItemTotal, setCartItemTotal] = useState(JSON.parse(window.localStorage.getItem("cartTotal") || 0));
-  const [closedOrderDetails, setClosedOrderDetails] = useState({});
   const [orderId, setOrderId] = useState(0);
   const [userOrderProducts, setUserOrderProducts] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
@@ -99,16 +97,15 @@ function App() {
 
         {/**User Routes**/}
 
-          <Route path="/user/login" element={ <Login setCartItemTotal={setCartItemTotal}/> } />
-          <Route path="/user/register" element={ <Register/> } />
-          <Route path="/user/profile" element={ <UserProfile setClosedOrderDetails={setClosedOrderDetails}/> } />
-          <Route path="/user/order_details" element={ <CompletedOrderDetail closedOrderDetails={closedOrderDetails}/>}/>
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/user/login" element={<Login setCartItemTotal={setCartItemTotal}/>}/>
+          <Route path="/user/register" element={<Register/>}/>
+          <Route path="/user/profile" element={<UserProfile/>}/>
+          <Route path="/admin" element={<AdminPage/>}/>
 
         {/**Cart Routes**/}
 
           <Route path="/my_cart" element={<Cart setCartItemTotal={setCartItemTotal} cartItemTotal={cartItemTotal} orderId={orderId} setOrderId={setOrderId} userOrderProducts={userOrderProducts} setUserOrderProducts={setUserOrderProducts} setCartTotal={setCartTotal}/>}/>
-          <Route path="/order/payment" element={<Payments orderId={orderId} setUserOrderProducts={setUserOrderProducts} cartTotal={cartTotal} setCartItemTotal={setCartItemTotal}  />}/>
+          <Route path="/order/payment" element={<Payments orderId={orderId} setUserOrderProducts={setUserOrderProducts} cartTotal={cartTotal} setCartItemTotal={setCartItemTotal}/>}/>
           <Route path="/payment_completion" element={<Completion/>}/>
 
         {/**Footer Routes**/}
@@ -119,7 +116,7 @@ function App() {
           
           <Route path="*" element={<PageNotFound/>}/>  
       </Routes>
-      <Footer />
+      <Footer/>
     </div>
   );
 }

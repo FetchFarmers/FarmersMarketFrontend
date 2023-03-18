@@ -1457,6 +1457,7 @@ textarea {
   font-weight: 500;
   margin: 0;
   margin-bottom: 35px;
+  padding-left: 5px;
 }
 
 .orderDtlsTitlesCtr {
@@ -1805,6 +1806,63 @@ textarea {
   font-weight: 525;
 }
 
+.orderHistorySearchCtr{
+  display: flex;
+  margin-bottom: 10px;
+  width: 550px;
+  justify-content: flex-start;
+  padding-left: 15px;
+}
+
+.orderHistorySearchBar{
+  padding: 0.5rem;
+  border: none;
+  background-color: #e6f3e0;
+  border-radius: 2px;
+  height: 26px;
+  width: 175px;
+
+  font-size: 12px;
+}
+
+.orderHistorySearchBarClearBtn{
+  border: none;
+  font-weight: 700;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background-color: #e6f3e0;
+  border-radius: 2px;
+  color: #616161;
+  position: relative;
+  float: right 20px;
+  height: 23.5px;
+  width: -10px;
+  top: 1px;
+  right: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.orderHistorySearchBarClearBtn:hover{
+  background-color: #c2e0c6;
+}
+
+.returnBtn{
+  background: none;
+  color: inherit;
+  border: none;
+  margin-bottom: 20px;
+  font: inherit;
+  outline: inherit;
+  justify-content: center;
+  color: #2a5c46;
+  font-size: 15px;
+}
+
+.arrow{
+  font-size: 12px;
+  margin-bottom: 2px;
+}
 
 /* 404 */
 
