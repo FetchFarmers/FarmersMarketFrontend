@@ -184,6 +184,12 @@ function UserProfile () {
   
   function clearSearch(event) {
     event.preventDefault()
+    setDatedSort([]);
+    setRevDatedSort([]);
+    setProdTotalSort([]);
+    setRevProdTotalSort([]);
+    setPriceSort([]);
+    setRevPriceSort([]);
     setOrderHistory(orderHistoryDefault)
     console.log('orderHistoryDefault :>> ', orderHistoryDefault);
     setSearchTerm("")
