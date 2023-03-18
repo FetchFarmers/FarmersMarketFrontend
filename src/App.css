@@ -1821,7 +1821,6 @@ textarea {
   border-radius: 2px;
   height: 26px;
   width: 175px;
-
   font-size: 12px;
 }
 
@@ -1862,6 +1861,13 @@ textarea {
 .arrow{
   font-size: 12px;
   margin-bottom: 2px;
+}
+
+.orderDetailPageTitle{
+  font-size: 35px;
+  font-weight: 500;
+  margin-top: 25px;
+  margin-bottom: 10px;
 }
 
 /* 404 */
