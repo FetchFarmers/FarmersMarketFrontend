@@ -21,7 +21,7 @@ const CompletedOrderDetail = ({closedOrderDetails, setViewDetails}) => {
   return (
     <div>
       <div className='mainCartPage'>
-        <h3 className='cartPageTitle' >Order from {closedOrderDetails.checkoutDate}</h3>
+        <h3 className='orderDetailPageTitle' >Order from {closedOrderDetails.checkoutDate}</h3>
         <button className='returnBtn' onClick={() => setViewDetails(false)} ><FontAwesomeIcon className='arrow' icon={faArrowLeft}/>&nbsp;Return to history </button>
         <div className='cartDetailsCtr'>
           <div className='cartProductsOutsideCtr'>
