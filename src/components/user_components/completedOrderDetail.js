@@ -1,15 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 
-const CompletedOrderDetail = ({closedOrderDetails}) => {
+const CompletedOrderDetail = ({closedOrderDetails, setViewDetails}) => {
   console.log('closeOrderDetails :>> ', closedOrderDetails);
   const orderProducts = closedOrderDetails.products
-
-  if(!orderProducts) {
-    window.location="/user/profile"
-  }
 
   let orderSum = 0
   if(orderProducts){
@@ -24,6 +22,7 @@ const CompletedOrderDetail = ({closedOrderDetails}) => {
     <div>
       <div className='mainCartPage'>
         <h3 className='cartPageTitle' >Order from {closedOrderDetails.checkoutDate}</h3>
+        <button className='returnBtn' onClick={() => setViewDetails(false)} ><FontAwesomeIcon className='arrow' icon={faArrowLeft}/>&nbsp;Return to history </button>
         <div className='cartDetailsCtr'>
           <div className='cartProductsOutsideCtr'>
           <h3 className="cartProductsCtrTitle">Products</h3>

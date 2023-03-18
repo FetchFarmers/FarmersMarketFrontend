@@ -43,7 +43,7 @@ export async function fetchUserOpenOrders(sessionId) {
   }
 }
 
-export async function fetchAddToOrder( sessionId, productId, quantity) {
+export async function fetchAddToOrder(sessionId, productId, quantity) {
   
   try {
     const header = setHeader()

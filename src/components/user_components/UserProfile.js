@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
@@ -6,8 +7,10 @@ import { fetchUpdateUser, fetchUserData } from '../../user_api';
 import Loading from '../Loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort } from '@fortawesome/free-solid-svg-icons';
+import CompletedOrderDetail from './completedOrderDetail';
 
-function UserProfile ({setClosedOrderDetails}) {
+function UserProfile () {
+  const [closedOrderDetails, setClosedOrderDetails] = useState({});
   const [loading, setLoading] = useState(false);
   const [orderHistory, setOrderHistory] = useState([]);
   const [user, setUser] = useState({});
@@ -21,17 +24,21 @@ function UserProfile ({setClosedOrderDetails}) {
   const [priceSort, setPriceSort] = useState([]);
   const [revPriceSort, setRevPriceSort] = useState([]);
   const [userMessage, setUserMessage] = useState("");
+  const [searchTerm, setSearchTerm] = useState("")
+  const [orderHistoryDefault, setOrderHistoryDefault] = useState([])
+  const [viewDetails, setViewDetails] = useState(false)
 
 
   async function loadUserAndClosedOrders() {
     try { 
       setLoading(true);
       const userResults = await fetchUserData();
-      console.log('userResults :>> ', userResults);
       setUser(userResults);
       setNewUsername(userResults.username);
       setNewEmail(userResults.email);
       const results = await fetchUserClosedOrders();
+      console.log('results :>> ', results);
+      setOrderHistoryDefault(results)
       setOrderHistory(results);
       setLoading(false);
 
@@ -115,8 +122,8 @@ function UserProfile ({setClosedOrderDetails}) {
     event.preventDefault();
     setPriceSort([]);
     setRevPriceSort([]);
-    setProdTotalSort([]);
-    setRevProdTotalSort([]);
+    setDatedSort([]);
+    setRevDatedSort([]);
 
     if (!prodTotalSort[0]){
       const sort = orderHistory.sort((a, b) => {return a.products.length - b.products.length});   
@@ -133,11 +140,11 @@ function UserProfile ({setClosedOrderDetails}) {
 
   function handleFilterByPrice(event) {
     event.preventDefault()
-    setPriceSort([]);
-    setRevPriceSort([]);
+    setDatedSort([]);
+    setRevDatedSort([]);
     setProdTotalSort([]);
     setRevProdTotalSort([]);
-
+    
     if (!priceSort[0]) {
       const sort = orderHistory.sort((a, b) => {return a.checkoutSum - b.checkoutSum});
       setPriceSort(sort);
@@ -150,7 +157,38 @@ function UserProfile ({setClosedOrderDetails}) {
 
     loadSortedOrders();
   }
+
+  function handleSearch(event) {
+    event.preventDefault();
+    setDatedSort([]);
+    setRevDatedSort([]);
+    setProdTotalSort([]);
+    setRevProdTotalSort([]);
+    setPriceSort([]);
+    setRevPriceSort([]);
+    setOrderHistory(orderHistoryDefault)
+    const productsArray = []
+    const orderArray = []
+    orderHistory.map((order) => order.products.map((product) => productsArray.push(product)))
+    const productSearch = productsArray.filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    const orderIds = productSearch.map((product) => product.orderId) 
+    const uniqueOrderIds = [...new Set(orderIds)]
+    uniqueOrderIds.map((id) => {
+      orderHistory.map((order) => {
+        if (order.id === id)
+        orderArray.push(order)
+      } )
+    })
+    setOrderHistory(orderArray)
+    console.log('orderArray :>> ', orderArray);
+  }
   
+  function clearSearch(event) {
+    event.preventDefault()
+    setOrderHistory(orderHistoryDefault)
+    console.log('orderHistoryDefault :>> ', orderHistoryDefault);
+    setSearchTerm("")
+  }
 
   useEffect(() => {
     loadUserAndClosedOrders();
@@ -159,7 +197,7 @@ function UserProfile ({setClosedOrderDetails}) {
   return (
     <div>
       {loading && <Loading/>}
-      {!loading && <div className='mainUserProfilePage'>
+      {(!loading && !viewDetails) && <div className='mainUserProfilePage'>
         <h3 className='cartPageTitle' >{user.username}'s Profile</h3>
         <div className='userProfileDetailsCtr'>
           <div className="userDetailsCtr">  
@@ -188,25 +226,33 @@ function UserProfile ({setClosedOrderDetails}) {
           <div>  
             <div className='orderHistoryListCtr'>
               <h3 className="orderHistoryTitle">Order History</h3>
+              <div className='orderHistorySearchCtr' >
+                <form onSubmit={handleSearch}>
+                  <input className='orderHistorySearchBar' value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} placeholder='search order products'></input>
+                </form>
+                <button className='orderHistorySearchBarClearBtn' onClick={clearSearch}>x</button>
+              </div>
               <div className='orderDtlsTitlesCtr'>
                 <button onClick={handleFilterByDate} className='orderHistoryHeaderLbl'>Date&nbsp;&nbsp;<FontAwesomeIcon  icon={faSort}/></button>
                 <button onClick={handleFilterByItems} className='orderHistoryHeaderLbl'>Items&nbsp;&nbsp;<FontAwesomeIcon  icon={faSort}/></button>
                 <button onClick={handleFilterByPrice} className='orderHistoryHeaderLbl'>Price&nbsp;&nbsp;<FontAwesomeIcon  icon={faSort}/></button>
                 <p className='orderHistoryHeaderDtlLbl'>Details</p>
               </div>
-              {!orderHistory[0] && <p className='noOrdersMessage'>No previous orders found</p>}
+              {!orderHistory[0] && <p className='noOrdersMessage'>No orders found</p>}
               <div className='orderHistoryInsideCtr'>
-                {orderHistory[0] && orderHistory.map((order) => (<div key={order.id} className='orderCtr'>
+                {orderHistory[0] && orderHistory.map((order) => (<div key={order.orderId} className='orderCtr'>
                   <p className='orderHistoryData'>{order.checkoutDate}</p>
                   <p className='orderHistoryData'>{order.products.length} items</p>
                   <p className='orderHistoryData'>${order.checkoutSum}</p>
-                  <button className='viewOrderDetailsBtn' onClick={() => setClosedOrderDetails(order)}><Link to="/user/order_details">View</Link></button>
+                  <button className='viewOrderDetailsBtn' onClick={() => {setClosedOrderDetails(order); setViewDetails(true)}}>View</button>
                 </div>))}
               </div>
+              
             </div>
           </div>
         </div> 
       </div>}
+      {viewDetails && <CompletedOrderDetail closedOrderDetails={closedOrderDetails} setViewDetails={setViewDetails}/>}
     </div>
   );
 }
