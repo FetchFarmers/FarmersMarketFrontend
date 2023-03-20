@@ -23,10 +23,10 @@ function UserProfile () {
   const [priceSort, setPriceSort] = useState([]);
   const [revPriceSort, setRevPriceSort] = useState([]);
   const [userMessage, setUserMessage] = useState("");
-  const [searchTerm, setSearchTerm] = useState("")
-  const [orderHistoryDefault, setOrderHistoryDefault] = useState([])
-  const [viewDetails, setViewDetails] = useState(false)
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const [orderHistoryDefault, setOrderHistoryDefault] = useState([]);
+  const [viewDetails, setViewDetails] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   async function loadUserAndClosedOrders() {
     try { 
@@ -36,7 +36,6 @@ function UserProfile () {
       setNewUsername(userResults.username);
       setNewEmail(userResults.email);
       const results = await fetchUserClosedOrders();
-      console.log('results :>> ', results);
       setOrderHistoryDefault(results)
       setOrderHistory(results);
       setLoading(false);
@@ -82,16 +81,22 @@ function UserProfile () {
   async function handleUpdateUser(event) {
     event.preventDefault();
     try {
+      setIsProcessing(true)
       const results = await fetchUpdateUser (newUsername, newEmail);
-      console.log('UpdateUserResults :>> ', results);
-      if (!results.id){
-        setUserMessage("Sorry there was an error updating your profile. Please try again")
-        console.log(userMessage);
-      } else {  
+      if (results.message === 'duplicate key value violates unique constraint "users_username_key"'){
+        setUserMessage("Username is not available. Please try Again")
+        setTimeout(() => setUserMessage(""), 3000);
+        setIsProcessing(false)
+      } else if(results.username) {  
         loadUserData();
+        setUserMessage("")
         setIsEditing(false);
+        setIsProcessing(false)
+      } else {
+        setUserMessage("Sorry there was an error updating your profile. Please try again")
+        setTimeout(() => setUserMessage(""), 3000);
+        setIsProcessing(false)
       }
-
     } catch (error) {
       console.error(error)
     }
@@ -159,6 +164,7 @@ function UserProfile () {
 
   function handleSearch(event) {
     event.preventDefault();
+    setOrderHistory(orderHistoryDefault)
     setDatedSort([]);
     setRevDatedSort([]);
     setProdTotalSort([]);
@@ -168,17 +174,17 @@ function UserProfile () {
     setOrderHistory(orderHistoryDefault)
     const productsArray = []
     const orderArray = []
-    orderHistory.map((order) => order.products.map((product) => productsArray.push(product)))
-    const productSearch = productsArray.filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
-    const orderIds = productSearch.map((product) => product.orderId) 
-    const uniqueOrderIds = [...new Set(orderIds)]
+    orderHistory.map((order) => order.products.map((product) => productsArray.push(product)));
+    const productSearch = productsArray.filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    const orderIds = productSearch.map((product) => product.orderId);
+    const uniqueOrderIds = [...new Set(orderIds)];
     uniqueOrderIds.map((id) => {
       orderHistory.map((order) => {
         if (order.id === id)
         orderArray.push(order)
       } )
-    })
-    setOrderHistory(orderArray)
+    });
+    setOrderHistory(orderArray);
     console.log('orderArray :>> ', orderArray);
   }
   
@@ -190,9 +196,8 @@ function UserProfile () {
     setRevProdTotalSort([]);
     setPriceSort([]);
     setRevPriceSort([]);
-    setOrderHistory(orderHistoryDefault)
-    console.log('orderHistoryDefault :>> ', orderHistoryDefault);
-    setSearchTerm("")
+    setOrderHistory(orderHistoryDefault);
+    setSearchTerm("");
   }
 
   useEffect(() => {
@@ -207,6 +212,7 @@ function UserProfile () {
         <div className='userProfileDetailsCtr'>
           <div className="userDetailsCtr">  
             <h3 className="userDetailsTitle">User Details</h3>
+            {userMessage &&<h5 className='updateUserErrorMessage'>{userMessage}</h5>}
             <form onSubmit={handleUpdateUser} className='username_emailCtr'>
               <div className='userCtr'>
                 <div className='username_emailCtr'>
@@ -217,14 +223,13 @@ function UserProfile () {
                 <div className='username_emailCtr'>
                   <h3 className='username_emailTitle'>User Email: </h3>
                   {!isEditing &&<h3 className='username_email'>{user.email}</h3>}
-                  {isEditing &&<input className='editUserInputs' defaultValue={user.email} onChange={(event) => setNewEmail(event.target.value)}  onSubmit={(event) => setNewEmail(event.target.value)} required/>}
+                  {isEditing &&<input className='editUserInputs' type="email" defaultValue={user.email} onChange={(event) => setNewEmail(event.target.value)}  onSubmit={(event) => setNewEmail(event.target.value)} required/>}
                 </div>
                 <div className='editUserBtnCtr'>
                   {!isEditing &&<button className='editUserBtn' onClick={() => setIsEditing(true)}>Edit</button>}
-                  {isEditing &&<input className='editUserBtn' type='submit' value='Submit'></input>}
+                  {isEditing&&<button disabled={isProcessing} className="editUserBtn" type="submit" >{isProcessing ? "Processing..." : "Submit"}</button>}
                   {isEditing &&<button className='cancelEditUserBtn' onClick={()=>setIsEditing(false)}>Cancel</button>}
                 </div>
-                {userMessage &&<h5 className='updateUserErrorMessage'>{userMessage}</h5>}
               </div>
             </form>
           </div>
@@ -240,7 +245,7 @@ function UserProfile () {
               <div className='orderDtlsTitlesCtr'>
                 <button onClick={handleFilterByDate} className='orderHistoryHeaderLbl'>Date&nbsp;&nbsp;<FontAwesomeIcon  icon={faSort}/></button>
                 <button onClick={handleFilterByItems} className='orderHistoryHeaderLbl'>Items&nbsp;&nbsp;<FontAwesomeIcon  icon={faSort}/></button>
-                <button onClick={handleFilterByPrice} className='orderHistoryHeaderLbl'>Price&nbsp;&nbsp;<FontAwesomeIcon  icon={faSort}/></button>
+                <button onClick={handleFilterByPrice} className='orderHistoryHeaderLbl'>Total&nbsp;&nbsp;<FontAwesomeIcon  icon={faSort}/></button>
                 <p className='orderHistoryHeaderDtlLbl'>Details</p>
               </div>
               {!orderHistory[0] && <p className='noOrdersMessage'>No orders found</p>}
@@ -252,7 +257,6 @@ function UserProfile () {
                   <button className='viewOrderDetailsBtn' onClick={() => {setClosedOrderDetails(order); setViewDetails(true)}}>View</button>
                 </div>))}
               </div>
-              
             </div>
           </div>
         </div> 

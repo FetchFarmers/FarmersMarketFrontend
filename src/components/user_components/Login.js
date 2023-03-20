@@ -9,11 +9,13 @@ function Login({setCartItemTotal}) {
   const [userMessage, setUserMessage] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isProcessing, setIsProcessing] = useState("")
   let navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
     try {  
+      setIsProcessing(true)
       const user = await fetchLogin(username, password);
       console.log('logInUserResults :>> ', user);
       
@@ -25,9 +27,11 @@ function Login({setCartItemTotal}) {
         setCartItemTotal(0);
         setUsername("");
         setPassword("");
+        setIsProcessing(false)
         navigate("/");
 
       } else {
+        setIsProcessing(false)
         setUserMessage("Username or password is incorrect. Please try again");
         setTimeout(() => setUserMessage(""), 3000);
       }
@@ -39,16 +43,16 @@ function Login({setCartItemTotal}) {
 
   return (
     <div className="logIn_signUp_container">
-        <h1 className="logIn_signUp_Title">Log In </h1>
-        <form onSubmit={handleLogin} className="form">
-            <label>User Name</label><br/>
-            <input className="logIn_signUp_entry" type="username" value={username} onChange={(event) => setUsername(event.target.value)} required/><br/>
-            <label>Password</label><br/>
-            <input className="logIn_signUp_entry" type="password" value={password} onChange={(event) => setPassword(event.target.value)}  required/><br/>
-            <input className="logIn_signUp_submitButton" type="submit" ></input>
-        </form>
-        {userMessage &&<h5 className='logInErrorMessage'>{userMessage}</h5>}
-        <Link className="signUp_Link" to="/user/register">Don't have an account? Sign Up here!</Link>
+      <h1 className="logIn_signUp_Title">Log In </h1>
+      {userMessage &&<h5 className='logInErrorMessage'>{userMessage}</h5>}
+      <form onSubmit={handleLogin} className="form">
+        <label>User Name</label><br/>
+        <input className="logIn_signUp_entry" type="username" value={username} onChange={(event) => setUsername(event.target.value)} required/><br/>
+        <label>Password</label><br/>
+        <input className="logIn_signUp_entry" type="password" value={password} onChange={(event) => setPassword(event.target.value)}  required/><br/>
+        <button disabled={isProcessing} className="logIn_signUp_submitButton" type="submit" >{isProcessing ? "Processing..." : "Submit"}</button>
+      </form>  
+      <Link className="signUp_Link" to="/user/register">Don't have an account? Sign Up here!</Link>
     </div>
   );
 }
