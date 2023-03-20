@@ -618,7 +618,10 @@ textarea {
 }
 
 .logIn_signUp_Title {
+  font-size: 25px;
+  font-weight: 500;
   margin-top: 30px;
+  margin-bottom: 15px;
 }
 
 label {
@@ -647,18 +650,20 @@ label {
   border: 1px solid #3D8161;
   color: #ecf9fb;
   text-decoration: none;
-  width: 75px;
+  width: 80px;
   height: 30px;
   margin-bottom: 30px;
   justify-content: center;
   align-items: center;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 250;
   border-radius: 2px;
 }
 
 .logInErrorMessage {
   color: #da190b;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 /** Footer Styles */
@@ -1675,9 +1680,11 @@ textarea {
   font-size: 14px;
   font-weight: 300;
 }
+
 .editUserBtnCtr{
   display: flex;
 }
+
 .editUserInputs{
   padding: 0.5rem;
   border: 1px solid #ccc;
@@ -1688,12 +1695,14 @@ textarea {
   border: 1px solid #ccc;
   background-color: #f0f7ed;
 }
+
 .updateUserErrorMessage{
   color: #da190b;
-  margin: 0px;
-  margin-top: 15px;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  margin-top: 0px;
 }
-
 
 .userDetailsTitle {
   font-size: 25px;
@@ -1788,12 +1797,6 @@ textarea {
   width: 200px;
   border: 1px solid #ccc;
   background-color: #f0f7ed;
-}
-
-.updateUserErrorMessage {
-  color: #da190b;
-  margin: 0px;
-  margin-top: 15px;
 }
 
 .noOrdersMessage{

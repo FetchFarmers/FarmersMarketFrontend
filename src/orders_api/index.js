@@ -33,6 +33,7 @@ export async function fetchUserOpenOrders(sessionId) {
     const data = await response.json();
 
     if (data[0]) {
+      console.log('data :>> ', data[0]);
       return data[0]
     } else {
       return {error: "No open orders"}
