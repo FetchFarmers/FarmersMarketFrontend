@@ -128,6 +128,7 @@ export default function AdminPage() {
           <div className="admin-page-products">
             {products
               .filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
+              .sort((a, b) => a.inventory - b.inventory) // <--- sort by inventory
               .map((product) => (
                 <div key={product.id} className="admin-page-product">
                   <div className="admin-page-product-info">
@@ -149,4 +150,3 @@ export default function AdminPage() {
     </div>
   );  
 }
-
