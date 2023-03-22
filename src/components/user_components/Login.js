@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {useNavigate, Link} from 'react-router-dom';
+import { fetchUserOpenOrders } from '../../orders_api';
 
 import { 
     fetchLogin
@@ -24,10 +25,10 @@ function Login({setCartItemTotal}) {
         window.localStorage.setItem("token", user.token);
         window.localStorage.setItem("isAdmin", user.user.isAdmin);
         console.log('user.isAdmin :>> ', user.user.isAdmin);
-        setCartItemTotal(0);
         setUsername("");
         setPassword("");
         setIsProcessing(false)
+        loadUserOpenOrdersCartTotal()
         navigate("/");
 
       } else {
@@ -36,6 +37,31 @@ function Login({setCartItemTotal}) {
         setTimeout(() => setUserMessage(""), 3000);
       }
 
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const randomString =  () => {
+    return crypto.randomUUID();
+  }
+
+  async function loadUserOpenOrdersCartTotal() {
+    try {  
+      const sessionId = window.localStorage.getItem("fetchSessionId");
+      if (!sessionId) {
+        const newSessionId = randomString();
+        window.localStorage.setItem("fetchSessionId", newSessionId);
+      }
+      const results = await fetchUserOpenOrders(sessionId);
+      const resultProducts = results.products;
+      if (resultProducts) {
+        let numOfItems = 0;
+        results.products.map((product) => numOfItems += product.quantity);
+        setCartItemTotal(numOfItems);
+        window.localStorage.setItem("cartTotal", numOfItems);
+      }
+      
     } catch (error) {
       console.error(error);
     }

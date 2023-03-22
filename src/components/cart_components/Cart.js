@@ -31,7 +31,7 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
       }
       const results = await fetchUserOpenOrders(sessionId);
       const resultProducts = results.products;
-      if (results.products) {
+      if (resultProducts) {
         const sortedProducts = resultProducts.sort((a, b) => (a.name > b.name) ? 1: -1);
         console.log('sortedProducts :>> ', sortedProducts);
         setUserOrderProducts(() => sortedProducts);
@@ -43,11 +43,10 @@ const Cart = ({setCartItemTotal, cartItemTotal, orderId, setOrderId, userOrderPr
           }
         }
         let numOfItems = 0;
-        if (results.products) {
-          results.products.map((product) => numOfItems += product.quantity);
-          setCartItemTotal(numOfItems);
-          window.localStorage.setItem("cartTotal", numOfItems);
-        }
+        resultProducts.map((product) => numOfItems += product.quantity);
+        setCartItemTotal(numOfItems);
+        window.localStorage.setItem("cartTotal", numOfItems);
+      
       }
       setLoading(false);
       
